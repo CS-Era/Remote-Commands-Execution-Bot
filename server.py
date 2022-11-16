@@ -1,14 +1,12 @@
 from socket import *
-import sys
-import time
+import socket
 import signal
 
-
-#Info globali
-IP="localhost"
-PORT=12000
-ADDR=(IP,PORT)
-
+IP = "localhost"
+PORT = 12001
+ADDR = (IP, PORT)
+SIZE = 4096
+FORMAT = "utf-8"
 
 
 #gestisce il ctrl-C per l'uscita
@@ -25,7 +23,7 @@ def serverConnection():
         print(f"\n[LISTENING] Server is up and it's waiting for a client connection")
     except:
         print(f"[ERROR] Connection refused")
-        exit(1)    
+        exit(1)
     return server
 
 
@@ -46,44 +44,60 @@ def commandsHelp():
     print()
     print("####################################")
 
-def remoteControl(client):
-    command='none'
-    commandsHelp()
-    while(command is not "exit"):
-        
-        #ricevo il path
-        wd_path=client.recv(1024).decode()
-        print(wd_path + "$ ",end=" ")
 
-        command=input()
+def printInformazioni(clientConnection):
 
-        #completare
+    #Ricezione del file dal Client
+    buff=1
+    risposta="y"
+    nbytes=clientConnection.recv(1024).decode(FORMAT)
+    print(nbytes)
+
+    while buff and nbytes != '':
+        buff=clientConnection.recv((int(nbytes)+1)).decode(FORMAT)
+        nbytes=''
+        if buff[0:7] == "[ERROR]":
+            risposta=input(buff)
+            clientConnection.send((risposta).encode(FORMAT))
+            if risposta == "Y" or risposta == "y":
+                buff = 1
+            elif risposta == "N" or risposta == "n":
+                buff = 0
+                break
+
+        print(buff)
+
+    if risposta == "Y" or risposta == "y":
+        print(f"[RECEIVING] File 'OperatingSystem.txt' received: Find all useful information on the client's operating system.\n")
+    elif risposta == "N" or risposta == "n":
+        print(f"[RECEIVING] File 'OperatingSystem.txt' not received.\n")
+
+    return "finito"
+
 
 def main():
+    signal.signal(signal.SIGINT, signalHandler)
+    exit = False
+    server = serverConnection()
 
-    signal.signal(signal.SIGINT,signalHandler)
-    exit=False
-    server=serverConnection()
-    
+    while exit == False:
 
-    while exit==False:
-
-        clientConnection,addr=server.accept()
+        clientConnection, addr = server.accept()
         print(f"[CONNECTED] Client {addr} is connected to the server")
         print()
 
-        #ricevo info sul sistema
-        OSInfo=clientConnection.recv(1024).decode()
+        # ricevo info sul sistema
+        OSInfo = clientConnection.recv(1024).decode()
 
         print(f"System's Information received:\n")
-        print(OSInfo+"\n")
+        print(OSInfo + "\n")
         time.sleep(4)
         print("[REMOTE CONTROL] Starting procedure...")
         time.sleep(4)
         clientConnection.close()
         print(f"[CLOSED] Client Connection closed succesfully!")
         print()
-        #Le operazioni sono concluse e decido come procedere
+        # Le operazioni sono concluse e decido come procedere
         print(f"[DECISION] Do you want to close the Sever or keep listening for new Clients?")
         print(f"[DECISION] 1 - Keep Listening")
         print(f"[DECISION] 2 - Close Server")
@@ -94,11 +108,13 @@ def main():
             print(f"[INFO] The Server was shut down successfully")
             server.close()
             sys.exit(0)
-        elif restartDecision=='1':
+        elif restartDecision == '1':
             print(f"[INFO] The server keeps listening...")
-        else: 
+        else:
             clientConnection.close()
             server.close()
 
+
 if __name__ == "__main__":
     main()
+
