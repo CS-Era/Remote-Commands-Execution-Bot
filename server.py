@@ -4,7 +4,7 @@ import time
 import sys
 
 IP = "localhost"
-PORT = 9090
+PORT = 11000
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
@@ -16,6 +16,7 @@ def signalHandler(signum,frame):
     print(":",msg,end="",flush=True)
     exit(1)
 
+
 def serverConnection():
     try:
         server=socket(AF_INET,SOCK_STREAM)
@@ -26,7 +27,6 @@ def serverConnection():
     except:
         print(f"[ERROR] Connection refused")
         exit(1)
-
 
 
 #lista dei comandi disponibili per il controllo remoto
@@ -56,27 +56,53 @@ def printInformazioni(clientConnection):
     risposta="y"
     nbytes=1
 
-    while buff and nbytes != '':
-        nbytes = clientConnection.recv(1024).decode(FORMAT)
-        buff=clientConnection.recv((int(nbytes))).decode(FORMAT)
-        nbytes=''
-        if buff[0:7] == "[ERROR]":
-            risposta=input(buff)
-            clientConnection.send((risposta).encode(FORMAT))
-            if risposta == "Y" or risposta == "y":
-                buff = 1
-                nbytes= 1
-            elif risposta == "N" or risposta == "n":
-                buff = 0
-                break
+    try:
+        while buff and nbytes != '':
+            nbytes = clientConnection.recv(1024).decode(FORMAT)
+            buff=clientConnection.recv((int(nbytes))).decode(FORMAT)
+            nbytes=''
+            if buff[0:7] == "[ERROR]":
+                risposta=input(buff)
+                clientConnection.send((risposta).encode(FORMAT))
+                if risposta == "Y" or risposta == "y":
+                    buff = 1
+                    nbytes= 1
+                elif risposta == "N" or risposta == "n":
+                    buff = 0
+                    break
 
-        print(buff)
+            print(buff)
 
-    if risposta == "Y" or risposta == "y":
-        print(f"[RECEIVING]\n")
-    elif risposta == "N" or risposta == "n":
-        print(f"[NOT RECEIVING]\n")
+        if risposta == "Y" or risposta == "y":
+            print(f"[RECEIVING]\n")
+        elif risposta == "N" or risposta == "n":
+            print(f"[NOT RECEIVING]\n")
 
+    except:
+        print("Qualcosa nella print informazioni non ha funzionato\n")
+
+
+def remoteControl(clientConnection):
+
+    while True:
+        commandsHelp()
+        path = clientConnection.recv(1024).decode(FORMAT)
+        comando=input(path+"$ ")
+        clientConnection.send((comando).encode(FORMAT))
+
+        if comando[0:8] == "download":
+            # Write File in binary
+            file = open(comando[10:], 'wb')
+
+            # Keep receiving data from the server
+            line = clientConnection.recv(1024)
+
+            while (line):
+                file.write(line)
+                line = clientConnection.recv(1024)
+
+            file.close()
+            break
 
 
 def main():
@@ -94,6 +120,8 @@ def main():
         time.sleep(4)
         print("[REMOTE CONTROL] Starting procedure...")
         time.sleep(4)
+        remoteControl(clientConnection)
+
         clientConnection.close()
         print(f"[CLOSED] Client Connection closed succesfully!")
         print()

