@@ -1,13 +1,14 @@
 import os
+import pickle
 from socket import *
 import platform
 import psutil
 import time
-import cpuinfo
 import signal
+from os import name, system
 
 IP="localhost"
-PORT = 11000 #Porta di Ascolto del TCP
+PORT = 12000 #Porta di Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
@@ -89,13 +90,14 @@ def clientConnection():
 
 def openRemoteControl(client):
 
-    while True:
+    comando="null"
+
+    while comando != "exit":
         client.send((os.getcwd()).encode(FORMAT))
         comando = client.recv(1024).decode(FORMAT)
 
         if comando[0:8] == "download":
-            #download "ciao.txt"
-            filename=comando[10:]
+            filename=comando[10:len(comando)-1]
             filesize=os.path.getsize(filename)
             numeroByteLetti=0
 
@@ -105,12 +107,21 @@ def openRemoteControl(client):
                 while (line):
                     client.send(line)
                     line = f.read(1024)
-
                 f.close()
                 break
-
         elif comando[0:5] == "cd ..":
             os.chdir("..")
+        elif comando[0:2] == "cd":
+            path=comando[3:]
+            os.chdir(os.getcwd() + "/" + path)
+        elif comando[0:2] == "ls":
+            #ritorna una lista
+            listdir=os.listdir()
+            #faccio un dump per poterla inoltrare
+            data=pickle.dumps(listdir)
+            client.send(data)
+    print("Procedura di controllo remoto conclusa con successo")
+
 
 def main():
 

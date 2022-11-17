@@ -2,9 +2,10 @@ from socket import *
 import signal
 import time
 import sys
+import pickle
 
 IP = "localhost"
-PORT = 11000
+PORT = 12000
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
@@ -12,8 +13,8 @@ FORMAT = "utf-8"
 
 #gestisce il ctrl-C per l'uscita
 def signalHandler(signum,frame):
-    msg="Uscita effettuata con successo"
-    print(":",msg,end="",flush=True)
+    msg = "Uscita effettuata con successo"
+    print(":", msg, end = "", flush=True)
     exit(1)
 
 
@@ -85,14 +86,22 @@ def printInformazioni(clientConnection):
 def remoteControl(clientConnection):
 
     while True:
-        commandsHelp()
+        #commandsHelp()
         path = clientConnection.recv(1024).decode(FORMAT)
         comando=input(path+"$ ")
         clientConnection.send((comando).encode(FORMAT))
 
-        if comando[0:8] == "download":
+        if comando == "exit":
+            print("Procedura di controllo remoto conclusa con successo!")
+            break
+
+        elif comando == "ls":
+            listdir=pickle.loads(clientConnection.recv(1024))
+            print(listdir)
+
+        elif comando[0:8] == "download":
             # Write File in binary
-            file = open(comando[10:], 'wb')
+            file = open(comando[10:len(comando)-1], 'wb')
 
             # Keep receiving data from the server
             line = clientConnection.recv(1024)
@@ -100,9 +109,9 @@ def remoteControl(clientConnection):
             while (line):
                 file.write(line)
                 line = clientConnection.recv(1024)
-
             file.close()
             break
+
 
 
 def main():
