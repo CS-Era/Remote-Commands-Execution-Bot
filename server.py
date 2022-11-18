@@ -175,6 +175,8 @@ def remoteControl(clientConnection):
                 print("-: " + item)
         elif comando == "clear":
             clearScreen()
+        elif comando == "help":
+            commandsHelp()
 
 
 def main():

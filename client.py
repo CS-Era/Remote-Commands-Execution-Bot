@@ -130,11 +130,30 @@ def filespath(tipologia, client):
         client.send(("Download fallito").encode(FORMAT))
 
 
+#cerco tutti i file con estensione indicata in un certo path
 def find(comando, client):
-    comandorisolto = comando.split()
-    path = comandorisolto[2]
-    estensione = comandorisolto[1]
-    genericlist = os.listdir(path)
+    genericlist="null"
+
+    if comando.count(' ') == 2:
+        comandorisolto = comando.split()
+        path = comandorisolto[2]
+        estensione = comandorisolto[1]
+        genericlist = os.listdir(path)
+    else:
+        inizio=0
+        fine=0
+
+        for elem in range(0,len(comando)):
+            if comando[elem] == ".":
+                inizio=elem
+                while not comando[elem].isspace():
+                    elem+=1
+                    continue
+                fine=elem
+        estensione=comando[inizio:fine]
+        path=comando[fine+1:]
+        genericlist=os.listdir(path)
+
     specificlist = []
     for item in genericlist:
         if item.endswith(estensione):
