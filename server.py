@@ -6,14 +6,15 @@ import signal
 from os import system
 import traceback
 import sys
+from traceback import print_exc
 
-IP = "localhost"
-PORT = 12806  # Porta di 2Ascolto del TCP
+
+
+IP = "192.168.5.95"
+PORT = 8082  # Porta di 2Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
-FORMATWIN = "windows-1252"
-FORMATPDF = "latin-1"
 
 
 # OK funzione di pulizia schermo per unix e windows
@@ -37,12 +38,10 @@ def serverConnection():
         server = socket(AF_INET, SOCK_STREAM)
         server.bind(ADDR)
         server.listen(5)
-        print(f"\n[LISTENING] Server is up and it's waiting for a client connection")
-        time.sleep(5)
+        print(f"\n[LISTENING] Server acceso!\n")
         return server
     except:
-        traceback.print_exc()
-        print(f"[ERROR] Connection refused")
+        print(f"[ERROR] Accensione server non riuscita...\n")
         return "errore"
 
 
@@ -66,11 +65,11 @@ def commandsHelp():
     print("####################################")
 
 
-# OK STAMPA INFO CLIENT
+#  STAMPA INFO CLIENT
 def printInformazioni(clientConnection):
     # Ricezione del file dal Client
     buff = 1
-    risposta = "y"
+    risposta = "1"
     nbytes = 1
 
     try:
@@ -90,23 +89,24 @@ def printInformazioni(clientConnection):
 
             nbytes = ''
             if buff[0:7] == "[ERROR]":
-                risposta = input(buff)
-                clientConnection.send((risposta).encode(FORMAT))
-                if risposta == "Y" or risposta == "y":
-                    buff = 1
-                    nbytes = 1
-                elif risposta == "N" or risposta == "n":
-                    buff = 0
-                    break
+                risposta = "null"
+                while risposta != '0' and risposta != '1':
+                    risposta = input(buff)
+                    clientConnection.send((risposta).encode(FORMAT))
+                    if risposta == '1':
+                        buff = 1
+                        nbytes = 1
+                    elif risposta == '0':
+                        buff = 0
+                        break
 
             print(buff)
 
-        if risposta == "Y" or risposta == "y":
-            print(f"[RECEIVING]\n")
-        elif risposta == "N" or risposta == "n":
-            print(f"[NOT RECEIVING]\n")
+        if risposta == '1':
+            print(f"[RECEIVING] Informazioni ricevute\n")
+        elif risposta == '0':
+            print(f"[NOT RECEIVING] Informazioni non ricevute\n")
     except:
-        traceback.print_exc()
         raise Exception
 
 
@@ -125,64 +125,82 @@ def filespath(clientConnection):
         print("File con percorsi dei file creato!")
     except:
         print("Download fallito\n")
-
-
 def remoteControl(clientConnection):
     while True:
-        # commandsHelp()
-        path = clientConnection.recv(1024).decode(FORMAT)
-        comando = input(path + "$ ")
-        while comando == "":
+        try:
+
+            pathError = clientConnection.recv(1024).decode(FORMAT)
+            if pathError[0:7]=="[ERROR]":
+                path=clientConnection.recv(1024).decode(FORMAT)
+                print(path+"$ "+pathError)
+            else:
+                path=pathError
+
             comando = input(path + "$ ")
+            while comando == "":
+                comando = input(path + "$ ")
 
-        clientConnection.send((comando).encode(FORMAT))
-        if comando == "exit":
-            print("Procedura di controllo remoto conclusa con successo!")
             clientConnection.send((comando).encode(FORMAT))
-            break
-        elif comando[0:2] == "ls":
-            listdir = pickle.loads(clientConnection.recv(1024))
-            for item in listdir:
-                print("-: " + item)
-        elif comando[0:8] == "download":
-            try:
-                # Write File in binary
-                file = open(comando[10:len(comando) - 1], 'wb')
-                # Keep receiving data from the server
-                filesize = clientConnection.recv(1024).decode(FORMAT)
-                if filesize == "Download fallito":
-                    print(filesize)
-                    raise Exception
+            if comando == "exit":
+                print(f"[REMOTE CONTROL CLOSED] Procedura di controllo remoto conclusa con successo!\n")
+                clientConnection.send((comando).encode(FORMAT))
+                break
+            elif comando[0:2] == "ls":
+                listdir = pickle.loads(clientConnection.recv(1024))
+                for item in listdir:
+                    print("-: " + item)
+            elif comando[0:8] == "download":
+                try:
+                    # Write File in binary
+                    file = open(comando[10:len(comando) - 1], 'wb')
+                    # Keep receiving data from the server
+                    filesize = clientConnection.recv(1024).decode(FORMAT)
+                    if filesize == "Download fallito":
+                        print(filesize)
+                    else:
+                        time.sleep(3)
+                        file.write(clientConnection.recv(int(filesize)))
+
+                    time.sleep(2)
+                    file.close()
+                except:
+                    print("Download fallito\n")
+
+            elif comando == "pwd":
+                pwdresult = clientConnection.recv(1024).decode(FORMAT)
+                print(pwdresult)
+            # "Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>"
+            elif comando[0:9] == "filespath":
+                filespath(clientConnection)
                 time.sleep(3)
-                file.write(clientConnection.recv(int(filesize)))
-                time.sleep(2)
-                file.close()
-            except:
-                traceback.print_exc()
-                print("Download fallito\n")
+            elif comando[0:4] == "find":
+                msg=clientConnection.recv(1024).decode(FORMAT)
+                if msg == "Dati in arrivo...":
+                    print("Dati in arrivo...\n")
+                    listresult = pickle.loads(clientConnection.recv(1024))
+                    for item in listresult:
+                        print("-: " + item)
+                elif msg == "Connessione interrotta":
+                    print("Connessione interrotta\n")
+                    break
+                elif msg == "Si è verificato un errore, verifica il comando":
+                    print("Si è verificato un errore, verifica il comando...\n")
 
+            elif comando == "clear":
+                clearScreen()
+            elif comando == "help":
+                commandsHelp()
 
-        elif comando == "pwd":
-            pwdresult = clientConnection.recv(1024).decode(FORMAT)
-            print(pwdresult)
-        # "Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>"
-        elif comando[0:9] == "filespath":
-            filespath(clientConnection)
-            time.sleep(3)
-        elif comando[0:4] == "find":
-            listresult = pickle.loads(clientConnection.recv(1024))
-            for item in listresult:
-                print("-: " + item)
-        elif comando == "clear":
-            clearScreen()
-        elif comando == "help":
-            commandsHelp()
+        except Exception as e:
+            if e.__class__.__name__ == "ConnectionResetError":
+                print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
+                raise e
+            raise e
 
 
 def main():
     signal.signal(signal.SIGINT, signalHandler)
     server = serverConnection()
-
     if server == "errore":
         raise Exception
     else:
@@ -190,10 +208,10 @@ def main():
         while exit == False:
 
             clientConnection, addr = server.accept()
-            print(f"[CONNECTED] Client {addr} is connected to the server")
+            print(f"\n[CONNECTED] Client {addr} is connected to the server")
 
             print(f"INFORMAZIONI SISTEMA OPERATIVO CLIENT:\n")
-            t_end = time.time() + 5
+            t_end = time.time() + 3
             while time.time() < t_end:
                 print(".", end="")
                 time.sleep(1)
@@ -202,26 +220,29 @@ def main():
                 print(".")
                 time.sleep(1)
 
-            # ricevo info sul sistema
+            #RICEVO INFORMAZIONI SISTEMA OPERATIVO
             try:
                 printInformazioni(clientConnection)
                 time.sleep(2)
-            except:
-                print("Qualcosa nella print informazioni non ha funzionato...attendi\n")
-                t_end = time.time() + 5
-                while time.time() < t_end:
-                    print(".", end="")
-                    time.sleep(1)
-                    print(".", end="")
-                    time.sleep(1)
-                    print(".")
-                    time.sleep(1)
+            except Exception as e:
+                if e.__class__.__name__ == "ConnectionResetError":
+                    exit = True
+                else:
+                    print(f"[ERROR] Qualcosa nella print informazioni non ha funzionato... attendi\n")
+                    t_end = time.time() + 5
+                    while time.time() < t_end:
+                        print(".", end="")
+                        time.sleep(1)
+                        print(".", end="")
+                        time.sleep(1)
+                        print(".")
+                        time.sleep(1)
 
-            # procedura remote control
+            #ATTIVO LA REMOTE CONTROL
             attivo = 1
             while attivo == 1:
                 try:
-                    print("[REMOTE CONTROL] Starting procedure...")
+                    print(f"[REMOTE CONTROL] Starting procedure...")
                     t_end = time.time() + 5
                     while time.time() < t_end:
                         print(".", end="")
@@ -231,16 +252,23 @@ def main():
                         print(".")
                         time.sleep(1)
                     remoteControl(clientConnection)
+                    raise Exception
                     time.sleep(2)
                     attivo = 0
-                except:
-                    traceback.print_exc()
-                    risposta = input("Remote control non disponibile, riprovare? Y/N ")
-                    print(risposta)
-                    if risposta == "Y" or "y":
-                        attivo = 1
-                    elif risposta == "N" or "n":
+
+                except Exception as e:
+                    if e.__class__.__name__ == "ConnectionResetError":
+                        print(f"La connessione con il client si è interrotta\n")
                         attivo = 0
+                        raise e
+                    else:
+                        risposta="null"
+                        while risposta !='0' and risposta !='1':
+                            risposta = input(f"Remote control non disponibile, riprovare? Y-1/N-0 ")
+                            if risposta == '1':
+                                attivo = 1
+                            elif risposta == '0':
+                                attivo = 0
 
             clientConnection.close()
             print(f"[CLOSED] Client Connection closed succesfully!")
@@ -259,7 +287,7 @@ def main():
                 sys.exit(0)
             elif restartDecision == '1':
                 print(f"[INFO] The server keeps listening...")
-                t_end = time.time() + 10
+                t_end = time.time() + 5
                 while time.time() < t_end:
                     print(".", end="")
                     time.sleep(1)
@@ -278,12 +306,9 @@ if __name__ == "__main__":
     ##download cartelle, loop clientcclose, barra di caricamento
     # controllare dove fare differenze di sistema
 
-    # while True:
     try:
         main()
     except:
-        # traceback.print_exc()2
-        # print("Mi sto riconnetendo")
         t_end = time.time() + 10
         while time.time() < t_end:
             print(".", end="")
@@ -292,3 +317,4 @@ if __name__ == "__main__":
             time.sleep(1)
             print(".")
             time.sleep(1)
+            print(f"[CLOSE] Server chiuso.")
