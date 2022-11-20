@@ -9,8 +9,7 @@ import sys
 from traceback import print_exc
 
 
-
-IP = "192.168.5.95"
+IP = "localhost"
 PORT = 8082  # Porta di 2Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
@@ -112,23 +111,34 @@ def printInformazioni(clientConnection):
 
 def filespath(clientConnection):
     try:
-        nomeFile = input("Che nome vuoi dare al file?: ")
+        nomeFile = "file.txt"
         file = open(nomeFile, 'wb')
-        filesize = clientConnection.recv(1024).decode(FORMAT)
+        newNBytes = ""
+        filesize = clientConnection.recv(256).decode(FORMAT)
         if filesize == "Download fallito":
             print(filesize)
             raise Exception
-        time.sleep(3)
-        # barra di caricamento
-        file.write(clientConnection.recv(int(filesize)))
+        elif filesize[0:1].isdigit():
+            while filesize[0:1].isdigit():
+                newNBytes = newNBytes + filesize[0:1]
+                filesize = filesize[1:]
+            file.write(clientConnection.recv(int(newNBytes)))
+            time.sleep(3)
+        elif filesize[0:7] == "[ERROR]":
+            print(filesize)
+        else:
+            file.write(clientConnection.recv(int(filesize)))
+            time.sleep(3)
+
+            # barra di caricamento
         file.close()
         print("File con percorsi dei file creato!")
     except:
-        print("Download fallito\n")
+        traceback.print_exc()
+        print("Filespath ha dato problemi\n")
 def remoteControl(clientConnection):
     while True:
         try:
-
             pathError = clientConnection.recv(1024).decode(FORMAT)
             if pathError[0:7]=="[ERROR]":
                 path=clientConnection.recv(1024).decode(FORMAT)
@@ -164,8 +174,8 @@ def remoteControl(clientConnection):
                     time.sleep(2)
                     file.close()
                 except:
+                    traceback.print_exc()
                     print("Download fallito\n")
-
             elif comando == "pwd":
                 pwdresult = clientConnection.recv(1024).decode(FORMAT)
                 print(pwdresult)
@@ -190,7 +200,19 @@ def remoteControl(clientConnection):
                 clearScreen()
             elif comando == "help":
                 commandsHelp()
-
+            else:
+                msg = clientConnection.recv(1024).decode(FORMAT)
+                if msg == "Dati in arrivo...":
+                    print("Dati in arrivo...\n")
+                    filesize=clientConnection.recv(256).decode(FORMAT)
+                    output = clientConnection.recv(filesize)
+                    print(output.decode())
+                elif msg == "Connessione interrotta":
+                    print("Connessione interrotta\n")
+                    break
+                elif msg == "Si è verificato un errore, verifica il comando":
+                    print("Si è verificato un errore, verifica il comando...\n")
+                
         except Exception as e:
             if e.__class__.__name__ == "ConnectionResetError":
                 print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
@@ -252,8 +274,6 @@ def main():
                         print(".")
                         time.sleep(1)
                     remoteControl(clientConnection)
-                    raise Exception
-                    time.sleep(2)
                     attivo = 0
 
                 except Exception as e:
@@ -309,6 +329,7 @@ if __name__ == "__main__":
     try:
         main()
     except:
+        print(f"[CLOSE] Server chiuso.")
         t_end = time.time() + 10
         while time.time() < t_end:
             print(".", end="")
@@ -317,4 +338,4 @@ if __name__ == "__main__":
             time.sleep(1)
             print(".")
             time.sleep(1)
-            print(f"[CLOSE] Server chiuso.")
+
