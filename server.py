@@ -231,22 +231,7 @@ def remoteControl(clientConnection):
                 file.write(myScreenshot)
                 file.close()
             else:
-                msg = clientConnection.recv(1024).decode(FORMAT)
-                if msg == "Dati in arrivo...":
-                    print("Dati in arrivo...\n")
-                    filesize=clientConnection.recv(256).decode(FORMAT)
-                    output = clientConnection.recv(filesize).decode(FORMAT)
-                    print(output)
-                    fileLog = fileLog + "\n" + output + "\n"
-
-                elif msg == "Connessione interrotta":
-                    print("Connessione interrotta\n")
-                    fileLog = fileLog + "\n" + "Connessione interrotta\n" + "\n"
-
-                    break
-                elif msg == "Si è verificato un errore, verifica il comando":
-                    print("Si è verificato un errore, verifica il comando...\n")
-                    fileLog = fileLog + "\n" + "Si è verificato un errore, verifica il comando...\n" + "\n"
+               print("Si è verificato un errore, verifica il comando...\n")
 
         except Exception as e:
             if e.__class__.__name__ == "ConnectionResetError":

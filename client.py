@@ -9,7 +9,6 @@ import psutil
 import time
 import signal
 from os import system
-import traceback
 from threading import Timer
 from traceback import print_exc
 
@@ -135,7 +134,6 @@ def filespath(tipologia, client):
                         for item in file:
                             result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
         else:
-
             if platform.system() == "Darwin":
                 for cartella, sottocartelle, file in os.walk(r"/mnt/"):
                     for item in file:
@@ -180,7 +178,7 @@ def filespath(tipologia, client):
         client.send((result).encode(FORMAT))
 
     except:
-        traceback.print_exc()
+        #traceback.print_exc()
         client.send(("Download fallito").encode(FORMAT))
 
 
@@ -214,40 +212,6 @@ def find(comando, client):
         data = pickle.dumps(specificlist)
         client.send(("Dati in arrivo...").encode(FORMAT))
         client.send(data)
-    except Exception as e:
-        if e.__class__.__name__ == "ConnectionResetError":
-            client.send(("Connessione interrotta").encode(FORMAT))
-        else:
-            client.send(("Si è verificato un errore, verifica il comando").encode(FORMAT))
-
-
-# [Funzione] che esegue i commandi sulla macchina client e li manda al server
-def eseguiComando(client, command, sistemaOperativo):
-    try:
-        if sistemaOperativo == "Windows":
-            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE,
-                                       shell=True)
-            timer = Timer(20, process.terminate)
-            try:
-                timer.start()
-                stdout, stderr = process.communicate()
-                output = stdout or stderr
-            finally:
-                timer.cancel()
-            final_output = output.replace(b"\r\n", b"\n").decode(encoding="windows-1252").encode()
-            client.send(("Dati in arrivo...").encode(FORMAT))
-
-            filesize = sys.getsizeof(final_output)
-            client.send((str(filesize)).encode(FORMAT))
-            time.sleep(3)
-            client.send((final_output).encode(FORMAT))
-
-        else:
-            print("Eseguo il comando")
-            output = subprocess.getoutput(command)
-            output.encode()
-            client.send(output.encode())
-
     except Exception as e:
         if e.__class__.__name__ == "ConnectionResetError":
             client.send(("Connessione interrotta").encode(FORMAT))
@@ -318,10 +282,10 @@ def openRemoteControl(client):
                 clientConnection().send(myScreenshot.encode())
             #Tutti gli altri commandi
             else:
-                eseguiComando(client,comando,platform.system())
+                pass
 
         except Exception as e:
-            traceback.print_exc()
+            #traceback.print_exc()
             client.send(("[ERROR] Command " + comando + " not found ...\n").encode(FORMAT))
             comando = "null"
             if e.__class__.__name__== "ConnectionResetError":
