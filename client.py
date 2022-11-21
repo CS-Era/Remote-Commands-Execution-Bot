@@ -5,8 +5,8 @@ import subprocess
 import sys
 from socket import *
 import platform
-import psutil
 import time
+import psutil
 import signal
 from os import system
 from threading import Timer
@@ -102,72 +102,38 @@ def filespath(tipologia, client):
     allType = tipologia
     listaType = tipologia.split()
     result = [""]
+    path="null"
+    counter_elemets=0
+
+    if platform.system() == "Windows":
+        path = "C:\\Users"
+    elif platform.system() == "Darwin":
+        path = "/Users/"
+    else:
+        path = "/"
+
 
     for n in range(len(listaType)):
+
         tipologia = listaType[n]
-        result.append("\n\nLista dei risultati per estensione " + tipologia + "\n\n")
+        result.append("\n\nLista dei risultati per estensione: " + tipologia + "\n\n")
+
         if tipologia == "*":
-            if platform.system() == "Darwin":
-                for cartella, sottocartelle, file in os.walk(r"/mnt/"):
-                    for item in file:
-                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
+            for cartella, sottocartelle, file in os.walk(path):
+                for item in file:
+                    result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
 
-                    for cart in sottocartelle:
-                        for item in file:
-                            result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
-
-            elif platform.system() == "Windows":
-                for cartella, sottocartelle, file in os.walk(r"C:\Users\biagi\Desktop\Progetto Reti"):
-                    for item in file:
-                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
-
-                    for cart in sottocartelle:
-                        for item in file:
-                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\\" + cart + "\n")
-
-            elif platform.system() == "Linux":
-                for cartella, sottocartelle, file in os.walk(r"/mnt/"):
-                    for item in file:
-                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
-
-                    for cart in sottocartelle:
-                        for item in file:
-                            result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
         else:
-            if platform.system() == "Darwin":
-                for cartella, sottocartelle, file in os.walk(r"/mnt/"):
-                    for item in file:
-                        if item.endswith(tipologia):
-                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
+            for cartella, sottocartelle, file in os.walk(path):
+                for item in file:
+                    if item.endswith(tipologia):
+                        counter_elemets += 1
+                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
 
-                    for cart in sottocartelle:
-                        for item in file:
-                            if item.endswith(tipologia):
-                                result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
 
-            elif platform.system() == "Windows":
-                for cartella, sottocartelle, file in os.walk(r"C:\Users\biagi\Desktop\Università"):
-                    for item in file:
-                        if item.endswith(tipologia):
-                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
 
-                    for cart in sottocartelle:
-                        for item in file:
-                            if item.endswith(tipologia):
-                                result.append('"' + item + '"' + " nel percorso: " + cartella + "\\" + cart + "\n")
-
-            elif platform.system() == "Linux":
-                for cartella, sottocartelle, file in os.walk(r"/mnt/"):
-                    for item in file:
-                        if item.endswith(tipologia):
-                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
-
-                    for cart in sottocartelle:
-                        for item in file:
-                            if item.endswith(tipologia):
-                                result.append('"' + item + '"' + " nel percorso: " + cartella + "/" + cart + "\n")
-
-    result.append("\n### TROVATI TUTTI I FILE CON ESTENSIONE " + allType + "###\n\n")
+    result.append("\n----Trovati "+str(counter_elemets)+" elementi.")
+    result.append("\n### File chiuso correttamente ###\n\n")
     result = ''.join(result)
 
     try:
@@ -190,6 +156,7 @@ def find(comando, client):
         inizio_ext=0
         fine_ext=0
         inizio_path=0
+        counter_elemets=0
         for element in range(0, len(comando)):
             if comando[element] == ".":
                 counter_punti += 1
@@ -208,7 +175,9 @@ def find(comando, client):
         specificlist = []
         for item in genericlist:
             if item.endswith(estensione):
+                counter_elemets += 1
                 specificlist.append(item)
+        specificlist.append("Numero di elementi trovati: "+ str(counter_elemets))
         data = pickle.dumps(specificlist)
         client.send(("Dati in arrivo...").encode(FORMAT))
         client.send(data)
