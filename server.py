@@ -333,6 +333,7 @@ def main():
                                 attivo = 0
 
             clientConnection.close()
+            os.chdir("..")
             for i in tqdm(range(10), desc=Fore.LIGHTWHITE_EX + "Chiusura connessione client", colour="green", ncols=50,
                           bar_format="{desc}: {percentage:3.0f}% {bar}"):
                 sleep(0.2)
@@ -348,6 +349,10 @@ def main():
             if restartDecision == '2':
                 exit = True
                 print(f"[INFO] The Server was shut down successfully")
+                file = open("fileLog.txt", "w")
+                file.write(fileLog)
+                file.close()
+                fileLog = ""
                 server.close()
                 sys.exit(0)
             elif restartDecision == '1':
@@ -356,7 +361,6 @@ def main():
                 file.close()
                 fileLog=""
                 print(f"[INFO] The server keeps listening...")
-                os.chdir("..")
                 t_end = time.time() + 3
                 while time.time() < t_end:
                     print(".", end="")
