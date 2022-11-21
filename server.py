@@ -93,6 +93,7 @@ def printInformazioni(clientConnection):
                               bar_format="{desc}: {percentage:3.0f}% {bar}"):
                     sleep(0.2)
                 buff = clientConnection.recv((int(nbytes))).decode(FORMAT)
+
             nbytes = ''
             if buff[0:7] == "[ERROR]":
                 risposta = "null"
@@ -214,7 +215,7 @@ def remoteControl(clientConnection):
                 sleep(1)
 
             elif comando[0:4] == "find":
-                listresult = pickle.loads(clientConnection.recv(8))
+                listresult = pickle.loads(clientConnection.recv(80000000))
 
                 for item in listresult:
                     print("-: " + item)
@@ -257,28 +258,15 @@ def main():
         exit = False
         while exit == False:
             clientConnection, addr = server.accept()
-            for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[CONNECTION] Connessione client",
-                          colour="green",
-                          ncols=65,
-                          bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                sleep(0.2)
             print(f"\n[CONNECTED] Client {addr} is connected to the server")
             os.mkdir(f"cartellaClient {addr}")
-            os.chdir(os.getcwd()+"/"+f"cartellaClient {addr}")
+            os.chdir(os.getcwd() + "/" + f"cartellaClient {addr}")
 
             global fileLog
             fileLog = fileLog + "\n" + "\n[CONNECTED] Client {addr} is connected to the server" + "\n"
 
-            t_end = time.time() + 5
-            while time.time() < t_end:
-                print(".", end="")
-                time.sleep(1)
-                print(".", end="")
-                time.sleep(1)
-                print(".")
-                time.sleep(1)
 
-            #RICEVO INFORMAZIONI SISTEMA OPERATIVO
+            # RICEVO INFORMAZIONI SISTEMA OPERATIVO
             try:
                 print(f"INFORMAZIONI SISTEMA OPERATIVO CLIENT:\n")
                 fileLog = fileLog + "\n" + "INFORMAZIONI SISTEMA OPERATIVO CLIENT:\n" + "\n"
@@ -312,7 +300,7 @@ def main():
                     attivo = 0
 
                 except Exception as e:
-                    traceback.print_exc()
+                    #traceback.print_exc()
                     if e.__class__.__name__ == "ConnectionResetError":
                         print(f"La connessione con il client si è interrotta\n")
                         fileLog = fileLog + "\n" + "La connessione con il client si è interrotta\n" + "\n"
