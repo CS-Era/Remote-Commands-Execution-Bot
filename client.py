@@ -112,7 +112,6 @@ def filespath(tipologia, client):
     else:
         path = "/"
 
-
     for n in range(len(listaType)):
 
         tipologia = listaType[n]
@@ -130,10 +129,8 @@ def filespath(tipologia, client):
                         counter_elemets += 1
                         result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
 
-
-
     result.append("\n----Trovati "+str(counter_elemets)+" elementi.")
-    result.append("\n### File chiuso correttamente ###\n\n")
+    result.append("\n### TROVATI TUTTI I FILE CON ESTENSIONE " + allType + "###\n\n")
     result = ''.join(result)
 
     try:
@@ -179,7 +176,6 @@ def find(comando, client):
                 specificlist.append(item)
         specificlist.append("Numero di elementi trovati: "+ str(counter_elemets))
         data = pickle.dumps(specificlist)
-        client.send(("Dati in arrivo...").encode(FORMAT))
         client.send(data)
     except Exception as e:
         if e.__class__.__name__ == "ConnectionResetError":

@@ -3,12 +3,14 @@ import pickle
 from socket import *
 import platform
 import time
+from time import sleep
 import signal
 from os import system
 import traceback
 import sys
 from traceback import print_exc
-
+from tqdm import tqdm
+from colorama import Fore
 
 IP = "localhost"
 PORT = 8082  # Porta di 2Ascolto del TCP
@@ -38,6 +40,9 @@ def serverConnection():
         server = socket(AF_INET, SOCK_STREAM)
         server.bind(ADDR)
         server.listen(5)
+        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "[STARTING] Accensione Server", colour="green", ncols=50,
+                      bar_format="{desc}: {percentage:3.0f}% {bar}"):
+            sleep(0.2)
         print(f"\n[LISTENING] Server acceso!\n")
         return server
     except:
@@ -84,7 +89,9 @@ def printInformazioni(clientConnection):
                     nbytes = nbytes[1:]
                 buff = clientConnection.recv((int(newNBytes))).decode(FORMAT)
             else:
-                time.sleep(3)
+                for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "[RECEIVING] Ricezione informazioni...", colour="green", ncols=50,
+                              bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                    sleep(0.2)
                 buff = clientConnection.recv((int(nbytes))).decode(FORMAT)
 
             nbytes = ''
@@ -114,6 +121,10 @@ def printInformazioni(clientConnection):
 
 # FILESPATH
 def filespath(clientConnection):
+    for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Ricezione informazioni", colour="green", ncols=50,
+                 bar_format="{desc}: {percentage:3.0f}% {bar}"):
+        sleep(0.2)
+
     try:
         nomeFile = "FilesPath.txt"
         file = open(nomeFile, 'ab')
@@ -126,14 +137,17 @@ def filespath(clientConnection):
             while filesize[0:1].isdigit():
                 newNBytes = newNBytes + filesize[0:1]
                 filesize = filesize[1:]
-            file.write(clientConnection.recv(int(newNBytes)+8000))
-            time.sleep(3)
+            file.write(clientConnection.recv(int(newNBytes)+800000))
+            for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50,
+                          bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                sleep(0.2)
         elif filesize[0:7] == "[ERROR]":
             print(filesize)
         else:
             file.write(clientConnection.recv(int(filesize)))
-            time.sleep(3)
-
+            for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50,
+                          bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                sleep(0.2)
             # barra di caricamento
         file.close()
         print("File con percorsi dei file creato!")
@@ -179,7 +193,9 @@ def remoteControl(clientConnection):
                     if filesize == "Download fallito":
                         print(filesize)
                     else:
-                        time.sleep(3)
+                        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green",
+                                      ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                            sleep(0.2)
                         file.write(clientConnection.recv(int(filesize)))
 
                     time.sleep(2)
@@ -187,6 +203,7 @@ def remoteControl(clientConnection):
                 except:
                     traceback.print_exc()
                     print("Download fallito\n")
+
             elif comando == "pwd":
                 pwdresult = clientConnection.recv(1024).decode(FORMAT)
                 print(pwdresult)
@@ -195,24 +212,14 @@ def remoteControl(clientConnection):
             # "Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>"
             elif comando[0:9] == "filespath":
                 filespath(clientConnection)
-                time.sleep(3)
+                sleep(1)
+
             elif comando[0:4] == "find":
-                msg=clientConnection.recv(1024).decode(FORMAT)
-                if msg == "Dati in arrivo...":
-                    print("Dati in arrivo...\n")
-                    listresult = pickle.loads(clientConnection.recv(1024))
-                    for item in listresult:
-                        print("-: " + item)
-                        fileLog = fileLog + "\n" + "-: " + item + "\n"
+                listresult = pickle.loads(clientConnection.recv(1024))
 
-                elif msg == "Connessione interrotta":
-                    print("Connessione interrotta\n")
-                    fileLog = fileLog + "\n" + "Connessione interrotta\n" + "\n"
-
-                    break
-                elif msg == "Si è verificato un errore, verifica il comando":
-                    print("Si è verificato un errore, verifica il comando...\n")
-                    fileLog = fileLog + "\n" + "Si è verificato un errore, verifica il comando...\n" + "\n"
+                for item in listresult:
+                    print("-: " + item)
+                    fileLog = fileLog + "\n" + "-: " + item + "\n"
 
             elif comando == "clear":
                 clearScreen()
@@ -249,11 +256,11 @@ def main():
     else:
         exit = False
         while exit == False:
-
             clientConnection, addr = server.accept()
             print(f"\n[CONNECTED] Client {addr} is connected to the server")
             os.mkdir(f"cartellaClient {addr}")
             os.chdir(os.getcwd()+"/"+f"cartellaClient {addr}")
+
             global fileLog
             fileLog = fileLog + "\n" + "\n[CONNECTED] Client {addr} is connected to the server" + "\n"
 
@@ -272,7 +279,7 @@ def main():
             #RICEVO INFORMAZIONI SISTEMA OPERATIVO
             try:
                 printInformazioni(clientConnection)
-                time.sleep(2)
+                sleep(2)
             except Exception as e:
                 if e.__class__.__name__ == "ConnectionResetError":
                     exit = True
@@ -293,15 +300,10 @@ def main():
             attivo = 1
             while attivo == 1:
                 try:
-                    print(f"[REMOTE CONTROL] Starting procedure...")
-                    t_end = time.time() + 5
-                    while time.time() < t_end:
-                        print(".", end="")
-                        time.sleep(1)
-                        print(".", end="")
-                        time.sleep(1)
-                        print(".")
-                        time.sleep(1)
+                    for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[REMOTE CONTROL] Starting procedure...", colour="green",
+                                  ncols=65,
+                                  bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                        sleep(0.2)
                     remoteControl(clientConnection)
                     attivo = 0
 
@@ -322,6 +324,9 @@ def main():
                                 attivo = 0
 
             clientConnection.close()
+            for i in tqdm(range(10), desc=Fore.LIGHTWHITE_EX + "Chiusura connessione client", colour="green", ncols=50,
+                          bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                sleep(0.2)
             print(f"[CLOSED] Client Connection closed succesfully!")
             print()
 
@@ -342,7 +347,7 @@ def main():
                 file.close()
                 fileLog=""
                 print(f"[INFO] The server keeps listening...")
-                t_end = time.time() + 5
+                t_end = time.time() + 3
                 while time.time() < t_end:
                     print(".", end="")
                     time.sleep(1)
@@ -360,11 +365,6 @@ def main():
 
 
 if __name__ == "__main__":
-    # , gestione comandi nativi rc,
-    # file log, screenshot, agg commnaHelps, cd del path completo
-    ##download cartelle, loop clientcclose, barra di caricamento
-    # controllare dove fare differenze di sistema
-
     try:
         main()
     except:
@@ -372,13 +372,9 @@ if __name__ == "__main__":
         file.write(fileLog)
         file.close()
         fileLog = ""
+        for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Chiusura Server...", colour="green", ncols=50,
+                      bar_format="{desc}: {percentage:3.0f}% {bar}"):
+            sleep(0.2)
         print(f"[CLOSE] Server chiuso.")
-        t_end = time.time() + 10
-        while time.time() < t_end:
-            print(".", end="")
-            time.sleep(1)
-            print(".", end="")
-            time.sleep(1)
-            print(".")
-            time.sleep(1)
+
 
