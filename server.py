@@ -93,7 +93,6 @@ def printInformazioni(clientConnection):
                               bar_format="{desc}: {percentage:3.0f}% {bar}"):
                     sleep(0.2)
                 buff = clientConnection.recv((int(nbytes))).decode(FORMAT)
-
             nbytes = ''
             if buff[0:7] == "[ERROR]":
                 risposta = "null"
@@ -215,7 +214,7 @@ def remoteControl(clientConnection):
                 sleep(1)
 
             elif comando[0:4] == "find":
-                listresult = pickle.loads(clientConnection.recv(1024))
+                listresult = pickle.loads(clientConnection.recv(8))
 
                 for item in listresult:
                     print("-: " + item)
@@ -245,7 +244,8 @@ def remoteControl(clientConnection):
                 print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
                 fileLog = fileLog + "\n" + "[CONNECTION INTERRUPTED] Connessione interrotta\n" + "\n"
                 raise e
-            raise e
+            else:
+                raise e
 
 
 def main():
@@ -257,6 +257,11 @@ def main():
         exit = False
         while exit == False:
             clientConnection, addr = server.accept()
+            for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[CONNECTION] Connessione client",
+                          colour="green",
+                          ncols=65,
+                          bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                sleep(0.2)
             print(f"\n[CONNECTED] Client {addr} is connected to the server")
             os.mkdir(f"cartellaClient {addr}")
             os.chdir(os.getcwd()+"/"+f"cartellaClient {addr}")
@@ -264,10 +269,7 @@ def main():
             global fileLog
             fileLog = fileLog + "\n" + "\n[CONNECTED] Client {addr} is connected to the server" + "\n"
 
-            print(f"INFORMAZIONI SISTEMA OPERATIVO CLIENT:\n")
-            fileLog = fileLog + "\n" + "INFORMAZIONI SISTEMA OPERATIVO CLIENT:\n" + "\n"
-
-            t_end = time.time() + 3
+            t_end = time.time() + 5
             while time.time() < t_end:
                 print(".", end="")
                 time.sleep(1)
@@ -278,6 +280,8 @@ def main():
 
             #RICEVO INFORMAZIONI SISTEMA OPERATIVO
             try:
+                print(f"INFORMAZIONI SISTEMA OPERATIVO CLIENT:\n")
+                fileLog = fileLog + "\n" + "INFORMAZIONI SISTEMA OPERATIVO CLIENT:\n" + "\n"
                 printInformazioni(clientConnection)
                 sleep(2)
             except Exception as e:
@@ -316,6 +320,7 @@ def main():
                         raise e
                     else:
                         risposta="null"
+                        clientConnection.recv(300000)
                         while risposta !='0' and risposta !='1':
                             risposta = input(f"Remote control non disponibile, riprovare? Y-1/N-0 ")
                             if risposta == '1':
