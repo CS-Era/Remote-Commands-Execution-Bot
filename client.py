@@ -1,6 +1,7 @@
 import glob
 import os
 import pickle
+import re
 import subprocess
 import sys
 from socket import *
@@ -12,6 +13,7 @@ from os import system
 from threading import Timer
 from traceback import print_exc
 import pyautogui
+import traceback
 
 IP = "localhost"
 PORT = 8080  # Porta di Ascolto del TCP
@@ -145,6 +147,7 @@ def find(comando, client):
     fine_ext=0
     inizio_path=0
     counter_elemets=0
+
     specificlist = ["\nRisultati "+comando+":\n"]
 
     for element in range(0, len(comando)):
@@ -182,6 +185,33 @@ def find(comando, client):
         raise Exception
 
 
+def regexcheck_find(comando):
+    windows_regex='^find \.[a-z]{1,4} (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
+    unix_regex='^find \.[a-z]{1,4} (\.(\/[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\/[a-zA-Z0-9, ,\_,\-]+)+)'
+
+    if platform.system() == "Windows":
+        return re.match(windows_regex,comando)
+    elif platform.system() == "Linux" or "Darwin":
+        return re.match(unix_regex,comando)
+
+
+def regexcheck_cd(comando):
+    windows_regex = '^cd ([a-zA-Z0-9, ,\-,\_]+)|^cd (\\[a-zA-Z0-9, ,\-,\_]+)+|^cd (\.(\\[a-zA-Z0-9, ,\-,\_]+)+)|^cd \.\.'
+    unix_regex = '^cd ([a-zA-Z0-9, ,\-,\_]+)|^cd (\/[a-zA-Z0-9, ,\-,\_]+)+|^cd (\.(\/[a-zA-Z0-9, ,\-,\_]+)+)|^cd \.\.'
+
+    if platform.system() == "Windows":
+        return re.match(windows_regex,comando)
+    elif platform.system() == "Linux" or "Darwin":
+        return re.match(unix_regex,comando)
+
+def regexcheck_ls(comando):
+    windows_regex = '^ls ([a-zA-Z0-9, ,\-,\_]+)|^ls (\\[a-zA-Z0-9, ,\-,\_]+)+|^ls (\.(\\[a-zA-Z0-9, ,\-,\_]+)+)|^ls \.\.|^ls \.|^ls'
+    unix_regex = '^ls ([a-zA-Z0-9, ,\-,\_]+)|^ls (\/[a-zA-Z0-9, ,\-,\_]+)+|^ls (\.(\/[a-zA-Z0-9, ,\-,\_]+)+)|^ls \.\.|^ls \.|^ls'
+
+    if platform.system() == "Windows":
+       return re.match(windows_regex,comando)
+    elif platform.system() == "Darwin" or "Linux":
+        return re.match(unix_regex,comando)
 
 # funzione di remote control
 def openRemoteControl(client):
@@ -207,48 +237,52 @@ def openRemoteControl(client):
                     client.send(("[ERROR]").encode(FORMAT))
 
                 time.sleep(3)
-            elif comando == "cd ..":
-                os.chdir("..")
 
-            elif comando == "cd":
-                if comando[3:4] != "C" and comando[3:4] != "/":
-                    path = comando[3:]
-                    os.chdir(os.getcwd() + "/" + path)
-                else:
+            elif comando[0:2] == "cd":
+                match= regexcheck_cd(comando)
+
+                if match:
                     os.chdir(comando[3:])
 
 
 
+
             elif comando[0:2] == "ls":
+                match=False
+                match=regexcheck_ls(comando)
 
-                if len(comando) == 2:
+                if match:
 
-                    # ritorna una lista
+                    if len(comando) == 2:
 
-                    listdir = os.listdir()
+                        # ritorna una lista
 
-                    # faccio un dump per poterla inoltrare
+                        listdir = os.listdir()
 
-                    data = pickle.dumps(listdir)
+                        # faccio un dump per poterla inoltrare
 
-                    client.send(data)
+                        data = pickle.dumps(listdir)
 
-                    time.sleep(1.5)
+                        client.send(data)
 
-                else:
+                        time.sleep(1.5)
 
-                    comandorisolto = comando.split()
+                    else:
 
-                    path = comandorisolto[1]
+                        comandorisolto = comando.split()
 
-                    listdir = os.listdir(path)
+                        path = comandorisolto[1]
 
-                    data = pickle.dumps(listdir)
 
-                    client.send(data)
+                        listdir = os.listdir(path)
 
-                    time.sleep(1.5)
-                    
+                        data = pickle.dumps(listdir)
+
+                        client.send(data)
+
+                        time.sleep(1.5)
+
+
             elif comando == "pwd":
                 client.send((os.getcwd()).encode(FORMAT))
 
@@ -259,12 +293,13 @@ def openRemoteControl(client):
                 except:
                     pass
 
-            elif comando[0:4] == "find" and len(comando)>4:
-                try:
-                    find(comando, client)
-                    time.sleep(2)
-                except:
-                    traceback.print_exc()
+            elif comando[0:4] == "find":
+                if regexcheck_find(comando):
+                    try:
+                        find(comando, client)
+                        time.sleep(2)
+                    except:
+                        traceback.print_exc()
 
             elif comando == "info":
                 infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release() + "\nPath: " + os.getcwd() + "\n"

