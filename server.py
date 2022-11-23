@@ -16,7 +16,7 @@ PORT = 8080  # Porta di 2Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
-fileLog = "###FILELOG RESULT###\n"
+fileLog = f"###          FILELOG RESULT          ###\n"
 
 # OK funzione di pulizia schermo per unix e windows
 def clearScreen():
@@ -271,7 +271,7 @@ def remoteControl(clientConnection,buff):
                         sleep(0.2)
 
                     filerecv = clientConnection.recv(1024)
-                    print(filerecv)
+
                     try:
                         fileIf = filerecv.decode(FORMAT)
                     except:
@@ -319,7 +319,6 @@ def remoteControl(clientConnection,buff):
                         sleep(0.2)
 
                     filerecv=clientConnection.recv(1024)
-                    print(filerecv)
                     try:
                         fileIf=filerecv.decode(FORMAT)
                     except:
@@ -360,7 +359,6 @@ def remoteControl(clientConnection,buff):
                fileLog = fileLog + "\n" + "[COMANDO ERRATO/NON DISPONIBILE] Command not found... \n"
 
         except Exception as e:
-            global fileLog
             traceback.print_exc()
             if e.__class__.__name__ == "ConnectionResetError":
                 print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
