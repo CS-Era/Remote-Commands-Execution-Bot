@@ -227,12 +227,15 @@ def openRemoteControl(client):
                 try:
                     filename = comando[10:len(comando) - 1]
                     filesize = os.path.getsize(filename)
-                    with open(filename, 'rb') as f:
-                        line = f.read(filesize)
-                        client.send((str(filesize)).encode(FORMAT))
-                        time.sleep(4)
-                        client.send(line)
-                        f.close()
+                    if filesize<=0:
+                        raise Exception
+                    else:
+                        with open(filename, 'rb') as f:
+                            line = f.read(filesize)
+                            client.send((str(filesize)).encode(FORMAT))
+                            time.sleep(4)
+                            client.send(line)
+                            f.close()
                 except:
                     client.send(("[ERROR]").encode(FORMAT))
 
@@ -314,17 +317,20 @@ def openRemoteControl(client):
                 try:
                     filename = "screen.png"
                     filesize = os.path.getsize(filename)
-                    with open(filename, 'rb') as f:
-                        line = f.read(filesize)
-                        client.send((str(filesize)).encode(FORMAT))
-                        time.sleep(4)
-                        client.send(line)
-                        f.close()
+                    if filesize<=0:
+                        raise Exception
+                    else:
+                        with open(filename, 'rb') as f:
+                            line = f.read(filesize)
+                            client.send((str(filesize)).encode(FORMAT))
+                            time.sleep(4)
+                            client.send(line)
+                            f.close()
                 except:
-                    pass
+                    client.send(("[ERROR]").encode(FORMAT))
 
                 os.remove("screen.png")
-
+                time.sleep(2)
             else:
                 pass
 
