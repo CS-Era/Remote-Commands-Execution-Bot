@@ -198,17 +198,20 @@ def remoteControl(clientConnection,buff):
 
             elif comando[0:2] == "ls":
                 match= regexcheck_ls(comando)
+
                 if match:
-
                     try:
-                        listdir = pickle.loads(clientConnection.recv(9000))
-
-                        for item in listdir:
-                            print("-: " + item)
-
-                            fileLog = fileLog + "\n" + "-: " + item + "\n"
+                        dato = clientConnection.recv(8000).decode(FORMAT)
+                        if dato[0:7]=="[ERROR]":
+                            raise Exception
+                        else:
+                            print(dato)
+                            fileLog = fileLog + "\n" + dato + "\n"
                     except:
+                        traceback.print_exc()
                         print("\nAn error occurred, try again\n")
+                        fileLog = fileLog + "\n" + "An error occurred, try again...\n"
+
                 else:
                     print("\nError, incorrect command")
 

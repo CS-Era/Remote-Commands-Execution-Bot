@@ -244,44 +244,41 @@ def openRemoteControl(client):
                 if match:
                     os.chdir(comando[3:])
 
-
-
-
             elif comando[0:2] == "ls":
                 match=False
                 match=regexcheck_ls(comando)
+                try:
+                    if match:
+                        if len(comando) == 2:
+                            listdir = os.listdir()
+                            lista = []
+                            for item in listdir:
+                                lista.append("-: " + item + "\n")
 
-                if match:
+                            data = ''.join(lista)
+                            client.send((data).encode(FORMAT))
+                            time.sleep(1.5)
+                            # ritorna una lista
+                            #listdir = os.listdir()
+                            # faccio un dump per poterla inoltrare
+                            #data = pickle.dumps(listdir)
+                            #client.send(data)
+                            #time.sleep(1.5)
+                        else:
+                            comandorisolto = comando.split()
+                            path = comandorisolto[1]
+                            listdir = os.listdir(path)
+                            lista = []
+                            for item in listdir:
+                                lista.append("-: " + item + "\n")
 
-                    if len(comando) == 2:
-
-                        # ritorna una lista
-
-                        listdir = os.listdir()
-
-                        # faccio un dump per poterla inoltrare
-
-                        data = pickle.dumps(listdir)
-
-                        client.send(data)
-
-                        time.sleep(1.5)
-
-                    else:
-
-                        comandorisolto = comando.split()
-
-                        path = comandorisolto[1]
-
-
-                        listdir = os.listdir(path)
-
-                        data = pickle.dumps(listdir)
-
-                        client.send(data)
-
-                        time.sleep(1.5)
-
+                            data = ''.join(lista)
+                            client.send((data).encode(FORMAT))
+                            #data = pickle.dumps(listdir)
+                            #client.send(data)
+                            time.sleep(1.5)
+                except:
+                    client.send(("[ERROR]").encode(FORMAT))
 
             elif comando == "pwd":
                 client.send((os.getcwd()).encode(FORMAT))
