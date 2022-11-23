@@ -1,8 +1,5 @@
-import glob
 import os
-import pickle
 import re
-import subprocess
 import sys
 from socket import *
 import platform
@@ -10,8 +7,6 @@ import time
 import psutil
 import signal
 from os import system
-from threading import Timer
-from traceback import print_exc
 import pyautogui
 import traceback
 

