@@ -1,0 +1,4 @@
+PyAutoGUI == 0.9.53
+colorama == 0.4.6
+psutil == 5.9.3
+tqdm == 4.64.1
