@@ -1,7 +1,7 @@
 from socket import *
 
 IP = "localhost"
-PORT = 8080  # Porta di Ascolto del TCP
+PORT = 8080 # Porta di Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"

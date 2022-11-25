@@ -20,7 +20,7 @@ def signalHandler(signum, frame):
 
 # OK regExpr find
 def regexcheck_find(comando):
-    windows_regex='^find \.[a-z]{1,4} (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
+    windows_regex=r'^find \.[a-z]{1,4} (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
     unix_regex='^find \.[a-z]{1,4} (\.(\/[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\/[a-zA-Z0-9, ,\_,\-]+)+)'
 
     if platform.system() == "Windows":
@@ -31,7 +31,7 @@ def regexcheck_find(comando):
 
 # OK regExpr cd
 def regexcheck_cd(comando):
-    windows_regex = '^cd ([a-zA-Z0-9, ,\-,\_]+)|^cd (\\[a-zA-Z0-9, ,\-,\_]+)+|^cd (\.(\\[a-zA-Z0-9, ,\-,\_]+)+)|^cd \.\.'
+    windows_regex =r'^cd ([a-zA-Z0-9, ,\-,\_]+)|^cd (\\[a-zA-Z0-9, ,\-,\_]+)+|^cd (\.(\\[a-zA-Z0-9, ,\-,\_]+)+)|^cd \.\.'
     unix_regex = '^cd ([a-zA-Z0-9, ,\-,\_]+)|^cd (\/[a-zA-Z0-9, ,\-,\_]+)+|^cd (\.(\/[a-zA-Z0-9, ,\-,\_]+)+)|^cd \.\.'
 
     if platform.system() == "Windows":
@@ -42,7 +42,7 @@ def regexcheck_cd(comando):
 
 # OK regExpr ls
 def regexcheck_ls(comando):
-    windows_regex = '^ls ([a-zA-Z0-9, ,\-,\_]+)|^ls (\\[a-zA-Z0-9, ,\-,\_]+)+|^ls (\.(\\[a-zA-Z0-9, ,\-,\_]+)+)|^ls \.\.|^ls \.|^ls'
+    windows_regex = r'^ls ([a-zA-Z0-9, ,\-,\_]+)|^ls (\\[a-zA-Z0-9, ,\-,\_]+)+|^ls (\.(\\[a-zA-Z0-9, ,\-,\_]+)+)|^ls \.\.|^ls \.|^ls'
     unix_regex = '^ls ([a-zA-Z0-9, ,\-,\_]+)|^ls (\/[a-zA-Z0-9, ,\-,\_]+)+|^ls (\.(\/[a-zA-Z0-9, ,\-,\_]+)+)|^ls \.\.|^ls \.|^ls'
 
     if platform.system() == "Windows":
