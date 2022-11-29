@@ -239,7 +239,7 @@ def openRemoteControl(client):
                     pass
 
             elif comando[0:4] == "find":
-                if regexcheck_find(comando):
+                if regexcheck_find(comando) == True:
                     try:
                         find(comando, client)
                         time.sleep(2)

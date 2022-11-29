@@ -120,9 +120,7 @@ def remoteControl(clientConnection,buff):
 
             elif comando[0:4] == "find":
 
-                match = regexcheck_find(comando)
-
-                if match:
+                if regexcheck_find(comando) == True:
 
                     for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Receiving Information", colour="green", ncols=50,bar_format="{desc}: {percentage:3.0f}% {bar}"):
                         sleep(0.2)
@@ -143,7 +141,7 @@ def remoteControl(clientConnection,buff):
                         fileLog = fileLog + "\n" + "Command Find gone wrong\n"
                         print("Command Find gone wrong\n")
                 else:
-                    print("Wrong command!")
+                    print("Regular Expression not matched!")
             elif comando == "clear":
                 clearScreen()
 

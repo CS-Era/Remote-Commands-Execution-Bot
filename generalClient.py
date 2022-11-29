@@ -24,10 +24,13 @@ def regexcheck_find(comando):
     unix_regex='^find \.[a-z]{1,4} (\.(\/[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\/[a-zA-Z0-9, ,\_,\-]+)+)'
 
     if platform.system() == "Windows":
-        return re.match(windows_regex,comando)
+        if re.match(windows_regex,comando) == True:
+            return True
     elif platform.system() == "Linux" or "Darwin":
-        return re.match(unix_regex,comando)
+        if re.match(unix_regex,comando) == True:
+            return True
 
+    return False
 
 # OK regExpr cd
 def regexcheck_cd(comando):
