@@ -13,12 +13,18 @@ def clearScreen():
 
 
 def regexcheck_find(comando):
-    windows_regex='^find \.[a-z]{1,4} (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
+    windows_regex=r'^find \.[a-z]{1,4} (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
     unix_regex='^find \.[a-z]{1,4} (\.(\/[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\/[a-zA-Z0-9, ,\_,\-]+)+)'
+    resultWindows = 'null'
+    resultUnix = 'null'
 
-    if re.match(unix_regex,comando) or re.match(windows_regex,comando):
+    resultWindows = re.match(windows_regex,comando)
+    resultUnix = re.match(unix_regex,comando)
+
+    if resultWindows or resultUnix:
         return True
-    return False
+    else:
+        return False
 
 
 # OK gestisce il ctrl-C per l'uscita

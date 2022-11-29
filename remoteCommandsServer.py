@@ -127,21 +127,25 @@ def remoteControl(clientConnection,buff):
                     print("Wait...")
                     filesize = clientConnection.recv(1024).decode(FORMAT)
 
-                    dato = ('').encode(FORMAT)
-                    try:
-                        dato = dato + clientConnection.recv(int(filesize))
-                        print(dato.decode(FORMAT))
-                        fileLog = fileLog + "\n" + dato.decode(FORMAT) + "\n"
-                        for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Completing Operation", colour="green",
-                                      ncols=50,
-                                      bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                            sleep(0.2)
-                    except:
-                        #traceback.print_exc()
-                        fileLog = fileLog + "\n" + "Command Find gone wrong\n"
-                        print("Command Find gone wrong\n")
+                    if filesize[0:26]!="[ERROR] Path doesn't exist":
+                        dato = ('').encode(FORMAT)
+                        try:
+                            dato = dato + clientConnection.recv(int(filesize))
+                            print(dato.decode(FORMAT))
+                            fileLog = fileLog + "\n" + dato.decode(FORMAT) + "\n"
+                            for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Completing Operation", colour="green",
+                                          ncols=50,
+                                          bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                                sleep(0.2)
+                        except:
+                            #traceback.print_exc()
+                            fileLog = fileLog + "\n" + "Command Find gone wrong\n"
+                            print("Command Find gone wrong\n")
+                    else:
+                        print(filesize)
                 else:
                     print("Regular Expression not matched!")
+
             elif comando == "clear":
                 clearScreen()
 

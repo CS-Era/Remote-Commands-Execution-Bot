@@ -22,15 +22,17 @@ def signalHandler(signum, frame):
 def regexcheck_find(comando):
     windows_regex=r'^find \.[a-z]{1,4} (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
     unix_regex='^find \.[a-z]{1,4} (\.(\/[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\/[a-zA-Z0-9, ,\_,\-]+)+)'
+    result = 'null'
 
-    if platform.system() == "Windows":
-        if re.match(windows_regex,comando) == True:
-            return True
-    elif platform.system() == "Linux" or "Darwin":
-        if re.match(unix_regex,comando) == True:
-            return True
+    if platform.system()=='Windows':
+        result = re.match(windows_regex,comando)
+    else:
+        result = re.match(unix_regex,comando)
 
-    return False
+    if result:
+        return True
+    else:
+        return False
 
 # OK regExpr cd
 def regexcheck_cd(comando):
