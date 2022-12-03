@@ -1,6 +1,6 @@
 import os
 import time
-
+import traceback
 from generalServer import *
 from connectionServer import *
 
@@ -57,6 +57,7 @@ def filespath(clientConnection):
 
 
 def download(comando,clientConnection):
+    global fileLog
     nomeFile='null'
     inizio_file='null'
     fine_file='null'
@@ -134,7 +135,7 @@ def download(comando,clientConnection):
             else:
                 print("Couldn't take start and end point of the file's name")
         except:
-            #traceback.print_exc()
+            traceback.print_exc()
             print("Download fallito\n")
             fileLog = fileLog + "\n" + "Download failed\n"
     else:
