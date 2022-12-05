@@ -9,6 +9,7 @@ import traceback
 import subprocess
 from threading import Timer
 from colorama import Fore
+import zipfile
 
 # OK mando informazioni so
 def sendInfo(client):
@@ -104,15 +105,38 @@ def filespath(tipologia, client):
             allType=allType+" "+tipologia
             for cartella, sottocartelle, file in os.walk(path):
                 for item in file:
-                    result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
+                    if item.endswith(".zip"):
+                        result.append('"' + item + '"' + " nel percorso: " + cartella)
+                        pathcurrent = os.getcwd()
+                        os.chdir(cartella)
+                        counter_elemets += 1
+                        zf = zipfile.ZipFile(item, 'r')
+                        os.chdir(pathcurrent)
+                        for item2 in zf.namelist():
+                            result.append('\t-: "' + item2 + '"')
+                        result.append("\n")
+
+                    else:
+                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
 
         elif tipologia[0:1]==".":
             allType=allType+" "+tipologia
             for cartella, sottocartelle, file in os.walk(path):
                 for item in file:
                     if item.endswith(tipologia):
-                        counter_elemets += 1
-                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
+                        if item.endswith(".zip"):
+                            result.append('"' + item + '"' + " nel percorso: " + cartella)
+                            pathcurrent = os.getcwd()
+                            os.chdir(cartella)
+                            counter_elemets += 1
+                            zf = zipfile.ZipFile(item, 'r')
+                            os.chdir(pathcurrent)
+                            for item2 in zf.namelist():
+                                result.append('\t-: "' + item2 + '"')
+                            result.append("\n")
+                        else:
+                            counter_elemets += 1
+                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
 
     result.append("\n----Trovati "+str(counter_elemets)+" elementi.")
     result.append("\n### TROVATI TUTTI I FILE CON ESTENSIONE " + allType + "###\n\n")
