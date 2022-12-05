@@ -57,19 +57,13 @@ def filespath(clientConnection):
 
 
 def download(comando,clientConnection):
-    global fileLog
     nomeFile='null'
     inizio_file='null'
     fine_file='null'
     counter_virgolette=0
     regex_match = regexcheck_download(comando)
-
     if regex_match != 'null' and regex_match != 'not matched':
-
         if regex_match == 'windowstip1'or regex_match == 'unixtip1':
-
-            print(f"Nella download: regex riconosciuta e risulta {regex_match}")
-
             #tipologia 1: (simile a find) download "nomefile.estensione" path
             for element in range(0, len(comando)):
                 if comando[element] == "\"":
@@ -78,9 +72,7 @@ def download(comando,clientConnection):
                         inizio_file = element+1
                     elif counter_virgolette == 2:
                         fine_file = element
-
         elif regex_match == 'windowstip2' or regex_match == 'unixtip2':
-
             #tipologia 2: (il risultato di filespath) "Carta di identità cartacea titolare.pdf" nel percorso: /Users/erasmo/Desktop
             for element in range(0, len(comando)):
                 if comando[element] == "\"":
@@ -89,42 +81,37 @@ def download(comando,clientConnection):
                         inizio_file = element+1
                     elif counter_virgolette == 2:
                         fine_file = element
-
-        print(f"Risulta nomefile = {comando[inizio_file:fine_file]}")
-
         try:
             if inizio_file != 'null' and fine_file != 'null':
                 nomeFile=comando[inizio_file:fine_file]
                 file = open(nomeFile, 'wb')
-                for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + f"Downloading {nomeFile}...", colour="green",
-                                ncols=100, bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                    sleep(0.2)
+                lunghezzacmd = len(nomeFile)
+
+                for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + f"Downloading \"{nomeFile}\"...", colour="green",
+                              ncols=45 + lunghezzacmd, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                    time.sleep(0.2)
 
                 filerecv = clientConnection.recv(1024)
-
                 try:
                     fileIf = filerecv.decode(FORMAT)
                 except:
                     fileIf = ""
-
-                if fileIf[0:7]!="[ERROR]":
-
+                if fileIf[0:7] != "[ERROR]":
                     scritti = 0
-                    while (filerecv):
+                    while (filerecv != b'[END]'):
                         scritti = scritti + file.write(filerecv)
                         filerecv = clientConnection.recv(1024)
-                        if filerecv == b'[END]':
-                            filerecv = ''
 
                     file.close()
 
+                    global fileLog
                     if os.path.getsize(nomeFile) <= 0:
                         fileLog = fileLog + "\n" + "Download failed\n" + "\n"
                         print("Download failed\n")
                         os.remove(nomeFile)
                     elif scritti < os.path.getsize(nomeFile):
                         fileLog = fileLog + "\n" + "Download failed\n" + "\n"
-                        print("Download fallito\n")
+                        print("Download failed\n")
                         os.remove(nomeFile)
                     else:
                         fileLog = fileLog + "\n" + f"File {nomeFile} successfully downloaded\n" + "\n"
@@ -134,10 +121,16 @@ def download(comando,clientConnection):
                     raise Exception
             else:
                 print("Couldn't take start and end point of the file's name")
+                error = clientConnection.recv(256).decode(FORMAT)
+                raise Exception
         except:
-            traceback.print_exc()
-            print("Download fallito\n")
+            print("Download failed\n")
+            try:
+                os.remove(nomeFile)
+            except:
+                pass
             fileLog = fileLog + "\n" + "Download failed\n"
+
     else:
         print("The input doesn't match the regular expression for download command")
 
@@ -202,7 +195,11 @@ def remoteControl(clientConnection,buff):
 
             # "Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>"
             elif comando[0:9] == "filespath":
-                filespath(clientConnection)
+                reg = "^filespath .[a-z]{1,4}"
+                if (re.match(reg, comando)):
+                    filespath(clientConnection)
+                else:
+                    print("Regular Expression not matched!")
 
             elif comando[0:4] == "find":
 
@@ -246,6 +243,7 @@ def remoteControl(clientConnection,buff):
                 print(output)
                 fileLog = fileLog + "\n" + output + "\n"
 
+
             elif comando[0:8] == "download":
                 download(comando,clientConnection)
 
@@ -269,9 +267,11 @@ def remoteControl(clientConnection,buff):
 
                 try:
                     file = open(nomeFoto, 'wb')
-                    for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + f"Downloading the {nomeFoto} file...", colour="green",
-                                  ncols=75, bar_format="{desc}: {percentage:3.0f}% {bar}"):
-                        sleep(0.2)
+                    lunghezzacmd = len(nomeFoto)
+
+                    for i in tqdm(range(17), desc=Fore.LIGHTWHITE_EX + f"Downloading \"{nomeFoto}\"...", colour="green",
+                                  ncols=45 + lunghezzacmd, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+                        time.sleep(0.2)
 
                     filerecv=clientConnection.recv(1024)
                     try:
@@ -281,12 +281,9 @@ def remoteControl(clientConnection,buff):
 
                     if fileIf[0:7] != "[ERROR]":
                         scritti=0
-                        while(filerecv):
+                        while (filerecv != b'[END]'):
                             scritti = scritti + file.write(filerecv)
                             filerecv = clientConnection.recv(1024)
-                            if filerecv == b'[END]':
-                                print(filerecv.decode(FORMAT))
-                                filerecv=''
 
                         file.close()
 

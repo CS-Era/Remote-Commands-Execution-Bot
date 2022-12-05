@@ -21,37 +21,27 @@ def signalHandler(signum, frame):
 def regexcheck_download(comando):
     windows_regex_tip1 = r'^download \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.[a-z]{1,4}\" (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
     unix_regex_tip1 = '^download \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.[a-z]{1,4}\" (\.(\/[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\/[a-zA-Z0-9, ,\_,\-]+)+)'
-    windows_regex_tip2 = r'^'
-    unix_regex_tip2 = '^'
+    windows_regex_tip2 = r'^download "[a-zA-Z0-9, ,\_,\-,\.,\']+\.[a-z]{1,4}" nel percorso: C:((\\[a-zA-Z0-9, ,\_,\-]+)+)'
+    unix_regex_tip2 = '^download \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.[a-z]{1,4}\" nel percorso: ((\/[a-zA-Z0-9, ,\_,\-]+)+)'
+
     result1 = 'null'
     result2 = 'null'
     systemName = platform.system()
 
     if systemName == 'Windows':
-        print("Ho riconosciuto la regex per windows")
-        result1 = re.match(windows_regex_tip1,comando)
-        result2 = re.match(windows_regex_tip2,comando)
-    else:
-        print("Ho riconosciuto la regex per unix")
-        result1 = re.match(unix_regex_tip1,comando)
-        result2 = re.match(unix_regex_tip2,comando)
-
-    if result1 != 'null':
-        if systemName == 'Windows':
-            print("ritorno match per windows tipologia 1")
+        if re.match(windows_regex_tip1,comando):
             return "windowstip1"
-        else:
-            print("ritorno match per unix tipologia 1")
-            return "unixtip1"
-    elif result2 != 'null':
-        if systemName == 'Windows':
-            print("ritorno match per windows tipologia 2")
+        elif re.match(windows_regex_tip2,comando):
             return "windowstip2"
         else:
-            print("ritorno match per unix tipologia 2")
-            return "unixtip2"
+            return "not matched"
     else:
-        return 'not matched'
+        if re.match(unix_regex_tip1,comando):
+            return "unixtip1"
+        elif re.match(unix_regex_tip2,comando):
+            return "unixtip2"
+        else:
+            return "not matched"
 
 # OK regExpr find
 def regexcheck_find(comando):

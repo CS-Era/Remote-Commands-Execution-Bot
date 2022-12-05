@@ -56,14 +56,7 @@ def main():
                             fileLog = fileLog + "\n" + f"La connessione con il client {addr} si è interrotta\n" + "\n"
                             attivo = 0
                         else:
-                            #risposta="null"
-                            #while risposta !='0' and risposta !='1':
-                                #risposta = input(f"Remote control non disponibile, riprovare? Y-1/N-0 ")
-                                #fileLog = fileLog + "\n" + f"Remote control non disponibile, riprovare? Y-1/N-0 " + risposta +"\n"
-                                #if risposta == '1':
-                                    #attivo = 1
-                                #elif risposta == '0':
-                                    attivo = 0
+                            attivo = 0
 
                 clientConnection.close()
                 for i in tqdm(range(10), desc=Fore.LIGHTWHITE_EX + "Chiusura connessione client", colour="green", ncols=50,
