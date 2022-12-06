@@ -245,6 +245,7 @@ def remoteControl(clientConnection,buff,fileLog):
 
                 else:
                     print("\nError, incorrect command")
+                    fileLog = fileLog + "\n" + "Error, incorrect command\n"
 
             elif comando == "pwd":
                 pwdresult = clientConnection.recv(1024).decode(FORMAT)
@@ -258,6 +259,8 @@ def remoteControl(clientConnection,buff,fileLog):
                     fileLog=filespath(clientConnection,fileLog)
                 else:
                     print("Regular Expression not matched!")
+                    fileLog = fileLog + "\n" + "Regular Expression not matched!\n"
+
 
             elif comando[0:4] == "find":
 
@@ -286,6 +289,7 @@ def remoteControl(clientConnection,buff,fileLog):
                         print(filesize)
                 else:
                     print("Regular Expression not matched!")
+                    fileLog = fileLog + "\n" + "Regular Expression not matched!\n"
 
             elif comando == "clear":
                 clearScreen()
@@ -370,12 +374,18 @@ def remoteControl(clientConnection,buff,fileLog):
                             print(f"Screenshot successfully downloaded\n")
                         time.sleep(2)
                     else:
-                        raise Exception
+                        fileLog = fileLog + "\n" + "Screenshot failed\n" + "\n"
+                        print("Screenshot failed\n")
+                        os.remove(nomeFoto)
 
                 except:
                     #traceback.print_exc()
-                    print("Screenshot fallito\n")
-                    fileLog = fileLog + "\n" + "Screenshot failed\n"
+                    fileLog = fileLog + "\n" + "Screenshot failed\n" + "\n"
+                    print("Screenshot failed\n")
+                    try:
+                        os.remove(nomeFoto)
+                    except:
+                        pass
 
             elif comando[0:4] == "open":
                 regex = r'^open \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.zip\"'
@@ -383,6 +393,8 @@ def remoteControl(clientConnection,buff,fileLog):
                     fileLog=openZip(comando, clientConnection,fileLog)
                 else:
                     print("Regular Expression not matched!")
+                    fileLog = fileLog + "\n" + "Regular Expression not matched!\n"
+
 
             else:
                print("[ERROR] Command not found... \n")
