@@ -3,8 +3,6 @@ import time
 import subprocess
 from generalServer import *
 from connectionServer import *
-
-
 def openZip(comando, clientConnection):
     global fileLog
     try:
@@ -14,15 +12,15 @@ def openZip(comando, clientConnection):
         except:
             fileIf = ""
 
-        print(fileIf)
         if fileIf[0:7] != "[ERROR]":
+            fileLog = fileLog + "\n"
             while (filerecv != b'[END]'):
-                print(fileIf)
-                fileLog = fileLog + "\n" + fileIf
+                print(fileIf, end="")
+                fileLog = fileLog + fileIf
                 filerecv = clientConnection.recv(1024)
                 fileIf = filerecv.decode(FORMAT)
 
-
+            print("\n")
             fileLog = fileLog + "\n"
         else:
             raise Exception
@@ -91,6 +89,7 @@ def filespath(clientConnection):
 
 
 def download(comando,clientConnection):
+    global fileLog
     nomeFile='null'
     inizio_file='null'
     fine_file='null'
@@ -138,7 +137,6 @@ def download(comando,clientConnection):
 
                     file.close()
 
-                    global fileLog
                     if os.path.getsize(nomeFile) <= 0:
                         fileLog = fileLog + "\n" + "Download failed\n" + "\n"
                         print("Download failed\n")
@@ -174,6 +172,8 @@ def download(comando,clientConnection):
 
 # CONTROLLO REMOTO
 def remoteControl(clientConnection,buff):
+    global fileLog
+
     while True:
         try:
             pathError = ""
@@ -196,7 +196,6 @@ def remoteControl(clientConnection,buff):
             while comando == "":
                 comando = input(path + "$ ")
 
-            global fileLog
             fileLog = fileLog + "\n" + path + "$ " + comando + "\n"
 
             clientConnection.send((comando).encode(FORMAT))
@@ -204,6 +203,7 @@ def remoteControl(clientConnection,buff):
             if comando == "exit":
                 print(f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n")
                 fileLog = fileLog + "\n" + f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n" + "\n"
+                print(fileLog)
                 break
 
             elif comando[0:2] == "ls":

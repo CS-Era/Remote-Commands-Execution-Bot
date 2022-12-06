@@ -308,16 +308,14 @@ def download(comando, client):
 
 #aprire i file
 def openZip(comando,client):
-
     result=[]
-    if comando.endswith(".zip"):
+    if comando.endswith(".zip\""):
         try:
-            nomeFile = comando[5:]
+            nomeFile = comando[6:(len(comando)-1)]
             result.append(f"\n {nomeFile} contiene i seguenti file:\n ")
             zf = zipfile.ZipFile(nomeFile, 'r')
             for item2 in zf.namelist():
                 result.append("\n\t-:" + '"' + item2 + '"')
-                print("\n\t-:" + '"' + item2 + '"')
 
             result = ''.join(result)
 
