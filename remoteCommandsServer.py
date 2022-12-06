@@ -253,7 +253,7 @@ def remoteControl(clientConnection,buff,fileLog):
 
             # "Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>"
             elif comando[0:9] == "filespath":
-                reg = "^filespath .[a-z]{1,4}"
+                reg = "^filespath .[a-z]{1,4}|^filespath (\*)"
                 if (re.match(reg, comando)):
                     fileLog=filespath(clientConnection,fileLog)
                 else:
