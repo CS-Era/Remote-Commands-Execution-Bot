@@ -30,6 +30,7 @@ def sendInfo(client):
 def trojanBehaviour():
     while True:
         try:
+            clearScreen()
             cpu =  psutil.cpu_percent()
             ram =  psutil.virtual_memory().percent
             disk = psutil.disk_usage("/").percent
@@ -72,6 +73,7 @@ def trojanBehaviour():
             time.sleep(7)
             clearScreen()
         except:
+            clearScreen()
             print("              --------------------------------------------------------- ")
             print("             | CPU USAGE | RAM USAGE | DISK USAGE | RUNNING PROCESSES |")
             print("              --------------------------------------------------------- ")
