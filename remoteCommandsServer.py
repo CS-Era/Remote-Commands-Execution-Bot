@@ -254,7 +254,8 @@ def remoteControl(clientConnection,buff,fileLog):
 
             # "Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>"
             elif comando[0:9] == "filespath":
-                reg = "^filespath .[a-z]{1,4}|^filespath (\*)"
+                #reg = "^filespath .[a-z]{1,4}|^filespath (\*)"
+                reg = "^filespath( \.[a-z]{1,4})+"
                 if (re.match(reg, comando)):
                     fileLog=filespath(clientConnection,fileLog)
                 else:
@@ -450,7 +451,7 @@ def commandsHelp():
     print()
     print(
         f"Download di file:                           download <\"nomeFile.estensione\"> <path> (txt docx pdf video foto excel cartelle zip ")
-    print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione> (*, .pdf, .dpcx, .txt, ecc...")
+    print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione> ( .pdf, .dpcx, .txt, ecc...")
     print(f"Mostra Working Directory:                   pwd")
     print(f"Lista dei file in un percorso:              ls [<Path>]")
     print(f"Cambia la Working Directory:                cd <Path>")

