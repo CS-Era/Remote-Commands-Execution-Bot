@@ -9,7 +9,6 @@ PORT = 12001  # Porta di 2Ascolto del TCP
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
-fileLog = f"###          FILELOG RESULT          ###\n"
 
 
 # OK crea connessione

