@@ -1,5 +1,7 @@
 import signal
 import sys
+import traceback
+
 from remoteCommandsServer import *
 
 def main(fileLog):
@@ -79,10 +81,12 @@ def main(fileLog):
                 os.chdir("..")
 
                 # Le operazioni sono concluse e decido come procedere
-                print(f"[DECISION] Do you want to close the Sever or keep listening for new Clients?")
-                print(f"[DECISION] 1 - Keep Listening")
-                print(f"[DECISION] 2 - Close Server")
-                restartDecision = input("> ")
+                restartDecision='0'
+                while restartDecision!='1' and restartDecision!='2':
+                    print(f"[DECISION] Do you want to close the Sever or keep listening for new Clients?")
+                    print(f"[DECISION] 1 - Keep Listening")
+                    print(f"[DECISION] 2 - Close Server")
+                    restartDecision = input("> ")
 
                 if restartDecision == '2':
                     exit = True

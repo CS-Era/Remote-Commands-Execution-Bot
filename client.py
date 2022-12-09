@@ -11,19 +11,18 @@ def main():
             raise Exception
         else:
             client.setblocking(True)
-            time.sleep(7)
+            time.sleep(3)
             try:
                 sendInfo(client)
             except Exception as e:
                 raise e
 
             try:
-                time.sleep(5)
+                time.sleep(7)
                 openRemoteControl(client)
 
             except Exception as e:
                 if e.__class__.__name__ == "ConnectionResetError":
-                    print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
                     raise e
                 raise e
 

