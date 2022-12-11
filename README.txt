@@ -30,6 +30,11 @@ Il codice è stato testato principalmente su Python 3.8.
 
 Nei files di connessione è possibile modificare indirizzo ip e porto a seconda delle esigenze.
 
+ESECUZIONE:
+
+Vittima: client.py
+Server:  server.py
+
 
 LISTA DEI COMANDI REMOTI DISPONIBILI E RELATIVA SPIEGAZIONE:
 
