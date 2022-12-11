@@ -116,6 +116,7 @@ def download(comando,clientConnection,fileLog):
                         inizio_file = element+1
                     elif counter_virgolette == 2:
                         fine_file = element
+                        break
         elif regex_match == 'windowstip2' or regex_match == 'unixtip2':
             #tipologia 2: (il risultato di filespath) "Carta di identità cartacea titolare.pdf" nel percorso: /Users/erasmo/Desktop
             for element in range(0, len(comando)):
@@ -125,6 +126,7 @@ def download(comando,clientConnection,fileLog):
                         inizio_file = element+1
                     elif counter_virgolette == 2:
                         fine_file = element
+                        break
         try:
             if inizio_file != 'null' and fine_file != 'null':
                 nomeFile=comando[inizio_file:fine_file]

@@ -44,10 +44,11 @@ def regexcheck_ls(comando):
 
 
 def regexcheck_download(comando):
-    windows_regex_tip1 = r'^download \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.[a-z]{1,4}\" (\.(\\[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\\[a-zA-Z0-9, ,\_,\-]+)+)'
-    unix_regex_tip1 = '^download \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.[a-z]{1,4}\" (\.(\/[a-zA-Z0-9, ,\_,\-]+)+|\.{1,2}|(\/[a-zA-Z0-9, ,\_,\-]+)+)'
-    windows_regex_tip2 = r'^download "[a-zA-Z0-9, ,\_,\-,\.,\']+\.[a-z]{1,4}" nel percorso: C:((\\[a-zA-Z0-9, ,\_,\-]+)+)'
-    unix_regex_tip2 = '^download \"[a-zA-Z0-9, ,\_,\-,\.,\']+\.[a-z]{1,4}\" nel percorso: ((\/[a-zA-Z0-9, ,\_,\-]+)+)'
+
+    windows_regex_tip1 = r'^download "[\s\S]+\.[a-z]{1,4}" (\.(\\[^\/]+)+|\.{1,2}|(\\[^\/]+)+)'
+    unix_regex_tip1 = '^download \"[\s\S]+\.[a-z]{1,4}\" (\.(\/[^\/]+)+|\.{1,2}|(\/[^\/]+)+)'
+    windows_regex_tip2 = r'^download "[\s\S]+\.[a-z]{1,4}" nel percorso: C:(\\[^\/]+)+'
+    unix_regex_tip2 = '^download \"[\s\S]+\.[a-z]{1,4}\" nel percorso: (\/[^\/]+)+'
 
     result1 = 'null'
     result2 = 'null'

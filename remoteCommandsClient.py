@@ -225,6 +225,7 @@ def download(comando, client):
                     counter_spazi += 1
                     if counter_spazi >= 2 and counter_virgolette == 2:
                         inizio_path = element + 1
+                        break
         elif regex_match == 'windowstip2' or regex_match == 'unixtip2':
             # tipologia 2: (il risultato di filespath) "Carta di identità cartacea titolare.pdf" nel percorso: /Users/erasmo/Desktop
             for element in range(0, len(comando)):
@@ -236,12 +237,10 @@ def download(comando, client):
                         fine_file = element
                 if comando[element] == ":" and counter_virgolette == 2:
                     inizio_path = element + 2
+                    break
 
         file = comando[inizio_file:fine_file]
         path = comando[inizio_path:]
-
-        print(path)
-        print(file)
 
         # distinguere il tipo di path per utilizzare os.path.getsize
         pathtoremember = 'null'
