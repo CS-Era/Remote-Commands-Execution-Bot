@@ -4,8 +4,8 @@ from colorama import Fore
 from time import sleep
 
 
-IP = "localhost"
-PORT = 12000  # Porta di 2Ascolto del TCP
+IP = "192.168.1.52"
+PORT = 12000
 ADDR = (IP, PORT)
 SIZE = 4096
 FORMAT = "utf-8"
