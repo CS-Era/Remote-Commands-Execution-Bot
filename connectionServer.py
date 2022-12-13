@@ -4,7 +4,7 @@ from colorama import Fore
 from time import sleep
 
 
-IP = "192.168.1.52"
+IP = "localhost"
 PORT = 12000
 ADDR = (IP, PORT)
 SIZE = 4096

@@ -1,0 +1,386 @@
+Information on the victim's Operating System ('192.168.1.188', 44300):
+
+Operating System: Linux
+Machine: x86_64
+Host: Ubuntu-20-04-LTS
+Processor: x86_64
+Platform: Linux-5.15.0-52-generic-x86_64-with-glibc2.35
+Release: 5.15.0-52-generic
+Path: /home/alessio/Documents/final test/Binotto Team - Erasmo
+
+[DONE] Info received.
+
+[REMOTE CONTROL] Starting procedure...: 100% ████████████████████
+[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...
+
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ network
+### Dati configurazione di rete ###
+enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::9406:ff6d:57df:81b6  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:63:f0:81  txqueuelen 1000  (Ethernet)
+        RX packets 29  bytes 5962 (5.9 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 119  bytes 14476 (14.4 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.188  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 fdac:c077:5c58:0:a815:7e34:a9bd:fd74  prefixlen 64  scopeid 0x0<global>
+        inet6 fdac:c077:5c58:0:48f0:3733:26f6:1457  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::9d7:8073:fa98:3b11  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:b5:01:f3  txqueuelen 1000  (Ethernet)
+        RX packets 669  bytes 91153 (91.1 KB)
+        RX errors 0  dropped 4  overruns 0  frame 0
+        TX packets 468  bytes 61885 (61.8 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Loopback locale)
+        RX packets 290  bytes 32621 (32.6 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 290  bytes 32621 (32.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ pwd
+"/home/alessio/Documents/final test/Binotto Team - Erasmo"
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ ls 
+
+An error occurred, try again
+
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ ls .
+-: README.txt
+-: generalServer.py
+-: connectionClient.py
+-: client.py
+-: remoteCommandsServer.py
+-: __pycache__
+-: requirements.txt
+-: connectionServer.py
+-: generalClient.py
+-: remoteCommandsClient.py
+-: server.py
+
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ ls ..
+-: Carnevale-Bosco-Granillo
+-: StockFish-Bait
+-: Hackerman - Fede.rar
+-: ProgettoReti - IPythonieri - Francesco Bruno (TheMasterN1)
+-: ThePhantomThieves - Alex Ciacciarella.zip
+-: ThePhantomThieves
+-: ProgettoReti - IPythonieri - Francesco Bruno (TheMasterN1).zip
+-: Lohackers
+-: TCPIPino - Francesco Orlando.rar
+-: TCPIPino
+-: Bot Tattici Nucleari - Giuseppe Francione
+-: Cookie Thieves - macro21KGB
+-: TMB (Trust Me Bro) - Vincenzo Donadio.zip
+-: Gruppo Reti DGBS - Salvatore
+-: Binotto Team - Erasmo
+-: BeeBeeGee - Tenam.zip
+-: CI ABBIAMO PROVATO - Paolo Dezio.zip
+-: FPS Team - Ferdinando D_Alessandro.zip
+-: Gruppo Reti DGBS - Salvatore.zip
+-: StealBot
+-: StealBot - Valentino Bocchetti.zip
+-: Fabrizio - Fabrizio Di Giovanni.zip
+-: BeeBeeGee - Tenam
+-: Cookie Thieves - macro21KGB.zip
+-: StockFish-Bait - Giuseppe De Martino.zip
+-: .DS_Store
+-: (In connessione...) - Agostino Cesarano
+-: Lohacker - Mathieus99 Container.rar
+-: MTRS17
+-: Lohacker
+-: Binotto Team - Erasmo.zip
+-: Bot Tattici Nucleari - Giuseppe Francione.zip
+-: CI ABBIAMO PROVATO - Paolo Dezio
+-: Lohackers - Claudio Riccio.zip
+-: Fabrizio - Fabrizio Di Giovanni
+-: HomeNet-Production - Armando Bausano.rar
+-: (In connessione...) - Agostino Cesarano.zip
+-: Chicago Bulls 96_s Project - Tempah
+-: BOTTANET_2 - SiMiez.rar
+-: Hackerman - Fede
+-: TMB (Trust Me Bro)
+-: MTRS17 - Matteo Spavone.zip
+-: LuFra
+-: LuFra - Luigi Ercolano.zip
+-: Carnevale-Bosco-Granillo - Emanuele Granillo.zip
+-: Chicago Bulls 96_s Project - Tempah.zip
+-: RFC_Group
+-: DukeFilecrawler - Lorenzo Sepe.rar
+-: FPS Team - Ferdinando D_Alessandro
+-: HomeNet-Production
+-: RFC Group - Giuseppe Travaglino.zip
+-: BOTTANET_2 - SiMiez
+-: DukeFilecrawler - Lorenzo Sepe
+
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ ls /home/alessio
+-: .config
+-: Videos
+-: .lesshst
+-: .cache
+-: .vboxclient-draganddrop.pid
+-: Documents
+-: .ssh
+-: .vboxclient-vmsvga-session-tty2.pid
+-: .local
+-: .local_
+-: Templates
+-: .python_history
+-: Desktop
+-: Public
+-: Music
+-: .gnupg
+-: .vboxclient-clipboard.pid
+-: .vboxclient-seamless.pid
+-: .bash_history
+-: .profile
+-: .myPwd
+-: Downloads
+-: snap
+-: .bashrc
+-: Pictures
+-: .bash_logout
+-: .pam_environment
+
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ cd /home/desktop
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ cd /home/alessio/Desktop
+/home/alessio/Desktop$ ls .
+-: TETTEOCULO
+
+/home/alessio/Desktop$ cd TETTEOCULO
+/home/alessio/Desktop$ ls .
+-: TETTEOCULO
+
+/home/alessio/Desktop$ cd TETTEOCULO
+/home/alessio/Desktop$ cd ./TETTEOCULO
+/home/alessio/Desktop$ cd ..
+/home/alessio$ ls
+-: .config
+-: Videos
+-: .lesshst
+-: .cache
+-: .vboxclient-draganddrop.pid
+-: Documents
+-: .ssh
+-: .vboxclient-vmsvga-session-tty2.pid
+-: .local
+-: .local_
+-: Templates
+-: .python_history
+-: Desktop
+-: Public
+-: Music
+-: .gnupg
+-: .vboxclient-clipboard.pid
+-: .vboxclient-seamless.pid
+-: .bash_history
+-: .profile
+-: .myPwd
+-: Downloads
+-: snap
+-: .bashrc
+-: Pictures
+-: .bash_logout
+-: .pam_environment
+
+/home/alessio$ cd Documents
+/home/alessio/Documents$ ls
+-: final test
+
+/home/alessio/Documents$ cd ..
+/home/alessio$ cd Public
+/home/alessio/Public$ ls
+-: bruno
+
+/home/alessio/Public$ cd bruno
+/home/alessio/Public$ cd ..
+/home/alessio$ cd Downloads
+/home/alessio/Downloads$ ls
+[PATH]/home/alessio/Downloads
+
+C:\Users\biagi\Desktop\PythonProject\venv\Scripts\python.exe "C:\Users\biagi\Desktop\PythonProject\Progetto Reti\Nuova-Botnet\server.py" 
+
+[STARTING] Starting the server...: 100% █████████████████████████
+[LISTENING] The Sever is waiting for a victim...
+
+[CONNECTED] Established a connection with the Victim using socket: ('192.168.1.188', 49732)
+[RECEIVING] Waiting for OS Info...: 100% ████████████████████████
+
+Information on the victim's Operating System ('192.168.1.188', 49732):
+[REMOTE CONTROL] Starting procedure...:   0%                     
+[PATH]/home/alessio/Downloads
+
+[DONE] Info received.
+
+[REMOTE CONTROL] Starting procedure...: 100% ████████████████████
+[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...
+
+/home/alessio/Downloads$ info
+Operating System: Linux
+Machine: x86_64
+Host: Ubuntu-20-04-LTS
+Processor: x86_64
+Platform: Linux-5.15.0-52-generic-x86_64-with-glibc2.35
+Release: 5.15.0-52-generic
+Path: /home/alessio/Downloads
+
+/home/alessio/Downloads$ cd ..
+/home/alessio$ cd ..
+/home$ ls
+-: alessio
+
+/home$ cd ..
+/$ ls
+-: root
+-: run
+-: boot
+-: mnt
+-: lost+found
+-: srv
+-: libx32
+-: sys
+-: home
+-: swapfile
+-: media
+-: cdrom
+-: opt
+-: lib32
+-: bin
+-: var
+-: dev
+-: sbin
+-: tmp
+-: lib
+-: snap
+-: usr
+-: osx-shared
+-: etc
+-: lib64
+-: proc
+
+/$ cd home
+/home$ ls
+-: alessio
+
+cd /home$ cd alessio
+/home/alessio$ ls
+-: .config
+-: Videos
+-: .lesshst
+-: .cache
+-: .vboxclient-draganddrop.pid
+-: Documents
+-: .ssh
+-: .vboxclient-vmsvga-session-tty2.pid
+-: .local
+-: .local_
+-: Templates
+-: .python_history
+-: Desktop
+-: Public
+-: Music
+-: .gnupg
+-: .vboxclient-clipboard.pid
+-: .vboxclient-seamless.pid
+-: .bash_history
+-: .profile
+-: .myPwd
+-: Downloads
+-: snap
+-: .bashrc
+-: Pictures
+-: .bash_logout
+-: .pam_environment
+
+/home/alessio$ cd documents
+/home/alessio$ cd Documents
+/home/alessio/Documents$ ls
+-: final test
+
+/home/alessio/Documents$ cd final test
+/home/alessio/Documents/final test$ ls
+-: Carnevale-Bosco-Granillo
+-: StockFish-Bait
+-: Hackerman - Fede.rar
+-: ProgettoReti - IPythonieri - Francesco Bruno (TheMasterN1)
+-: ThePhantomThieves - Alex Ciacciarella.zip
+-: ThePhantomThieves
+-: ProgettoReti - IPythonieri - Francesco Bruno (TheMasterN1).zip
+-: Lohackers
+-: TCPIPino - Francesco Orlando.rar
+-: TCPIPino
+-: Bot Tattici Nucleari - Giuseppe Francione
+-: Cookie Thieves - macro21KGB
+-: TMB (Trust Me Bro) - Vincenzo Donadio.zip
+-: Gruppo Reti DGBS - Salvatore
+-: Binotto Team - Erasmo
+-: BeeBeeGee - Tenam.zip
+-: CI ABBIAMO PROVATO - Paolo Dezio.zip
+-: FPS Team - Ferdinando D_Alessandro.zip
+-: Gruppo Reti DGBS - Salvatore.zip
+-: StealBot
+-: StealBot - Valentino Bocchetti.zip
+-: Fabrizio - Fabrizio Di Giovanni.zip
+-: BeeBeeGee - Tenam
+-: Cookie Thieves - macro21KGB.zip
+-: StockFish-Bait - Giuseppe De Martino.zip
+-: .DS_Store
+-: (In connessione...) - Agostino Cesarano
+-: Lohacker - Mathieus99 Container.rar
+-: MTRS17
+-: Lohacker
+-: Binotto Team - Erasmo.zip
+-: Bot Tattici Nucleari - Giuseppe Francione.zip
+-: CI ABBIAMO PROVATO - Paolo Dezio
+-: Lohackers - Claudio Riccio.zip
+-: Fabrizio - Fabrizio Di Giovanni
+-: HomeNet-Production - Armando Bausano.rar
+-: (In connessione...) - Agostino Cesarano.zip
+-: Chicago Bulls 96_s Project - Tempah
+-: BOTTANET_2 - SiMiez.rar
+-: Hackerman - Fede
+-: TMB (Trust Me Bro)
+-: MTRS17 - Matteo Spavone.zip
+-: LuFra
+-: LuFra - Luigi Ercolano.zip
+-: Carnevale-Bosco-Granillo - Emanuele Granillo.zip
+-: Chicago Bulls 96_s Project - Tempah.zip
+-: RFC_Group
+-: DukeFilecrawler - Lorenzo Sepe.rar
+-: FPS Team - Ferdinando D_Alessandro
+-: HomeNet-Production
+-: RFC Group - Giuseppe Travaglino.zip
+-: BOTTANET_2 - SiMiez
+-: DukeFilecrawler - Lorenzo Sepe
+
+/home/alessio/Documents/final test$ open "ThePhantomThieves - Alex Ciacciarella.zip"
+
+ ThePhantomThieves - Alex Ciacciarella.zip contiene i seguenti file:
+ 
+	-:"ThePhantomThieves/"
+	-:"ThePhantomThieves/README.txt"
+	-:"ThePhantomThieves/Server.py"
+	-:"ThePhantomThieves/requirements.txt"
+	-:"ThePhantomThieves/Client.py"
+
+/home/alessio/Documents/final test$ find .py .
+Receiving Information: 100% ██████████████████████
+Wait...
+Completing Operation:   0%                        
+Risultati find .py .:
+
+Numero di elementi trovati: 0
+Completing Operation: 100% ███████████████████████
+/home/alessio/Documents/final test$ filespath .txt .pdf .docx
+Receiving Information: 100% ██████████████████████
+Wait...
+File successfully created!
+
+/home/alessio/Documents/final test$ screenshot
+Name of the screen (without extension): screen1

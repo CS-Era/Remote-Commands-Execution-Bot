@@ -1,0 +1,1005 @@
+
+
+Lista dei risultati per estensione: .txt
+
+"gfxblacklist.txt" nel percorso: /boot/grub
+"last-crawl.txt" nel percorso: /home/alessio/.cache/tracker3/files
+"first-index.txt" nel percorso: /home/alessio/.cache/tracker3/files
+"locale-for-miner-apps.txt" nel percorso: /home/alessio/.cache/tracker3/files
+"readme.txt" nel percorso: /home/alessio/Documents/final test/Carnevale-Bosco-Granillo
+"vendor.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/pip/_vendor
+"top_level.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/psutil-5.9.4.dist-info
+"entry_points.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/pip-21.3.1.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/pip-21.3.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/pip-21.3.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/setuptools-60.2.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/Documents/final test/StockFish-Bait/venv/Lib/site-packages/setuptools-60.2.0.dist-info
+"Indicazioni.txt" nel percorso: /home/alessio/Documents/final test/ProgettoReti - IPythonieri - Francesco Bruno (TheMasterN1)
+"README.txt" nel percorso: /home/alessio/Documents/final test/ThePhantomThieves
+"requirements.txt" nel percorso: /home/alessio/Documents/final test/ThePhantomThieves
+"README.txt" nel percorso: /home/alessio/Documents/final test/Lohackers
+"README.txt" nel percorso: /home/alessio/Documents/final test/TCPIPino
+"requirements.txt" nel percorso: /home/alessio/Documents/final test/TCPIPino/bot
+"README.txt" nel percorso: /home/alessio/Documents/final test/Bot Tattici Nucleari - Giuseppe Francione
+"file.txt" nel percorso: /home/alessio/Documents/final test/Bot Tattici Nucleari - Giuseppe Francione
+"requirements.txt" nel percorso: /home/alessio/Documents/final test/Cookie Thieves - macro21KGB
+"README.txt" nel percorso: /home/alessio/Documents/final test/Gruppo Reti DGBS - Salvatore
+"requirements.txt" nel percorso: /home/alessio/Documents/final test/Gruppo Reti DGBS - Salvatore
+"README.txt" nel percorso: /home/alessio/Documents/final test/Binotto Team - Erasmo
+"requirements.txt" nel percorso: /home/alessio/Documents/final test/Binotto Team - Erasmo
+"README.txt" nel percorso: /home/alessio/Documents/final test/StealBot
+"requirements.txt" nel percorso: /home/alessio/Documents/final test/StealBot
+"Dipendenze & Istruzioni.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam
+"macchina vittima.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam
+"systemInfoFile.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapsnapd-desktop-integration43'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapcore201695'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapcore201738'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapbare5'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"memoryInfoFile.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapgnome-3-38-2004112'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'varsnapfirefoxcommonhost-hunspell'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapsnapd17883'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'bootefi'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"cpuInfoFile.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapfirefox2186'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapgtk-common-themes1535'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapfirefox2067'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapgnome-3-38-2004119'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"DiskUsageFile.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione ''.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapsnap-store638'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"networkInfoFile.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapsnap-store599'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"partizione 'snapsnapd-desktop-integration14'.txt" nel percorso: /home/alessio/Documents/final test/BeeBeeGee - Tenam/output
+"readme.txt" nel percorso: /home/alessio/Documents/final test/(In connessione...) - Agostino Cesarano
+"Istruzioni.txt" nel percorso: /home/alessio/Documents/final test/MTRS17
+"requrements.txt" nel percorso: /home/alessio/Documents/final test/Lohacker
+"ReadMe.txt" nel percorso: /home/alessio/Documents/final test/CI ABBIAMO PROVATO - Paolo Dezio
+"requirements.txt" nel percorso: /home/alessio/Documents/final test/Chicago Bulls 96_s Project - Tempah
+"InfoProgetto.txt" nel percorso: /home/alessio/Documents/final test/Hackerman - Fede
+"Dipendenze.txt" nel percorso: /home/alessio/Documents/final test/Hackerman - Fede
+"readme.txt" nel percorso: /home/alessio/Documents/final test/TMB (Trust Me Bro)
+"requirements.txt" nel percorso: /home/alessio/Documents/final test/LuFra
+"istruzioni.txt" nel percorso: /home/alessio/Documents/final test/LuFra
+"readme_RFC_Group.txt" nel percorso: /home/alessio/Documents/final test/RFC_Group
+"README.txt" nel percorso: /home/alessio/Documents/final test/FPS Team - Ferdinando D_Alessandro
+"requirements.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production
+"top_level.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/GPUtil-1.4.0.dist-info
+"vendor.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/pip/_vendor
+"entry_points.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/pip-21.3.1.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/pip-21.3.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/pip-21.3.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/setuptools-60.2.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/setuptools-60.2.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/Documents/final test/HomeNet-Production/venv/Lib/site-packages/psutil-5.9.3.dist-info
+"README.txt" nel percorso: /home/alessio/Documents/final test/DukeFilecrawler - Lorenzo Sepe
+"systemp.txt" nel percorso: /home/alessio/Documents/final test/DukeFilecrawler - Lorenzo Sepe
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/argcomplete-1.10.3.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/langcodes-3.3.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pytz_deprecation_shim-0.1.0.post0.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pip-22.3.1.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pip-22.3.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pip-22.3.1.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/ebcdic-1.1.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/ebcdic-1.1.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/tabulate-0.9.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/tabulate-0.9.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/frozenlist-1.3.3.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/compressed_rtf-1.0.6.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/murmurhash-1.0.9.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/GPUtil-1.4.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/cymem-2.0.7.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/packaging-21.3.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyScreeze-0.1.28.dist-info
+"AUTHORS.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyScreeze-0.1.28.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyScreeze-0.1.28.dist-info
+"gbq_fake_job.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pandas/tests/io/data
+"fixed_width_format.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pandas/tests/io/data/fixed_width
+"pytz.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/DateTime
+"DateTime.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/DateTime
+"julian_testdata.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/DateTime/tests
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/tqdm-4.64.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/tqdm-4.64.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/confection-0.0.3.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pycryptodome-3.16.0.dist-info
+"vendor.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pip/_vendor
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pathy-0.6.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pathy-0.6.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/sortedcontainers-2.4.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/SpeechRecognition-3.8.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/chardet-3.0.4.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/chardet-3.0.4.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/aiosignal-1.3.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/grapheme-0.6.0.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/setuptools-65.5.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/setuptools-65.5.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/Jinja2-3.1.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/Jinja2-3.1.2.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/tzlocal-4.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/tzlocal-4.2.dist-info
+"fail-plugin.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/thinc/tests/mypy/outputs
+"success-no-plugin.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/thinc/tests/mypy/outputs
+"fail-no-plugin.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/thinc/tests/mypy/outputs
+"success-plugin.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/thinc/tests/mypy/outputs
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/psutil-5.9.4.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyAutoGUI-0.9.53.dist-info
+"AUTHORS.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyAutoGUI-0.9.53.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyAutoGUI-0.9.53.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyRect-0.2.0.dist-info
+"AUTHORS.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyRect-0.2.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyRect-0.2.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/preshed-3.0.8.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/ipinfo-4.4.2.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pandas-1.5.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pandas-1.5.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/multidict-6.0.3.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/async_timeout-4.0.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/python_pptx-0.6.21.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/wget-3.2.dist-info
+"namespace_packages.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/zope.interface-5.5.1.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/zope.interface-5.5.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/zope.interface-5.5.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/soupsieve-2.3.2.post1.dist-info
+"LICENSES.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/lxml-4.9.1.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/lxml-4.9.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/lxml-4.9.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/smart_open-5.2.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/catalogue-2.0.8.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/DateTime-4.7.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/DateTime-4.7.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/attrs-22.1.0.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pytweening-1.0.4.dist-info
+"AUTHORS.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pytweening-1.0.4.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pytweening-1.0.4.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/textract-1.6.5.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/docx2txt-0.8.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/docx2txt-0.8.dist-info
+"requirements.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy/tests/package
+"sun.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy/tests/tokenizer
+"lemma_lookup_licence.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy/lang/sr
+"lemma_lookup_license.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy/lang/hr
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/srsly-2.4.5.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/srsly-2.4.5.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy-3.4.3.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy-3.4.3.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pyperclip-1.8.2.dist-info
+"AUTHORS.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pyperclip-1.8.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pyperclip-1.8.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/MouseInfo-0.1.3.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyGetWindow-0.0.9.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/yarl-1.8.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/about_time-3.1.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/alive_progress-2.4.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/py_cpuinfo-9.0.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/py_cpuinfo-9.0.0.dist-info
+"language-subtag-registry.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/langcodes/data
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/charset_normalizer-2.1.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/charset_normalizer-2.1.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/cachetools-5.2.0.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/mss-7.0.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/mss-7.0.1.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy_loggers-1.0.3.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy_loggers-1.0.3.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/XlsxWriter-3.0.3.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/XlsxWriter-3.0.3.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/PyMsgBox-1.0.9.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/extract_msg-0.28.7.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/extract_msg-0.28.7.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/extract_msg-0.28.7.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/IMAPClient-2.1.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/six-1.12.0.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/aiohttp-3.8.3.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/aiohttp-3.8.3.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/speech_recognition/pocketsphinx-data/en-US
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/wasabi-0.10.1.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/python3_xlib-0.15.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pdfminer.six-20191110.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/tzdata-2022.7.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy_legacy-3.0.10.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/spacy_legacy-3.0.10.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/blis-0.7.9.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/xlrd-1.2.0.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/beautifulsoup4-4.8.2.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/wheel-0.38.4.dist-info
+"LICENSE.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/wheel-0.38.4.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/wheel-0.38.4.dist-info
+"readme.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/lxml/isoschematron/resources/xsl/iso-schematron-xslt1
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pydantic-1.10.2.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/pydantic-1.10.2.dist-info
+"entry_points.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/thinc-8.1.5.dist-info
+"top_level.txt" nel percorso: /home/alessio/.local/lib/python3.10/site-packages/thinc-8.1.5.dist-info
+"pkcs11.txt" nel percorso: /home/alessio/snap/firefox/common/.mozilla/firefox/j7qfhg0w.default
+"SiteSecurityServiceState.txt" nel percorso: /home/alessio/snap/firefox/common/.mozilla/firefox/j7qfhg0w.default
+"serviceworker.txt" nel percorso: /home/alessio/snap/firefox/common/.mozilla/firefox/j7qfhg0w.default
+"AlternateServices.txt" nel percorso: /home/alessio/snap/firefox/common/.mozilla/firefox/j7qfhg0w.default
+"ispell-dicts-list.txt" nel percorso: /var/cache/dictionaries-common
+"help.be.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.ca.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.cs.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.da.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.de.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.el.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.eo.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.es.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.et.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.fi.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.fr.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.gl.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.hu.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.id.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.it.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.ja.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.nb.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.pl.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.pt.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.pt_BR.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.ro.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.ru.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.sk.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.sv.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.tr.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.zh_CN.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.zh_TW.txt" nel percorso: /snap/snap-store/638/usr/share/gnupg
+"help.be.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.ca.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.cs.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.da.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.de.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.el.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.eo.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.es.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.et.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.fi.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.fr.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.gl.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.hu.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.id.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.it.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.ja.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.nb.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.pl.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.pt.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.pt_BR.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.ro.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.ru.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.sk.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.sv.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.tr.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.zh_CN.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"help.zh_TW.txt" nel percorso: /snap/snap-store/599/usr/share/gnupg
+"rgb.txt" nel percorso: /snap/gnome-3-38-2004/119/etc/X11
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/PyGObject-3.36.0.egg-info
+"requires.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/PyGObject-3.36.0.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/PyGObject-3.36.0.egg-info
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/dbus_python-1.2.16.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/dbus_python-1.2.16.egg-info
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/pip-20.0.2.egg-info
+"entry_points.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/pip-20.0.2.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/pip-20.0.2.egg-info
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"entry_points.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/wheel-0.34.2.egg-info
+"entry_points.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/wheel-0.34.2.egg-info
+"requires.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/wheel-0.34.2.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3/dist-packages/wheel-0.34.2.egg-info
+"Grammar.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3.8/lib2to3
+"PatternGrammar.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3.8/lib2to3
+"Grammar.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3.9/lib2to3
+"PatternGrammar.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/lib/python3.9/lib2to3
+"rgb.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/share/X11
+"abbreviations_en.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/share/presage
+"abbreviations_it.txt" nel percorso: /snap/gnome-3-38-2004/119/usr/share/presage
+"rgb.txt" nel percorso: /snap/gnome-3-38-2004/112/etc/X11
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/PyGObject-3.36.0.egg-info
+"requires.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/PyGObject-3.36.0.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/PyGObject-3.36.0.egg-info
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/dbus_python-1.2.16.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/dbus_python-1.2.16.egg-info
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/pip-20.0.2.egg-info
+"entry_points.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/pip-20.0.2.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/pip-20.0.2.egg-info
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"entry_points.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/wheel-0.34.2.egg-info
+"entry_points.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/wheel-0.34.2.egg-info
+"requires.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/wheel-0.34.2.egg-info
+"top_level.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3/dist-packages/wheel-0.34.2.egg-info
+"Grammar.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3.8/lib2to3
+"PatternGrammar.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3.8/lib2to3
+"Grammar.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3.9/lib2to3
+"PatternGrammar.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/lib/python3.9/lib2to3
+"rgb.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/share/X11
+"abbreviations_en.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/share/presage
+"abbreviations_it.txt" nel percorso: /snap/gnome-3-38-2004/112/usr/share/presage
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/Jinja2-2.10.1.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/Jinja2-2.10.1.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/Jinja2-2.10.1.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/Jinja2-2.10.1.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/MarkupSafe-1.1.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/MarkupSafe-1.1.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/PyJWT-1.7.1.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/PyJWT-1.7.1.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/PyJWT-1.7.1.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/PyJWT-1.7.1.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/attrs-19.3.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/attrs-19.3.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/attrs-19.3.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/certifi-2019.11.28.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/certifi-2019.11.28.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/chardet-3.0.4.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/chardet-3.0.4.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/chardet-3.0.4.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/cloud_init-22.3.4.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/cloud_init-22.3.4.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/cloud_init-22.3.4.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/cloud_init-22.3.4.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/configobj-5.0.6.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/configobj-5.0.6.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/configobj-5.0.6.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/cryptography-2.8.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/cryptography-2.8.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/cryptography-2.8.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/idna-2.8.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/idna-2.8.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/importlib_metadata-1.5.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/importlib_metadata-1.5.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/importlib_metadata-1.5.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/jsonpatch-1.22.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/jsonpatch-1.22.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/jsonpatch-1.22.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/jsonpointer-2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/jsonpointer-2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/jsonschema-3.2.0.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/jsonschema-3.2.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/jsonschema-3.2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/jsonschema-3.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/more_itertools-4.2.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/more_itertools-4.2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/more_itertools-4.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/netifaces-0.10.4.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/netifaces-0.10.4.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/oauthlib-3.1.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/oauthlib-3.1.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/oauthlib-3.1.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/probert-0.0.18.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/probert-0.0.18.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/probert-0.0.18.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/pyrsistent-0.15.5.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/pyrsistent-0.15.5.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/pyrsistent-0.15.5.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/pyserial-3.4.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/pyserial-3.4.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/pyudev-0.21.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/pyudev-0.21.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/pyudev-0.21.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/requests-2.22.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/requests-2.22.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/requests-2.22.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/requests_unixsocket-0.2.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/requests_unixsocket-0.2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/requests_unixsocket-0.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/six-1.14.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/six-1.14.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/urllib3-1.25.8.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/urllib3-1.25.8.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/urllib3-1.25.8.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/urwid-2.0.1.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/urwid-2.0.1.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/zipp-1.0.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/zipp-1.0.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/lib/python3/dist-packages/zipp-1.0.0.egg-info
+"LICENSE.txt" nel percorso: /snap/core20/1738/usr/lib/python3.8
+"Grammar.txt" nel percorso: /snap/core20/1738/usr/lib/python3.8/lib2to3
+"PatternGrammar.txt" nel percorso: /snap/core20/1738/usr/lib/python3.8/lib2to3
+"Grammar.txt" nel percorso: /snap/core20/1738/usr/lib/python3.9/lib2to3
+"PatternGrammar.txt" nel percorso: /snap/core20/1738/usr/lib/python3.9/lib2to3
+"mount.txt" nel percorso: /snap/core20/1738/usr/share/doc/mount
+"dependency_links.txt" nel percorso: /snap/core20/1738/usr/share/subiquity/subiquity-0.0.5.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1738/usr/share/subiquity/subiquity-0.0.5.egg-info
+"top_level.txt" nel percorso: /snap/core20/1738/usr/share/subiquity/subiquity-0.0.5.egg-info
+"help.txt" nel percorso: /snap/core20/1738/usr/share/vim/vim81/doc
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/Jinja2-2.10.1.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/Jinja2-2.10.1.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/Jinja2-2.10.1.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/Jinja2-2.10.1.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/MarkupSafe-1.1.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/MarkupSafe-1.1.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/PyJWT-1.7.1.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/PyJWT-1.7.1.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/PyJWT-1.7.1.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/PyJWT-1.7.1.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/attrs-19.3.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/attrs-19.3.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/attrs-19.3.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/certifi-2019.11.28.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/certifi-2019.11.28.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/chardet-3.0.4.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/chardet-3.0.4.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/chardet-3.0.4.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/cloud_init-22.3.4.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/cloud_init-22.3.4.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/cloud_init-22.3.4.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/cloud_init-22.3.4.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/configobj-5.0.6.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/configobj-5.0.6.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/configobj-5.0.6.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/cryptography-2.8.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/cryptography-2.8.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/cryptography-2.8.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/idna-2.8.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/idna-2.8.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/importlib_metadata-1.5.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/importlib_metadata-1.5.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/importlib_metadata-1.5.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/jsonpatch-1.22.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/jsonpatch-1.22.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/jsonpatch-1.22.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/jsonpointer-2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/jsonpointer-2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/jsonschema-3.2.0.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/jsonschema-3.2.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/jsonschema-3.2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/jsonschema-3.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/more_itertools-4.2.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/more_itertools-4.2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/more_itertools-4.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/netifaces-0.10.4.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/netifaces-0.10.4.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/oauthlib-3.1.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/oauthlib-3.1.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/oauthlib-3.1.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/probert-0.0.18.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/probert-0.0.18.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/probert-0.0.18.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/pyrsistent-0.15.5.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/pyrsistent-0.15.5.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/pyrsistent-0.15.5.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/pyserial-3.4.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/pyserial-3.4.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/pyudev-0.21.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/pyudev-0.21.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/pyudev-0.21.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/requests-2.22.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/requests-2.22.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/requests-2.22.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/requests_unixsocket-0.2.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/requests_unixsocket-0.2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/requests_unixsocket-0.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/setuptools-45.2.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/six-1.14.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/six-1.14.0.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/urllib3-1.25.8.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/urllib3-1.25.8.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/urllib3-1.25.8.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/urwid-2.0.1.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/urwid-2.0.1.egg-info
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/zipp-1.0.0.egg-info
+"requires.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/zipp-1.0.0.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/lib/python3/dist-packages/zipp-1.0.0.egg-info
+"LICENSE.txt" nel percorso: /snap/core20/1695/usr/lib/python3.8
+"Grammar.txt" nel percorso: /snap/core20/1695/usr/lib/python3.8/lib2to3
+"PatternGrammar.txt" nel percorso: /snap/core20/1695/usr/lib/python3.8/lib2to3
+"Grammar.txt" nel percorso: /snap/core20/1695/usr/lib/python3.9/lib2to3
+"PatternGrammar.txt" nel percorso: /snap/core20/1695/usr/lib/python3.9/lib2to3
+"mount.txt" nel percorso: /snap/core20/1695/usr/share/doc/mount
+"dependency_links.txt" nel percorso: /snap/core20/1695/usr/share/subiquity/subiquity-0.0.5.egg-info
+"entry_points.txt" nel percorso: /snap/core20/1695/usr/share/subiquity/subiquity-0.0.5.egg-info
+"top_level.txt" nel percorso: /snap/core20/1695/usr/share/subiquity/subiquity-0.0.5.egg-info
+"help.txt" nel percorso: /snap/core20/1695/usr/share/vim/vim81/doc
+"LICENSES_bundled.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/numpy-1.23.4.dist-info
+"entry_points.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/numpy-1.23.4.dist-info
+"LICENSE.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/numpy-1.23.4.dist-info
+"top_level.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/numpy-1.23.4.dist-info
+"top_level.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/fastrlock-0.8.1.dist-info
+"LICENSE.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/numpy
+"multiarray_api.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/numpy/core/include/numpy
+"ufunc_api.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/numpy/core/include/numpy
+"LICENSE.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/numpy/core/include/numpy/libdivide
+"umath-validation-set-README.txt" nel percorso: /usr/local/lib/python3.10/dist-packages/numpy/core/tests/data
+"README.txt" nel percorso: /usr/share/libreoffice/help/media/icon-themes
+"NET-SNMP-EXAMPLES-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"UCD-DLMOD-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"NET-SNMP-VACM-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"LM-SENSORS-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"NET-SNMP-EXTEND-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"UCD-IPFWACC-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"UCD-SNMP-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"NET-SNMP-AGENT-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"UCD-DISKIO-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"UCD-DEMO-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"NET-SNMP-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"NET-SNMP-PASS-MIB.txt" nel percorso: /usr/share/snmp/mibs
+"NET-SNMP-TC.txt" nel percorso: /usr/share/snmp/mibs
+"robots.txt" nel percorso: /usr/share/cups/doc-root
+"README.txt" nel percorso: /usr/share/doc/fonts-ubuntu
+"TRADEMARKS.txt" nel percorso: /usr/share/doc/fonts-ubuntu
+"CONTRIBUTING.txt" nel percorso: /usr/share/doc/fonts-ubuntu
+"th_it_IT_copyright_licenza.txt" nel percorso: /usr/share/doc/mythes-it
+"th_it_IT_lettera_in_inglese.txt" nel percorso: /usr/share/doc/mythes-it
+"index.txt" nel percorso: /usr/share/doc/xorg
+"upstream-features.txt" nel percorso: /usr/share/doc/xorg
+"triage-bugs.txt" nel percorso: /usr/share/doc/xorg/howto
+"report-bugs.txt" nel percorso: /usr/share/doc/xorg/howto
+"squeeze-backports.txt" nel percorso: /usr/share/doc/xorg/reference
+"experimental.txt" nel percorso: /usr/share/doc/xorg/reference
+"upstream-contacts.txt" nel percorso: /usr/share/doc/xorg/reference
+"general.txt" nel percorso: /usr/share/doc/xorg/faq
+"LICENCE.realtek-firmware.txt" nel percorso: /usr/share/doc/linux-firmware/licenses
+"LICENCE.ralink-firmware.txt" nel percorso: /usr/share/doc/linux-firmware/licenses
+"LICENCE.rtlwifi_firmware.txt" nel percorso: /usr/share/doc/linux-firmware/licenses
+"modems-with-agetty.txt" nel percorso: /usr/share/doc/util-linux
+"howto-build-sys.txt" nel percorso: /usr/share/doc/util-linux
+"howto-man-page.txt" nel percorso: /usr/share/doc/util-linux
+"blkid.txt" nel percorso: /usr/share/doc/util-linux
+"00-about-docs.txt" nel percorso: /usr/share/doc/util-linux
+"howto-debug.txt" nel percorso: /usr/share/doc/util-linux
+"col.txt" nel percorso: /usr/share/doc/util-linux
+"getopt.txt" nel percorso: /usr/share/doc/util-linux
+"cal.txt" nel percorso: /usr/share/doc/util-linux
+"mount.txt" nel percorso: /usr/share/doc/util-linux
+"hwclock.txt" nel percorso: /usr/share/doc/util-linux
+"PAM-configuration.txt" nel percorso: /usr/share/doc/util-linux
+"getopt_changelog.txt" nel percorso: /usr/share/doc/util-linux
+"deprecated.txt" nel percorso: /usr/share/doc/util-linux
+"howto-compilation.txt" nel percorso: /usr/share/doc/util-linux
+"release-schedule.txt" nel percorso: /usr/share/doc/util-linux
+"pg.txt" nel percorso: /usr/share/doc/util-linux
+"upmix.txt" nel percorso: /usr/share/doc/libasound2-plugins
+"a52.txt" nel percorso: /usr/share/doc/libasound2-plugins
+"lavrate.txt" nel percorso: /usr/share/doc/libasound2-plugins
+"speexrate.txt" nel percorso: /usr/share/doc/libasound2-plugins
+"speexdsp.txt" nel percorso: /usr/share/doc/libasound2-plugins
+"samplerate.txt" nel percorso: /usr/share/doc/libasound2-plugins
+"vdownmix.txt" nel percorso: /usr/share/doc/libasound2-plugins
+"trustlist.txt" nel percorso: /usr/share/doc/gpg-agent/examples
+"mount.txt" nel percorso: /usr/share/doc/mount
+"fingerprints.txt" nel percorso: /usr/share/doc/openssl
+"keys.txt" nel percorso: /usr/share/doc/openssl/HOWTO
+"HOWTO_BUGREPORT.txt" nel percorso: /usr/share/doc/cups
+"README.txt" nel percorso: /usr/share/doc/fonts-sil-abyssinica
+"DOCUMENTATION.txt" nel percorso: /usr/share/doc/fonts-sil-abyssinica/documentation
+"power_supply.txt" nel percorso: /usr/share/doc/powermgmt-base
+"users-guide.txt" nel percorso: /usr/share/doc/hplip
+"negative-types.txt" nel percorso: /usr/share/doc/libsane-common/umax
+"Plustek-PARPORT.txt" nel percorso: /usr/share/doc/libsane-common/plustek
+"Plustek-PARPORT-TODO.txt" nel percorso: /usr/share/doc/libsane-common/plustek
+"Plustek-USB-TODO.txt" nel percorso: /usr/share/doc/libsane-common/plustek
+"s1200.txt" nel percorso: /usr/share/doc/libsane-common/sceptre
+"leo.txt" nel percorso: /usr/share/doc/libsane-common/leo
+"README.txt" nel percorso: /usr/share/doc/libsynctex2
+"symptoms.txt" nel percorso: /usr/share/doc/apport
+"README.txt" nel percorso: /usr/share/doc/fonts-sil-padauk
+"DOCUMENTATION.txt" nel percorso: /usr/share/doc/fonts-sil-padauk/documentation
+"requirements.txt" nel percorso: /usr/share/doc/python3-pip
+"api.txt" nel percorso: /usr/share/doc/libauthen-sasl-perl
+"protected-field.txt" nel percorso: /usr/share/doc/dpkg
+"frontend.txt" nel percorso: /usr/share/doc/dpkg
+"build_signature_amd64.txt" nel percorso: /usr/share/doc/libdb5.3
+"00_README.txt" nel percorso: /usr/share/doc/liblzma-dev/examples
+"OUTDATED.txt" nel percorso: /usr/share/doc/libgphoto2-6
+"test_psl.txt" nel percorso: /usr/share/doc/publicsuffix/examples
+"trustlist.txt" nel percorso: /usr/share/doc/gnupg/examples
+"syslog.conf.txt" nel percorso: /usr/share/doc/busybox-static
+"ReadMe.txt" nel percorso: /usr/share/doc/fonts-tibetan-machine
+"debugging.txt" nel percorso: /usr/share/doc/libio-socket-ssl-perl
+"asoundrc.txt" nel percorso: /usr/share/doc/libasound2/examples
+"Bt87x.txt" nel percorso: /usr/share/doc/alsa-base/driver
+"ControlNames.txt" nel percorso: /usr/share/doc/alsa-base/driver
+"emu10k1-jack.txt" nel percorso: /usr/share/doc/alsa-base/driver
+"MIXART.txt" nel percorso: /usr/share/doc/alsa-base/driver
+"alsa-parameters.txt" nel percorso: /usr/share/doc/alsa-base/driver
+"Joystick.txt" nel percorso: /usr/share/doc/alsa-base/driver
+"powersave.txt" nel percorso: /usr/share/doc/alsa-base/driver
+"VIA82xx-mixer.txt" nel percorso: /usr/share/doc/alsa-base/driver
+"serial-u16550.txt" nel percorso: /usr/share/doc/alsa-base/driver
+"rgb.txt" nel percorso: /usr/share/X11
+"help.txt" nel percorso: /usr/share/vim/vim82/doc
+"allkeys.txt" nel percorso: /usr/share/perl/5.34.0/Unicode/Collate
+"keys.txt" nel percorso: /usr/share/perl/5.34.0/Unicode/Collate
+"Blocks.txt" nel percorso: /usr/share/perl/5.34.0/unicore
+"SpecialCasing.txt" nel percorso: /usr/share/perl/5.34.0/unicore
+"NamedSequences.txt" nel percorso: /usr/share/perl/5.34.0/unicore
+"help.be.txt" nel percorso: /usr/share/gnupg
+"help.fr.txt" nel percorso: /usr/share/gnupg
+"help.ca.txt" nel percorso: /usr/share/gnupg
+"help.gl.txt" nel percorso: /usr/share/gnupg
+"help.cs.txt" nel percorso: /usr/share/gnupg
+"help.pt.txt" nel percorso: /usr/share/gnupg
+"help.hu.txt" nel percorso: /usr/share/gnupg
+"help.pt_BR.txt" nel percorso: /usr/share/gnupg
+"help.es.txt" nel percorso: /usr/share/gnupg
+"help.da.txt" nel percorso: /usr/share/gnupg
+"help.it.txt" nel percorso: /usr/share/gnupg
+"help.fi.txt" nel percorso: /usr/share/gnupg
+"help.sk.txt" nel percorso: /usr/share/gnupg
+"help.txt" nel percorso: /usr/share/gnupg
+"help.ro.txt" nel percorso: /usr/share/gnupg
+"help.eo.txt" nel percorso: /usr/share/gnupg
+"help.et.txt" nel percorso: /usr/share/gnupg
+"help.nb.txt" nel percorso: /usr/share/gnupg
+"help.ru.txt" nel percorso: /usr/share/gnupg
+"help.ja.txt" nel percorso: /usr/share/gnupg
+"help.zh_CN.txt" nel percorso: /usr/share/gnupg
+"help.zh_TW.txt" nel percorso: /usr/share/gnupg
+"help.de.txt" nel percorso: /usr/share/gnupg
+"help.el.txt" nel percorso: /usr/share/gnupg
+"help.tr.txt" nel percorso: /usr/share/gnupg
+"help.pl.txt" nel percorso: /usr/share/gnupg
+"help.sv.txt" nel percorso: /usr/share/gnupg
+"help.id.txt" nel percorso: /usr/share/gnupg
+"template.txt" nel percorso: /usr/share/ibus-table/tables
+"spelling.txt" nel percorso: /usr/src/linux-headers-5.15.0-43-generic/scripts
+"spelling.txt" nel percorso: /usr/src/linux-headers-5.15.0-52-generic/scripts
+"partner-jet-setup.txt" nel percorso: /usr/src/linux-headers-5.15.0-52/arch/sh/include/mach-kfr2r09/mach
+"partner-jet-setup.txt" nel percorso: /usr/src/linux-headers-5.15.0-52/arch/sh/include/mach-ecovec24/mach
+"spelling.txt" nel percorso: /usr/src/linux-headers-5.15.0-52/scripts
+"partner-jet-setup.txt" nel percorso: /usr/src/linux-headers-5.15.0-43/arch/sh/include/mach-kfr2r09/mach
+"partner-jet-setup.txt" nel percorso: /usr/src/linux-headers-5.15.0-43/arch/sh/include/mach-ecovec24/mach
+"spelling.txt" nel percorso: /usr/src/linux-headers-5.15.0-43/scripts
+"personas_list.txt" nel percorso: /usr/lib/libreoffice/share/gallery/personas
+"Grammar.txt" nel percorso: /usr/lib/python3.11/lib2to3
+"PatternGrammar.txt" nel percorso: /usr/lib/python3.11/lib2to3
+"protocol.txt" nel percorso: /usr/lib/xorg
+"LICENSE.txt" nel percorso: /usr/lib/python3.10
+"Grammar.txt" nel percorso: /usr/lib/python3.10/lib2to3
+"PatternGrammar.txt" nel percorso: /usr/lib/python3.10/lib2to3
+"brcmfmac43340-sdio.predia-basic.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.sinovoip,bpi-m2-zero.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43455-sdio.raspberrypi,3-model-a-plus.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.sinovoip,bpi-m2-ultra.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.raspberrypi,3-model-b.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.starfive,visionfive-v1.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430a0-sdio.ONDA-V80 PLUS.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43455-sdio.acepc-t8.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43362-sdio.lemaker,bananapro.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43455-sdio.MINIX-NEO Z83-4.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43455-sdio.Raspberry Pi Foundation-Raspberry Pi Compute Module 4.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.beagle,beaglev-starlight-jh7100-r0.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.Hampoo-D2D3_Vi8A1.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac4330-sdio.Prowise-PT301.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac4356-sdio.vamrs,rock960.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430a0-sdio.jumper-ezpad-mini3.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.raspberrypi,model-zero-w.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac4356-pcie.gpd-win-pocket.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43455-sdio.raspberrypi,3-model-b-plus.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43340-sdio.meegopad-t08.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43455-sdio.raspberrypi,4-model-b.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.AP6212.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.sinovoip,bpi-m2-plus.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.beagle,beaglev-starlight-jh7100-a1.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.friendlyarm,nanopi-r1.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43340-sdio.pov-tab-p1006w-data.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.sinovoip,bpi-m3.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430-sdio.MUR1DX.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac4356-sdio.khadas,vim2.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43430a0-sdio.ilife-S806.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43455-sdio.Raspberry Pi Foundation-Raspberry Pi 4 Model B.txt" nel percorso: /usr/lib/firmware/brcm
+"brcmfmac43362-sdio.cubietech,cubietruck.txt" nel percorso: /usr/lib/firmware/brcm
+"t4-config.txt" nel percorso: /usr/lib/firmware/cxgb4
+"t5-config.txt" nel percorso: /usr/lib/firmware/cxgb4
+"t6-config.txt" nel percorso: /usr/lib/firmware/cxgb4
+"t5-config-hashfilter.txt" nel percorso: /usr/lib/firmware/cxgb4/configs
+"t5-config-default.txt" nel percorso: /usr/lib/firmware/cxgb4/configs
+"t6-config-default.txt" nel percorso: /usr/lib/firmware/cxgb4/configs
+"t4-config-default.txt" nel percorso: /usr/lib/firmware/cxgb4/configs
+"t6-config-hashfilter.txt" nel percorso: /usr/lib/firmware/cxgb4/configs
+"notice_ath10k_firmware-5.txt" nel percorso: /usr/lib/firmware/ath10k/QCA99X0/hw2.0
+"notice_ath10k_firmware-5.txt" nel percorso: /usr/lib/firmware/ath10k/QCA9888/hw2.0
+"notice_ath10k_firmware-5.txt" nel percorso: /usr/lib/firmware/ath10k/QCA9984/hw1.0
+"notice_ath10k_firmware-5.txt" nel percorso: /usr/lib/firmware/ath10k/QCA6174/hw2.1
+"notice_ath10k_firmware-sdio-6.txt" nel percorso: /usr/lib/firmware/ath10k/QCA6174/hw3.0
+"notice_ath10k_firmware-6.txt" nel percorso: /usr/lib/firmware/ath10k/QCA6174/hw3.0
+"notice_ath10k_firmware-4.txt" nel percorso: /usr/lib/firmware/ath10k/QCA6174/hw3.0
+"notice_ath10k_firmware-5.txt" nel percorso: /usr/lib/firmware/ath10k/QCA4019/hw1.0
+"notice_ath10k_firmware-6.txt" nel percorso: /usr/lib/firmware/ath10k/QCA9377/hw1.0
+"notice_ath10k_firmware-sdio-5.txt" nel percorso: /usr/lib/firmware/ath10k/QCA9377/hw1.0
+"notice_ath10k_firmware-5.txt" nel percorso: /usr/lib/firmware/ath10k/QCA9377/hw1.0
+"notice_ath10k_firmware-5.txt" nel percorso: /usr/lib/firmware/ath10k/QCA9887/hw1.0
+"notice_ath10k_firmware-5.txt" nel percorso: /usr/lib/firmware/ath10k/QCA988X/hw2.0
+"notice_ath10k_firmware-4.txt" nel percorso: /usr/lib/firmware/ath10k/QCA988X/hw2.0
+"Notice.txt" nel percorso: /usr/lib/firmware/ath11k/IPQ8074/hw2.0
+"Notice.txt" nel percorso: /usr/lib/firmware/ath11k/WCN6855/hw2.0
+"Notice.txt" nel percorso: /usr/lib/firmware/ath11k/IPQ6018/hw1.0
+"Notice.txt" nel percorso: /usr/lib/firmware/ath11k/QCA6390/hw2.0
+"guile-procedures.txt" nel percorso: /usr/lib/x86_64-linux-gnu/guile/2.2
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/olefile-0.46.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/olefile-0.46.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/lazr.restfulclient-0.14.4.egg-info
+"namespace_packages.txt" nel percorso: /usr/lib/python3/dist-packages/lazr.restfulclient-0.14.4.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/lazr.restfulclient-0.14.4.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/lazr.restfulclient-0.14.4.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/duplicity-0.8.21.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/duplicity-0.8.21.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/duplicity-0.8.21.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/distro_info-1.1build1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/distro_info-1.1build1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/importlib_metadata-4.6.4.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/importlib_metadata-4.6.4.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/importlib_metadata-4.6.4.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/SecretStorage-3.3.1.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/SecretStorage-3.3.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/SecretStorage-3.3.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/wheel-0.37.1.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/wheel-0.37.1.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/wheel-0.37.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/wheel-0.37.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/MarkupSafe-2.0.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/MarkupSafe-2.0.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/wadllib-1.3.6.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/wadllib-1.3.6.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/wadllib-1.3.6.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/PyGObject-3.42.1.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/PyGObject-3.42.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/PyGObject-3.42.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/launchpadlib-1.10.16.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/launchpadlib-1.10.16.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/launchpadlib-1.10.16.egg-info
+"vendor.txt" nel percorso: /usr/lib/python3/dist-packages/pip/_vendor
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/PyJWT-2.3.0.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/PyJWT-2.3.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/PyJWT-2.3.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/keyring-23.5.0.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/keyring-23.5.0.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/keyring-23.5.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/keyring-23.5.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/cryptography-3.4.8.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/cryptography-3.4.8.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/cryptography-3.4.8.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/python_debian-0.1.43ubuntu1.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/python_debian-0.1.43ubuntu1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/python_debian-0.1.43ubuntu1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/colorama-0.4.4.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/colorama-0.4.4.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/oauthlib-3.2.0.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/oauthlib-3.2.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/oauthlib-3.2.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/monotonic-1.6.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/monotonic-1.6.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/macaroonbakery-1.3.1.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/macaroonbakery-1.3.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/macaroonbakery-1.3.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/more_itertools-8.10.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/more_itertools-8.10.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/netifaces-0.11.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/netifaces-0.11.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/ubuntu_drivers_common-0.0.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/ubuntu_drivers_common-0.0.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/six-1.16.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/six-1.16.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/lockfile-0.12.2.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/lockfile-0.12.2.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/chardet-4.0.0.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/chardet-4.0.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/chardet-4.0.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/pyparsing-2.4.7.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/pyparsing-2.4.7.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/language_selector-0.1.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/language_selector-0.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/language_selector-0.1.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/pip-22.0.2.dist-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/pip-22.0.2.dist-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/lazr.uri-1.0.6.egg-info
+"namespace_packages.txt" nel percorso: /usr/lib/python3/dist-packages/lazr.uri-1.0.6.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/lazr.uri-1.0.6.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/lazr.uri-1.0.6.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/Pillow-9.0.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/Pillow-9.0.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/certifi-2020.6.20.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/certifi-2020.6.20.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/PyNaCl-1.5.0.dist-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/zipp-1.0.0.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/zipp-1.0.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/zipp-1.0.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/future-0.18.2.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/future-0.18.2.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/future-0.18.2.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/idna-3.3.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/idna-3.3.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/ubuntu_advantage_tools-27.9.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/ubuntu_advantage_tools-27.9.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/ubuntu_advantage_tools-27.9.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/ubuntu_advantage_tools-27.9.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/setuptools-59.6.0.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/setuptools-59.6.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/setuptools-59.6.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/reportlab-3.6.8.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/reportlab-3.6.8.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/reportlab-3.6.8.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/fasteners-0.14.1.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/fasteners-0.14.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/fasteners-0.14.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/pyxdg-0.27.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/pyxdg-0.27.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/protobuf-3.12.4.egg-info
+"namespace_packages.txt" nel percorso: /usr/lib/python3/dist-packages/protobuf-3.12.4.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/protobuf-3.12.4.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/protobuf-3.12.4.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/requests-2.25.1.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/requests-2.25.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/requests-2.25.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/pymacaroons-0.13.0.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/pymacaroons-0.13.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/pymacaroons-0.13.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/python_apt-2.3.0+ubuntu2.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/python_apt-2.3.0+ubuntu2.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/pytz-2022.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/pytz-2022.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/Mako-1.1.3-py3.10.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/Mako-1.1.3-py3.10.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/Mako-1.1.3-py3.10.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/Mako-1.1.3-py3.10.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/bcrypt-3.2.0.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/bcrypt-3.2.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/bcrypt-3.2.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/distro-1.7.0.egg-info
+"entry_points.txt" nel percorso: /usr/lib/python3/dist-packages/distro-1.7.0.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/distro-1.7.0.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/urllib3-1.26.5.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/urllib3-1.26.5.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/urllib3-1.26.5.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/dbus_python-1.2.18.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/dbus_python-1.2.18.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/python_dateutil-2.8.1.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/python_dateutil-2.8.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/python_dateutil-2.8.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/click-8.0.3.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/click-8.0.3.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/click-8.0.3.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/defer-1.0.6.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/defer-1.0.6.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/unattended_upgrades-0.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/unattended_upgrades-0.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/PyYAML-5.4.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/PyYAML-5.4.1.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/paramiko-2.9.3.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/paramiko-2.9.3.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/paramiko-2.9.3.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/httplib2-0.20.2.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/httplib2-0.20.2.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/httplib2-0.20.2.egg-info
+"dependency_links.txt" nel percorso: /usr/lib/python3/dist-packages/pyRFC3339-1.1.egg-info
+"requires.txt" nel percorso: /usr/lib/python3/dist-packages/pyRFC3339-1.1.egg-info
+"top_level.txt" nel percorso: /usr/lib/python3/dist-packages/pyRFC3339-1.1.egg-info
+"requirements.txt" nel percorso: /osx-shared/StealBot
+"requirements.txt" nel percorso: /osx-shared/LuFra 2.0
+"istruzioni.txt" nel percorso: /osx-shared/LuFra 2.0
+"Indicazioni.txt" nel percorso: /osx-shared/ProgettoReti - Francesco Bruno
+"requirements.txt" nel percorso: /osx-shared/BotNet_TCP_IPino/bot
+"README.txt" nel percorso: /osx-shared/DukeFilecrawler - Versione Finale - Lorenzo Sepe
+"help.txt" nel percorso: /osx-shared/(InConnessione...) - Agostino Cesarano
+"requirements.txt" nel percorso: /osx-shared/GruppoRetiDGBS - Salvatore
+"Dipendenze.txt" nel percorso: /osx-shared/Stockfish Bait
+"readme.txt" nel percorso: /osx-shared/Progetto-Reti-main
+"requirements.txt" nel percorso: /osx-shared/ProgettoReti-master
+"README.txt" nel percorso: /osx-shared/ProgettoReti-master
+"requirements.txt" nel percorso: /osx-shared/Progetto-Reti - Tempah
+"Info.txt" nel percorso: /osx-shared/Hackerman - Fede
+"Dipendenze & Istruzioni.txt" nel percorso: /osx-shared/Progetto_BBG
+"requirements.txt" nel percorso: /osx-shared/LuFra N86002926 - Luigi Ercolano
+"istruzioni.txt" nel percorso: /osx-shared/LuFra N86002926 - Luigi Ercolano
+"requirements.txt" nel percorso: /osx-shared/final test/StealBot
+"README.txt" nel percorso: /osx-shared/final test/StealBot
+"readme.txt" nel percorso: /osx-shared/final test/TMB (Trust Me Bro)
+"README.txt" nel percorso: /osx-shared/final test/FPS Team - Ferdinando D_Alessandro
+"macchina vittima.txt" nel percorso: /osx-shared/final test/BeeBeeGee - Tenam
+"Dipendenze & Istruzioni.txt" nel percorso: /osx-shared/final test/BeeBeeGee - Tenam
+"README.txt" nel percorso: /osx-shared/final test/DukeFilecrawler - Lorenzo Sepe
+"Istruzioni.txt" nel percorso: /osx-shared/final test/MTRS17
+"requirements.txt" nel percorso: /osx-shared/final test/ThePhantomThieves
+"README.txt" nel percorso: /osx-shared/final test/ThePhantomThieves
+"readme.txt" nel percorso: /osx-shared/final test/(In connessione...) - Agostino Cesarano
+"requirements.txt" nel percorso: /osx-shared/final test/Cookie Thieves - macro21KGB
+"README.txt" nel percorso: /osx-shared/final test/Bot Tattici Nucleari - Giuseppe Francione
+"InfoProgetto.txt" nel percorso: /osx-shared/final test/Hackerman - Fede
+"Dipendenze.txt" nel percorso: /osx-shared/final test/Hackerman - Fede
+"requirements.txt" nel percorso: /osx-shared/final test/Binotto Team - Erasmo
+"README.txt" nel percorso: /osx-shared/final test/Binotto Team - Erasmo
+"requirements.txt" nel percorso: /osx-shared/final test/HomeNet-Production
+"top_level.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/GPUtil-1.4.0.dist-info
+"entry_points.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/setuptools-60.2.0.dist-info
+"top_level.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/setuptools-60.2.0.dist-info
+"entry_points.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"top_level.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"LICENSE.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"vendor.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/pip/_vendor
+"top_level.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/psutil-5.9.3.dist-info
+"entry_points.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/pip-21.3.1.dist-info
+"top_level.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/pip-21.3.1.dist-info
+"LICENSE.txt" nel percorso: /osx-shared/final test/HomeNet-Production/venv/Lib/site-packages/pip-21.3.1.dist-info
+"entry_points.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/setuptools-60.2.0.dist-info
+"top_level.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/setuptools-60.2.0.dist-info
+"entry_points.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"top_level.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"LICENSE.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/wheel-0.37.1.dist-info
+"vendor.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/pip/_vendor
+"top_level.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/psutil-5.9.4.dist-info
+"entry_points.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/pip-21.3.1.dist-info
+"top_level.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/pip-21.3.1.dist-info
+"LICENSE.txt" nel percorso: /osx-shared/final test/StockFish-Bait/venv/Lib/site-packages/pip-21.3.1.dist-info
+"Indicazioni.txt" nel percorso: /osx-shared/final test/ProgettoReti - IPythonieri - Francesco Bruno (TheMasterN1)
+"readme.txt" nel percorso: /osx-shared/final test/Carnevale-Bosco-Granillo
+"requirements.txt" nel percorso: /osx-shared/final test/Gruppo Reti DGBS - Salvatore
+"README.txt" nel percorso: /osx-shared/final test/Gruppo Reti DGBS - Salvatore
+"requirements.txt" nel percorso: /osx-shared/final test/Chicago Bulls 96_s Project - Tempah
+"ReadMe.txt" nel percorso: /osx-shared/final test/CI ABBIAMO PROVATO - Paolo Dezio
+"README.txt" nel percorso: /osx-shared/final test/Lohackers
+"requirements.txt" nel percorso: /osx-shared/final test/LuFra
+"istruzioni.txt" nel percorso: /osx-shared/final test/LuFra
+"readme_RFC_Group.txt" nel percorso: /osx-shared/final test/RFC_Group
+"requrements.txt" nel percorso: /osx-shared/final test/Lohacker
+"README.txt" nel percorso: /osx-shared/final test/TCPIPino
+"requirements.txt" nel percorso: /osx-shared/final test/TCPIPino/bot
+"Requirements.txt" nel percorso: /osx-shared/Binotto Team - Erasmo
+"readme.txt" nel percorso: /osx-shared/Carnevale-Bosco-Granillo
+"requirements.txt" nel percorso: /osx-shared/Progetto_Reti_di_Calcolatori - Davide Maresca
+"requirements.txt" nel percorso: /osx-shared/ElaboratoReti
+"dipendenze.txt" nel percorso: /osx-shared/Lohackers
+"readme_RFC_Group.txt" nel percorso: /osx-shared/RFG_Group - Raffaele Milano
+"readme.txt" nel percorso: /osx-shared/Lohacker - Mathieus99 Container
+"requirements.txt" nel percorso: /osx-shared/cookie-thieves-botnet - macro21KGB
+"README.txt" nel percorso: /osx-shared/ProgettoReti - Ferdinando “Fefly” D_Alessandro
+"readme_RFC_Group.txt" nel percorso: /osx-shared/RFC_Group - Raffaele Milano
+"Dipendenze.txt" nel percorso: /osx-shared/BotNet MTRS17
+"all.txt" nel percorso: /etc/brltty/Input/mb
+"40_m20_m40.txt" nel percorso: /etc/brltty/Input/bl
+"18.txt" nel percorso: /etc/brltty/Input/bl
+"all.txt" nel percorso: /etc/brltty/Input/mn
+"all.txt" nel percorso: /etc/brltty/Input/tn
+"all.txt" nel percorso: /etc/brltty/Input/no
+"all.txt" nel percorso: /etc/brltty/Input/eu
+"all.txt" nel percorso: /etc/brltty/Input/lt
+"all.txt" nel percorso: /etc/brltty/Input/vr
+"all.txt" nel percorso: /etc/brltty/Input/ec
+"spanish.txt" nel percorso: /etc/brltty/Input/ec
+"all.txt" nel percorso: /etc/brltty/Input/bd
+"all.txt" nel percorso: /etc/brltty/Input/tt
+"all.txt" nel percorso: /etc/brltty/Input/vd
+"all.txt" nel percorso: /etc/brltty/Input/ba
+"all.txt" nel percorso: /etc/brltty/Input/lb
+"all.txt" nel percorso: /etc/brltty/Input/vs
+"rgb.txt" nel percorso: /etc/X11
+
+
+Lista dei risultati per estensione: .pdf
+
+"README.pdf" nel percorso: /home/alessio/Documents/final test/StealBot
+"shared-mime-info-spec.pdf" nel percorso: /snap/snap-store/638/usr/share/doc/shared-mime-info
+"shared-mime-info-spec.pdf" nel percorso: /snap/snap-store/599/usr/share/doc/shared-mime-info
+"standard.pdf" nel percorso: /usr/share/cups/data
+"secret.pdf" nel percorso: /usr/share/cups/data
+"form_russian.pdf" nel percorso: /usr/share/cups/data
+"classified.pdf" nel percorso: /usr/share/cups/data
+"form_english.pdf" nel percorso: /usr/share/cups/data
+"topsecret.pdf" nel percorso: /usr/share/cups/data
+"default.pdf" nel percorso: /usr/share/cups/data
+"unclassified.pdf" nel percorso: /usr/share/cups/data
+"confidential.pdf" nel percorso: /usr/share/cups/data
+"default-testpage.pdf" nel percorso: /usr/share/cups/data
+"shared-mime-info-spec.pdf" nel percorso: /usr/share/doc/shared-mime-info
+"manual.pdf" nel percorso: /usr/share/doc/printer-driver-foo2zjs
+"xpdfimport_err.pdf" nel percorso: /usr/lib/libreoffice/share/xpdfimport
+"README.pdf" nel percorso: /osx-shared/final test/StealBot
+
+
+Lista dei risultati per estensione: .docx
+
+
+----Trovati 989 elementi.
+### TROVATI TUTTI I FILE CON ESTENSIONE  .txt .pdf .docx###
+
