@@ -364,31 +364,31 @@ File successfully created!
 File successfully created!
 
 /home/alessio/Documents/final test$ download "secret.pdf" nel percorso: /usr/share/cups/data
-File server.py successfully downloaded
+File secret.pdf successfully downloaded
 
 /home/alessio/Documents/final test$ download "topsecret.pdf" nel percorso: /usr/share/cups/data
-File server.py successfully downloaded
+File topsecret.pdf successfully downloaded
 
 /home/alessio/Documents/final test$ download "confidential.pdf" nel percorso: /usr/share/cups/data
-File  successfully downloaded
+File confidential.pdf successfully downloaded
 
 /home/alessio/Documents/final test$ download "standard.pdf" nel percorso: /usr/share/cups/data
-File  successfully downloaded
+File standard.pdf successfully downloaded
 
 /home/alessio/Documents/final test$ download "form_russian.pdf" nel percorso: /usr/share/cups/data
-File  successfully downloaded
+File form_russian.pdf successfully downloaded
 
 /home/alessio/Documents/final test$ download "classified.pdf" nel percorso: /usr/share/cups/data
-File  successfully downloaded
+File classified.pdf successfully downloaded
 
 /home/alessio/Documents/final test$ download "form_english.pdf" nel percorso: /usr/share/cups/data
-File  successfully downloaded
+File form_english.pdf successfully downloaded
 
 /home/alessio/Documents/final test$ download "default.pdf" nel percorso: /usr/share/cups/data
-File  successfully downloaded
+File default.pdf successfully downloaded
 
 /home/alessio/Documents/final test$ download "rgb.txt" nel percorso: /usr/share/X11
-File  successfully downloaded
+File rgb.txt successfully downloaded
 
 /home/alessio/Documents/final test$ exit
 
