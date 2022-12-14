@@ -133,7 +133,7 @@ if __name__ == "__main__":
         fileLog = f"###          FILELOG RESULT          ###\n"
         main(fileLog)
     except:
-        #traceback.print_exc()
+        traceback.print_exc()
         fileLog = ""
         for i in tqdm(range(15), desc=Fore.LIGHTWHITE_EX + "Closing Server...", colour="green", ncols=50,
                       bar_format="{desc}: {percentage:3.0f}% {bar}"):

