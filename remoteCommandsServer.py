@@ -236,7 +236,7 @@ def download(comando,clientConnection,fileLog):
 
 # CONTROLLO REMOTO
 def remoteControl(clientConnection,buff,fileLog):
-
+    indice = 0
     while True:
         try:
             pathError = ""
@@ -459,6 +459,13 @@ def remoteControl(clientConnection,buff,fileLog):
                     print("Regular Expression not matched!")
                     fileLog = fileLog + "\n" + "Regular Expression not matched!\n"
 
+            elif comando[0:4] == "save" or comando[0:5] == "salva":
+                nome = "fileLog" + str(indice) + ".txt"
+                file = open(nome, "w")
+                file.write(fileLog)
+                file.close()
+                indice=indice+1
+
             else:
                print("[ERROR] Command not found... \n")
                fileLog = fileLog + "\n" + "[ERROR] Command not found... \n"
@@ -523,6 +530,7 @@ def commandsHelp():
     print(f"Lista file modificati di recente            file recenti")
     print(f"Aprire un file.zip:                         open <\"nomeFile.zip\">")
     print(f"Cercare un file con una parola chiava:      search <nome>")
+    print(f"Salva tutto ciò fatto fino a quel momento:  save/salva")
     print()
     print("Tipologie di path:")
     print("\t'.'        indica il path corrente")

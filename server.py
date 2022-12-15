@@ -74,7 +74,7 @@ def main(fileLog):
                 fileLog = fileLog + "\n" + f"[CLOSED] Client Connection {addr} closed succesfully!" + "\n"
                 print()
 
-                file = open("fileLog.txt", "w")
+                file = open("fileLogGenerale.txt", "w")
                 file.write(fileLog)
                 file.close()
                 fileLog = ""
@@ -104,7 +104,7 @@ def main(fileLog):
                         print(".")
                         time.sleep(1)
                 else:
-                    file = open("fileLog.txt", "w")
+                    file = open("fileLogGenerale.txt", "w")
                     file.write(fileLog)
                     file.close()
                     fileLog = ""
@@ -116,13 +116,13 @@ def main(fileLog):
         #traceback.print_exc()
         if e.__class__.__name__ == "ConnectionResetError":
             print(f"[CONNECTION INTERRUPTED] Connessione interrotta\n")
-            file = open("fileLog.txt", "w")
+            file = open("fileLogGenerale.txt", "w")
             file.write(fileLog)
             file.close()
             fileLog = ""
             raise e
         else:
-            file = open("fileLog.txt", "w")
+            file = open("fileLogGenerale.txt", "w")
             file.write(fileLog)
             file.close()
             fileLog = ""
