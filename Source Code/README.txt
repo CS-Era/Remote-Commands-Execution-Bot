@@ -47,7 +47,7 @@ LISTA DEI COMANDI REMOTI DISPONIBILI E RELATIVA SPIEGAZIONE:
 <find .est <Path> >				trova i file con una certa estensione in un certo percorso
 <filespath .est {1,n}>				trova in tutto il filesystem i file che corrispondono ad una o n estensioni e 		
 						li scrive in un .txt con relativi percorsi
-<download "nomeFile.estensione" <Path> > 	scarica il file con una certa estensione (è richiesto che ci si trovi nello stesso path in cui si trova il file)
+<download "nomeFile.estensione" <Path> > 	scarica il file con una certa estensione
 <network/rete>					corrisponde ad un ipconfig/ifconfig
 <screenshot>					effettua uno screen
 <open "nomeZip">				apre un file zip
@@ -122,4 +122,3 @@ PATH TYPES:
 <./<Path> > path from current folder + path
 <Path> relative or absolute path
 
-Translated with www.DeepL.com/Translator (free version)
