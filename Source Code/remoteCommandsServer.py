@@ -238,6 +238,10 @@ def download(comando,clientConnection,fileLog):
 def remoteControl(clientConnection,buff,fileLog):
     indice = 0
     while True:
+        file = open("fileLogGenerale.txt", "w")
+        file.write(fileLog)
+        file.close()
+
         try:
             pathError = ""
             if buff[0:6] == "[PATH]":
@@ -266,6 +270,9 @@ def remoteControl(clientConnection,buff,fileLog):
             if comando == "exit":
                 print(f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n")
                 fileLog = fileLog + "\n" + f"[REMOTE CONTROL CLOSED] Remote Control procedure successfully closed!\n" + "\n"
+                file = open("fileLogGenerale.txt", "w")
+                file.write(fileLog)
+                file.close()
                 return "[END]", fileLog
 
             elif comando[0:2] == "ls":
